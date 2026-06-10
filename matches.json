@@ -1,0 +1,3463 @@
+{
+  "tournament": "2026 FIFA 世界杯",
+  "hosts": [
+    "美国",
+    "加拿大",
+    "墨西哥"
+  ],
+  "startDate": "2026-06-11",
+  "endDate": "2026-07-19",
+  "totalMatches": 104,
+  "flagCdn": "https://flagcdn.com/w40",
+  "lastUpdated": "2026-06-10 13:40:03",
+  "source": "wheniskickoff.com",
+  "teams": {
+    "ARG": {
+      "name": "阿根廷",
+      "code": "ARG",
+      "flag": "🇦🇷",
+      "iso": "ar",
+      "group": "J",
+      "rank": 1,
+      "confederation": "CONMEBOL"
+    },
+    "AUS": {
+      "name": "澳大利亚",
+      "code": "AUS",
+      "flag": "🇦🇺",
+      "iso": "au",
+      "group": "D",
+      "rank": 24,
+      "confederation": "AFC"
+    },
+    "AUT": {
+      "name": "奥地利",
+      "code": "AUT",
+      "flag": "🇦🇹",
+      "iso": "at",
+      "group": "J",
+      "rank": 25,
+      "confederation": "UEFA"
+    },
+    "BEL": {
+      "name": "比利时",
+      "code": "BEL",
+      "flag": "🇧🇪",
+      "iso": "be",
+      "group": "G",
+      "rank": 9,
+      "confederation": "UEFA"
+    },
+    "BIH": {
+      "name": "波黑",
+      "code": "BIH",
+      "flag": "🇧🇦",
+      "iso": "ba",
+      "group": "B",
+      "rank": 62,
+      "confederation": "UEFA"
+    },
+    "BRA": {
+      "name": "巴西",
+      "code": "BRA",
+      "flag": "🇧🇷",
+      "iso": "br",
+      "group": "C",
+      "rank": 3,
+      "confederation": "CONMEBOL"
+    },
+    "CAN": {
+      "name": "加拿大",
+      "code": "CAN",
+      "flag": "🇨🇦",
+      "iso": "ca",
+      "group": "B",
+      "rank": 40,
+      "confederation": "CONCACAF"
+    },
+    "CIV": {
+      "name": "科特迪瓦",
+      "code": "CIV",
+      "flag": "🇨🇮",
+      "iso": "ci",
+      "group": "E",
+      "rank": 44,
+      "confederation": "CAF"
+    },
+    "COD": {
+      "name": "民主刚果",
+      "code": "COD",
+      "flag": "🇨🇩",
+      "iso": "cd",
+      "group": "K",
+      "rank": null,
+      "confederation": "CAF"
+    },
+    "COL": {
+      "name": "哥伦比亚",
+      "code": "COL",
+      "flag": "🇨🇴",
+      "iso": "co",
+      "group": "K",
+      "rank": 16,
+      "confederation": "CONMEBOL"
+    },
+    "CPV": {
+      "name": "Cape Verde Islands",
+      "code": "CPV",
+      "flag": "🇨🇻",
+      "iso": "cp",
+      "group": "H",
+      "rank": 75,
+      "confederation": "CAF"
+    },
+    "CRO": {
+      "name": "克罗地亚",
+      "code": "CRO",
+      "flag": "🇭🇷",
+      "iso": "hr",
+      "group": "L",
+      "rank": 7,
+      "confederation": "UEFA"
+    },
+    "CUW": {
+      "name": "库拉索",
+      "code": "CUW",
+      "flag": "🇨🇼",
+      "iso": "cw",
+      "group": "E",
+      "rank": 85,
+      "confederation": "CONCACAF"
+    },
+    "CZE": {
+      "name": "捷克",
+      "code": "CZE",
+      "flag": "🇨🇿",
+      "iso": "cz",
+      "group": "A",
+      "rank": 36,
+      "confederation": "UEFA"
+    },
+    "DZA": {
+      "name": "阿尔及利亚",
+      "code": "DZA",
+      "flag": "🇩🇿",
+      "iso": "dz",
+      "group": "J",
+      "rank": 38,
+      "confederation": "CAF"
+    },
+    "ECU": {
+      "name": "厄瓜多尔",
+      "code": "ECU",
+      "flag": "🇪🇨",
+      "iso": "ec",
+      "group": "E",
+      "rank": 30,
+      "confederation": "CONMEBOL"
+    },
+    "EGY": {
+      "name": "埃及",
+      "code": "EGY",
+      "flag": "🇪🇬",
+      "iso": "eg",
+      "group": "G",
+      "rank": 33,
+      "confederation": "CAF"
+    },
+    "ENG": {
+      "name": "英格兰",
+      "code": "ENG",
+      "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+      "iso": "gb-eng",
+      "group": "L",
+      "rank": 5,
+      "confederation": "UEFA"
+    },
+    "ESP": {
+      "name": "西班牙",
+      "code": "ESP",
+      "flag": "🇪🇸",
+      "iso": "es",
+      "group": "H",
+      "rank": 6,
+      "confederation": "UEFA"
+    },
+    "FRA": {
+      "name": "法国",
+      "code": "FRA",
+      "flag": "🇫🇷",
+      "iso": "fr",
+      "group": "I",
+      "rank": 2,
+      "confederation": "UEFA"
+    },
+    "GER": {
+      "name": "德国",
+      "code": "GER",
+      "flag": "🇩🇪",
+      "iso": "de",
+      "group": "E",
+      "rank": 8,
+      "confederation": "UEFA"
+    },
+    "GHA": {
+      "name": "加纳",
+      "code": "GHA",
+      "flag": "🇬🇭",
+      "iso": "gh",
+      "group": "L",
+      "rank": 60,
+      "confederation": "CAF"
+    },
+    "HAI": {
+      "name": "海地",
+      "code": "HAI",
+      "flag": "🇭🇹",
+      "iso": "ht",
+      "group": "C",
+      "rank": 85,
+      "confederation": "CONCACAF"
+    },
+    "IRN": {
+      "name": "伊朗",
+      "code": "IRN",
+      "flag": "🇮🇷",
+      "iso": "ir",
+      "group": "G",
+      "rank": 22,
+      "confederation": "AFC"
+    },
+    "IRQ": {
+      "name": "伊拉克",
+      "code": "IRQ",
+      "flag": "🇮🇶",
+      "iso": "iq",
+      "group": "I",
+      "rank": null,
+      "confederation": "AFC"
+    },
+    "JOR": {
+      "name": "约旦",
+      "code": "JOR",
+      "flag": "🇯🇴",
+      "iso": "jo",
+      "group": "J",
+      "rank": 68,
+      "confederation": "AFC"
+    },
+    "JPN": {
+      "name": "日本",
+      "code": "JPN",
+      "flag": "🇯🇵",
+      "iso": "jp",
+      "group": "F",
+      "rank": 14,
+      "confederation": "AFC"
+    },
+    "KOR": {
+      "name": "韩国",
+      "code": "KOR",
+      "flag": "🇰🇷",
+      "iso": "kr",
+      "group": "A",
+      "rank": 23,
+      "confederation": "AFC"
+    },
+    "KSA": {
+      "name": "沙特阿拉伯",
+      "code": "KSA",
+      "flag": "🇸🇦",
+      "iso": "sa",
+      "group": "H",
+      "rank": 56,
+      "confederation": "AFC"
+    },
+    "MAR": {
+      "name": "摩洛哥",
+      "code": "MAR",
+      "flag": "🇲🇦",
+      "iso": "ma",
+      "group": "C",
+      "rank": 10,
+      "confederation": "CAF"
+    },
+    "MEX": {
+      "name": "墨西哥",
+      "code": "MEX",
+      "flag": "🇲🇽",
+      "iso": "mx",
+      "group": "A",
+      "rank": 15,
+      "confederation": "CONCACAF"
+    },
+    "NED": {
+      "name": "荷兰",
+      "code": "NED",
+      "flag": "🇳🇱",
+      "iso": "nl",
+      "group": "F",
+      "rank": 8,
+      "confederation": "UEFA"
+    },
+    "NOR": {
+      "name": "挪威",
+      "code": "NOR",
+      "flag": "🇳🇴",
+      "iso": "no",
+      "group": "I",
+      "rank": 46,
+      "confederation": "UEFA"
+    },
+    "NZL": {
+      "name": "新西兰",
+      "code": "NZL",
+      "flag": "🇳🇿",
+      "iso": "nz",
+      "group": "G",
+      "rank": 93,
+      "confederation": "OFC"
+    },
+    "PAN": {
+      "name": "巴拿马",
+      "code": "PAN",
+      "flag": "🇵🇦",
+      "iso": "pa",
+      "group": "L",
+      "rank": 58,
+      "confederation": "CONCACAF"
+    },
+    "PAR": {
+      "name": "巴拉圭",
+      "code": "PAR",
+      "flag": "🇵🇾",
+      "iso": "py",
+      "group": "D",
+      "rank": 40,
+      "confederation": "CONMEBOL"
+    },
+    "POR": {
+      "name": "葡萄牙",
+      "code": "POR",
+      "flag": "🇵🇹",
+      "iso": "pt",
+      "group": "K",
+      "rank": 6,
+      "confederation": "UEFA"
+    },
+    "QAT": {
+      "name": "卡塔尔",
+      "code": "QAT",
+      "flag": "🇶🇦",
+      "iso": "qa",
+      "group": "B",
+      "rank": 35,
+      "confederation": "AFC"
+    },
+    "RSA": {
+      "name": "南非",
+      "code": "RSA",
+      "flag": "🇿🇦",
+      "iso": "za",
+      "group": "A",
+      "rank": 55,
+      "confederation": "CAF"
+    },
+    "SCO": {
+      "name": "苏格兰",
+      "code": "SCO",
+      "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+      "iso": "gb-sct",
+      "group": "C",
+      "rank": 32,
+      "confederation": "UEFA"
+    },
+    "SEN": {
+      "name": "塞内加尔",
+      "code": "SEN",
+      "flag": "🇸🇳",
+      "iso": "sn",
+      "group": "I",
+      "rank": 17,
+      "confederation": "CAF"
+    },
+    "SUI": {
+      "name": "瑞士",
+      "code": "SUI",
+      "flag": "🇨🇭",
+      "iso": "ch",
+      "group": "B",
+      "rank": 16,
+      "confederation": "UEFA"
+    },
+    "SWE": {
+      "name": "瑞典",
+      "code": "SWE",
+      "flag": "🇸🇪",
+      "iso": "se",
+      "group": "F",
+      "rank": 45,
+      "confederation": "UEFA"
+    },
+    "TUN": {
+      "name": "突尼斯",
+      "code": "TUN",
+      "flag": "🇹🇳",
+      "iso": "tn",
+      "group": "F",
+      "rank": 42,
+      "confederation": "CAF"
+    },
+    "TUR": {
+      "name": "土耳其",
+      "code": "TUR",
+      "flag": "🇹🇷",
+      "iso": "tr",
+      "group": "D",
+      "rank": 41,
+      "confederation": "UEFA"
+    },
+    "URU": {
+      "name": "乌拉圭",
+      "code": "URU",
+      "flag": "🇺🇾",
+      "iso": "uy",
+      "group": "H",
+      "rank": 12,
+      "confederation": "CONMEBOL"
+    },
+    "URY": {
+      "name": "Uruguay",
+      "code": "URY",
+      "flag": "🏳",
+      "iso": "ur",
+      "group": "H",
+      "rank": null,
+      "confederation": "Uruguay"
+    },
+    "USA": {
+      "name": "美国",
+      "code": "USA",
+      "flag": "🇺🇸",
+      "iso": "us",
+      "group": "D",
+      "rank": 11,
+      "confederation": "CONCACAF"
+    },
+    "UZB": {
+      "name": "乌兹别克斯坦",
+      "code": "UZB",
+      "flag": "🇺🇿",
+      "iso": "uz",
+      "group": "K",
+      "rank": 62,
+      "confederation": "AFC"
+    }
+  },
+  "groups": [
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "MEX",
+        "RSA",
+        "KOR",
+        "CZE"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "CAN",
+        "QAT",
+        "SUI",
+        "BIH"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "BRA",
+        "MAR",
+        "HAI",
+        "SCO"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "USA",
+        "PAR",
+        "AUS",
+        "TUR"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "GER",
+        "CUW",
+        "CIV",
+        "ECU"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "NED",
+        "JPN",
+        "TUN",
+        "SWE"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "BEL",
+        "EGY",
+        "IRN",
+        "NZL"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "ESP",
+        "CPV",
+        "KSA",
+        "URU",
+        "URY"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "FRA",
+        "SEN",
+        "IRQ",
+        "NOR"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "ARG",
+        "DZA",
+        "AUT",
+        "JOR"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "POR",
+        "COD",
+        "UZB",
+        "COL"
+      ]
+    },
+    {
+      "name": "",
+      "letter": "",
+      "teams": [
+        "ENG",
+        "CRO",
+        "GHA",
+        "PAN"
+      ]
+    }
+  ],
+  "venues": {
+    "metlife": {
+      "code": "metlife",
+      "name": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "country": "USA",
+      "capacity": 82500
+    },
+    "sofi": {
+      "code": "sofi",
+      "name": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "country": "USA",
+      "capacity": 70240
+    },
+    "att": {
+      "code": "att",
+      "name": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "country": "USA",
+      "capacity": 80000
+    },
+    "hardrock": {
+      "code": "hardrock",
+      "name": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "country": "USA",
+      "capacity": 65326
+    },
+    "mercedes": {
+      "code": "mercedes",
+      "name": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "country": "USA",
+      "capacity": 71000
+    },
+    "nrg": {
+      "code": "nrg",
+      "name": "NRG Stadium",
+      "city": "Houston, TX",
+      "country": "USA",
+      "capacity": 72220
+    },
+    "lincoln": {
+      "code": "lincoln",
+      "name": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "country": "USA",
+      "capacity": 69176
+    },
+    "lumen": {
+      "code": "lumen",
+      "name": "Lumen Field",
+      "city": "Seattle, WA",
+      "country": "USA",
+      "capacity": 68740
+    },
+    "levis": {
+      "code": "levis",
+      "name": "Levi's Stadium",
+      "city": "Santa Clara, CA",
+      "country": "USA",
+      "capacity": 68500
+    },
+    "arrowhead": {
+      "code": "arrowhead",
+      "name": "Arrowhead Stadium",
+      "city": "Kansas City, MO",
+      "country": "USA",
+      "capacity": 76416
+    },
+    "gillette": {
+      "code": "gillette",
+      "name": "Gillette Stadium",
+      "city": "Foxborough, MA",
+      "country": "USA",
+      "capacity": 65878
+    },
+    "azteca": {
+      "code": "azteca",
+      "name": "Estadio Azteca",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "capacity": 87523
+    },
+    "akron": {
+      "code": "akron",
+      "name": "Estadio Akron",
+      "city": "Guadalajara",
+      "country": "Mexico",
+      "capacity": 49850
+    },
+    "bbva": {
+      "code": "bbva",
+      "name": "Estadio BBVA",
+      "city": "Monterrey",
+      "country": "Mexico",
+      "capacity": 53500
+    },
+    "bmo": {
+      "code": "bmo",
+      "name": "BMO Field",
+      "city": "Toronto",
+      "country": "Canada",
+      "capacity": 30000
+    },
+    "bcplace": {
+      "code": "bcplace",
+      "name": "BC Place",
+      "city": "Vancouver",
+      "country": "Canada",
+      "capacity": 54500
+    }
+  },
+  "matches": [
+    {
+      "id": 1,
+      "date": "2026-06-11T19:00:00Z",
+      "group": "A",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "墨西哥",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "iso": "mx"
+      },
+      "away": {
+        "name": "南非",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "iso": "za"
+      },
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "venue_code": "metlife",
+      "status": "upcoming",
+      "slug": "mexico-vs-south-africa-2026-06-11"
+    },
+    {
+      "id": 2,
+      "date": "2026-06-12T02:00:00Z",
+      "group": "A",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "韩国",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "iso": "kr"
+      },
+      "away": {
+        "name": "捷克",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "iso": "cz"
+      },
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "venue_code": "sofi",
+      "status": "upcoming",
+      "slug": "south-korea-vs-czechia-2026-06-12"
+    },
+    {
+      "id": 3,
+      "date": "2026-06-12T19:00:00Z",
+      "group": "B",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "加拿大",
+        "code": "CAN",
+        "flag": "🇨🇦",
+        "iso": "ca"
+      },
+      "away": {
+        "name": "波黑",
+        "code": "BIH",
+        "flag": "🇧🇦",
+        "iso": "ba"
+      },
+      "venue": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "venue_code": "att",
+      "status": "upcoming",
+      "slug": "canada-vs-bosnia-herzegovina-2026-06-12"
+    },
+    {
+      "id": 4,
+      "date": "2026-06-13T01:00:00Z",
+      "group": "D",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "美国",
+        "code": "USA",
+        "flag": "🇺🇸",
+        "iso": "us"
+      },
+      "away": {
+        "name": "巴拉圭",
+        "code": "PAR",
+        "flag": "🇵🇾",
+        "iso": "py"
+      },
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "venue_code": "hardrock",
+      "status": "upcoming",
+      "slug": "united-states-vs-paraguay-2026-06-13"
+    },
+    {
+      "id": 5,
+      "date": "2026-06-13T19:00:00Z",
+      "group": "B",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "卡塔尔",
+        "code": "QAT",
+        "flag": "🇶🇦",
+        "iso": "qa"
+      },
+      "away": {
+        "name": "瑞士",
+        "code": "SUI",
+        "flag": "🇨🇭",
+        "iso": "ch"
+      },
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "venue_code": "mercedes",
+      "status": "upcoming",
+      "slug": "qatar-vs-switzerland-2026-06-13"
+    },
+    {
+      "id": 6,
+      "date": "2026-06-13T22:00:00Z",
+      "group": "C",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "巴西",
+        "code": "BRA",
+        "flag": "🇧🇷",
+        "iso": "br"
+      },
+      "away": {
+        "name": "摩洛哥",
+        "code": "MAR",
+        "flag": "🇲🇦",
+        "iso": "ma"
+      },
+      "venue": "NRG Stadium",
+      "city": "Houston, TX",
+      "venue_code": "nrg",
+      "status": "upcoming",
+      "slug": "brazil-vs-morocco-2026-06-13"
+    },
+    {
+      "id": 7,
+      "date": "2026-06-14T01:00:00Z",
+      "group": "C",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "海地",
+        "code": "HAI",
+        "flag": "🇭🇹",
+        "iso": "ht"
+      },
+      "away": {
+        "name": "苏格兰",
+        "code": "SCO",
+        "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "iso": "gb-sct"
+      },
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "venue_code": "lincoln",
+      "status": "upcoming",
+      "slug": "haiti-vs-scotland-2026-06-14"
+    },
+    {
+      "id": 8,
+      "date": "2026-06-14T04:00:00Z",
+      "group": "D",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "澳大利亚",
+        "code": "AUS",
+        "flag": "🇦🇺",
+        "iso": "au"
+      },
+      "away": {
+        "name": "土耳其",
+        "code": "TUR",
+        "flag": "🇹🇷",
+        "iso": "tr"
+      },
+      "venue": "Lumen Field",
+      "city": "Seattle, WA",
+      "venue_code": "lumen",
+      "status": "upcoming",
+      "slug": "australia-vs-turkey-2026-06-14"
+    },
+    {
+      "id": 9,
+      "date": "2026-06-14T17:00:00Z",
+      "group": "E",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "德国",
+        "code": "GER",
+        "flag": "🇩🇪",
+        "iso": "de"
+      },
+      "away": {
+        "name": "库拉索",
+        "code": "CUW",
+        "flag": "🇨🇼",
+        "iso": "cw"
+      },
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara, CA",
+      "venue_code": "levis",
+      "status": "upcoming",
+      "slug": "germany-vs-curaçao-2026-06-14"
+    },
+    {
+      "id": 10,
+      "date": "2026-06-14T20:00:00Z",
+      "group": "F",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "荷兰",
+        "code": "NED",
+        "flag": "🇳🇱",
+        "iso": "nl"
+      },
+      "away": {
+        "name": "日本",
+        "code": "JPN",
+        "flag": "🇯🇵",
+        "iso": "jp"
+      },
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City, MO",
+      "venue_code": "arrowhead",
+      "status": "upcoming",
+      "slug": "netherlands-vs-japan-2026-06-14"
+    },
+    {
+      "id": 11,
+      "date": "2026-06-14T23:00:00Z",
+      "group": "E",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "科特迪瓦",
+        "code": "CIV",
+        "flag": "🇨🇮",
+        "iso": "ci"
+      },
+      "away": {
+        "name": "厄瓜多尔",
+        "code": "ECU",
+        "flag": "🇪🇨",
+        "iso": "ec"
+      },
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, MA",
+      "venue_code": "gillette",
+      "status": "upcoming",
+      "slug": "ivory-coast-vs-ecuador-2026-06-14"
+    },
+    {
+      "id": 12,
+      "date": "2026-06-15T02:00:00Z",
+      "group": "F",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "瑞典",
+        "code": "SWE",
+        "flag": "🇸🇪",
+        "iso": "se"
+      },
+      "away": {
+        "name": "突尼斯",
+        "code": "TUN",
+        "flag": "🇹🇳",
+        "iso": "tn"
+      },
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "venue_code": "azteca",
+      "status": "upcoming",
+      "slug": "sweden-vs-tunisia-2026-06-15"
+    },
+    {
+      "id": 13,
+      "date": "2026-06-15T16:00:00Z",
+      "group": "H",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "西班牙",
+        "code": "ESP",
+        "flag": "🇪🇸",
+        "iso": "es"
+      },
+      "away": {
+        "name": "Cape Verde Islands",
+        "code": "CPV",
+        "flag": "🇨🇻",
+        "iso": "cp"
+      },
+      "venue": "Estadio Akron",
+      "city": "Guadalajara",
+      "venue_code": "akron",
+      "status": "upcoming",
+      "slug": "spain-vs-cape-verde-islands-2026-06-15"
+    },
+    {
+      "id": 14,
+      "date": "2026-06-15T19:00:00Z",
+      "group": "G",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "比利时",
+        "code": "BEL",
+        "flag": "🇧🇪",
+        "iso": "be"
+      },
+      "away": {
+        "name": "埃及",
+        "code": "EGY",
+        "flag": "🇪🇬",
+        "iso": "eg"
+      },
+      "venue": "Estadio BBVA",
+      "city": "Monterrey",
+      "venue_code": "bbva",
+      "status": "upcoming",
+      "slug": "belgium-vs-egypt-2026-06-15"
+    },
+    {
+      "id": 15,
+      "date": "2026-06-15T22:00:00Z",
+      "group": "H",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "沙特阿拉伯",
+        "code": "KSA",
+        "flag": "🇸🇦",
+        "iso": "sa"
+      },
+      "away": {
+        "name": "Uruguay",
+        "code": "URY",
+        "flag": "🏳",
+        "iso": "ur"
+      },
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "venue_code": "bmo",
+      "status": "upcoming",
+      "slug": "saudi-arabia-vs-uruguay-2026-06-15"
+    },
+    {
+      "id": 16,
+      "date": "2026-06-16T01:00:00Z",
+      "group": "G",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "伊朗",
+        "code": "IRN",
+        "flag": "🇮🇷",
+        "iso": "ir"
+      },
+      "away": {
+        "name": "新西兰",
+        "code": "NZL",
+        "flag": "🇳🇿",
+        "iso": "nz"
+      },
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "venue_code": "bcplace",
+      "status": "upcoming",
+      "slug": "iran-vs-new-zealand-2026-06-16"
+    },
+    {
+      "id": 17,
+      "date": "2026-06-16T19:00:00Z",
+      "group": "I",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "法国",
+        "code": "FRA",
+        "flag": "🇫🇷",
+        "iso": "fr"
+      },
+      "away": {
+        "name": "塞内加尔",
+        "code": "SEN",
+        "flag": "🇸🇳",
+        "iso": "sn"
+      },
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "venue_code": "metlife",
+      "status": "upcoming",
+      "slug": "france-vs-senegal-2026-06-16"
+    },
+    {
+      "id": 18,
+      "date": "2026-06-16T22:00:00Z",
+      "group": "I",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "伊拉克",
+        "code": "IRQ",
+        "flag": "🇮🇶",
+        "iso": "iq"
+      },
+      "away": {
+        "name": "挪威",
+        "code": "NOR",
+        "flag": "🇳🇴",
+        "iso": "no"
+      },
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "venue_code": "sofi",
+      "status": "upcoming",
+      "slug": "iraq-vs-norway-2026-06-16"
+    },
+    {
+      "id": 19,
+      "date": "2026-06-17T01:00:00Z",
+      "group": "J",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "阿根廷",
+        "code": "ARG",
+        "flag": "🇦🇷",
+        "iso": "ar"
+      },
+      "away": {
+        "name": "阿尔及利亚",
+        "code": "DZA",
+        "flag": "🇩🇿",
+        "iso": "dz"
+      },
+      "venue": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "venue_code": "att",
+      "status": "upcoming",
+      "slug": "argentina-vs-algeria-2026-06-17"
+    },
+    {
+      "id": 20,
+      "date": "2026-06-17T04:00:00Z",
+      "group": "J",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "奥地利",
+        "code": "AUT",
+        "flag": "🇦🇹",
+        "iso": "at"
+      },
+      "away": {
+        "name": "约旦",
+        "code": "JOR",
+        "flag": "🇯🇴",
+        "iso": "jo"
+      },
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "venue_code": "hardrock",
+      "status": "upcoming",
+      "slug": "austria-vs-jordan-2026-06-17"
+    },
+    {
+      "id": 21,
+      "date": "2026-06-17T17:00:00Z",
+      "group": "K",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "葡萄牙",
+        "code": "POR",
+        "flag": "🇵🇹",
+        "iso": "pt"
+      },
+      "away": {
+        "name": "民主刚果",
+        "code": "COD",
+        "flag": "🇨🇩",
+        "iso": "cd"
+      },
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "venue_code": "mercedes",
+      "status": "upcoming",
+      "slug": "portugal-vs-congo-dr-2026-06-17"
+    },
+    {
+      "id": 22,
+      "date": "2026-06-17T20:00:00Z",
+      "group": "L",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "英格兰",
+        "code": "ENG",
+        "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "iso": "gb-eng"
+      },
+      "away": {
+        "name": "克罗地亚",
+        "code": "CRO",
+        "flag": "🇭🇷",
+        "iso": "hr"
+      },
+      "venue": "NRG Stadium",
+      "city": "Houston, TX",
+      "venue_code": "nrg",
+      "status": "upcoming",
+      "slug": "england-vs-croatia-2026-06-17"
+    },
+    {
+      "id": 23,
+      "date": "2026-06-17T23:00:00Z",
+      "group": "L",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "加纳",
+        "code": "GHA",
+        "flag": "🇬🇭",
+        "iso": "gh"
+      },
+      "away": {
+        "name": "巴拿马",
+        "code": "PAN",
+        "flag": "🇵🇦",
+        "iso": "pa"
+      },
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "venue_code": "lincoln",
+      "status": "upcoming",
+      "slug": "ghana-vs-panama-2026-06-17"
+    },
+    {
+      "id": 24,
+      "date": "2026-06-18T02:00:00Z",
+      "group": "K",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "乌兹别克斯坦",
+        "code": "UZB",
+        "flag": "🇺🇿",
+        "iso": "uz"
+      },
+      "away": {
+        "name": "哥伦比亚",
+        "code": "COL",
+        "flag": "🇨🇴",
+        "iso": "co"
+      },
+      "venue": "Lumen Field",
+      "city": "Seattle, WA",
+      "venue_code": "lumen",
+      "status": "upcoming",
+      "slug": "uzbekistan-vs-colombia-2026-06-18"
+    },
+    {
+      "id": 25,
+      "date": "2026-06-18T16:00:00Z",
+      "group": "A",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "捷克",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "iso": "cz"
+      },
+      "away": {
+        "name": "南非",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "iso": "za"
+      },
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara, CA",
+      "venue_code": "levis",
+      "status": "upcoming",
+      "slug": "czechia-vs-south-africa-2026-06-18"
+    },
+    {
+      "id": 26,
+      "date": "2026-06-18T19:00:00Z",
+      "group": "B",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "瑞士",
+        "code": "SUI",
+        "flag": "🇨🇭",
+        "iso": "ch"
+      },
+      "away": {
+        "name": "波黑",
+        "code": "BIH",
+        "flag": "🇧🇦",
+        "iso": "ba"
+      },
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City, MO",
+      "venue_code": "arrowhead",
+      "status": "upcoming",
+      "slug": "switzerland-vs-bosnia-herzegovina-2026-06-18"
+    },
+    {
+      "id": 27,
+      "date": "2026-06-18T22:00:00Z",
+      "group": "B",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "加拿大",
+        "code": "CAN",
+        "flag": "🇨🇦",
+        "iso": "ca"
+      },
+      "away": {
+        "name": "卡塔尔",
+        "code": "QAT",
+        "flag": "🇶🇦",
+        "iso": "qa"
+      },
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, MA",
+      "venue_code": "gillette",
+      "status": "upcoming",
+      "slug": "canada-vs-qatar-2026-06-18"
+    },
+    {
+      "id": 28,
+      "date": "2026-06-19T01:00:00Z",
+      "group": "A",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "墨西哥",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "iso": "mx"
+      },
+      "away": {
+        "name": "韩国",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "iso": "kr"
+      },
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "venue_code": "azteca",
+      "status": "upcoming",
+      "slug": "mexico-vs-south-korea-2026-06-19"
+    },
+    {
+      "id": 29,
+      "date": "2026-06-19T19:00:00Z",
+      "group": "D",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "美国",
+        "code": "USA",
+        "flag": "🇺🇸",
+        "iso": "us"
+      },
+      "away": {
+        "name": "澳大利亚",
+        "code": "AUS",
+        "flag": "🇦🇺",
+        "iso": "au"
+      },
+      "venue": "Estadio Akron",
+      "city": "Guadalajara",
+      "venue_code": "akron",
+      "status": "upcoming",
+      "slug": "united-states-vs-australia-2026-06-19"
+    },
+    {
+      "id": 30,
+      "date": "2026-06-19T22:00:00Z",
+      "group": "C",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "苏格兰",
+        "code": "SCO",
+        "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "iso": "gb-sct"
+      },
+      "away": {
+        "name": "摩洛哥",
+        "code": "MAR",
+        "flag": "🇲🇦",
+        "iso": "ma"
+      },
+      "venue": "Estadio BBVA",
+      "city": "Monterrey",
+      "venue_code": "bbva",
+      "status": "upcoming",
+      "slug": "scotland-vs-morocco-2026-06-19"
+    },
+    {
+      "id": 31,
+      "date": "2026-06-20T00:30:00Z",
+      "group": "C",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "巴西",
+        "code": "BRA",
+        "flag": "🇧🇷",
+        "iso": "br"
+      },
+      "away": {
+        "name": "海地",
+        "code": "HAI",
+        "flag": "🇭🇹",
+        "iso": "ht"
+      },
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "venue_code": "bmo",
+      "status": "upcoming",
+      "slug": "brazil-vs-haiti-2026-06-20"
+    },
+    {
+      "id": 32,
+      "date": "2026-06-20T03:00:00Z",
+      "group": "D",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "土耳其",
+        "code": "TUR",
+        "flag": "🇹🇷",
+        "iso": "tr"
+      },
+      "away": {
+        "name": "巴拉圭",
+        "code": "PAR",
+        "flag": "🇵🇾",
+        "iso": "py"
+      },
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "venue_code": "bcplace",
+      "status": "upcoming",
+      "slug": "turkey-vs-paraguay-2026-06-20"
+    },
+    {
+      "id": 33,
+      "date": "2026-06-20T17:00:00Z",
+      "group": "F",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "荷兰",
+        "code": "NED",
+        "flag": "🇳🇱",
+        "iso": "nl"
+      },
+      "away": {
+        "name": "瑞典",
+        "code": "SWE",
+        "flag": "🇸🇪",
+        "iso": "se"
+      },
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "venue_code": "metlife",
+      "status": "upcoming",
+      "slug": "netherlands-vs-sweden-2026-06-20"
+    },
+    {
+      "id": 34,
+      "date": "2026-06-20T20:00:00Z",
+      "group": "E",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "德国",
+        "code": "GER",
+        "flag": "🇩🇪",
+        "iso": "de"
+      },
+      "away": {
+        "name": "科特迪瓦",
+        "code": "CIV",
+        "flag": "🇨🇮",
+        "iso": "ci"
+      },
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "venue_code": "sofi",
+      "status": "upcoming",
+      "slug": "germany-vs-ivory-coast-2026-06-20"
+    },
+    {
+      "id": 35,
+      "date": "2026-06-21T00:00:00Z",
+      "group": "E",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "厄瓜多尔",
+        "code": "ECU",
+        "flag": "🇪🇨",
+        "iso": "ec"
+      },
+      "away": {
+        "name": "库拉索",
+        "code": "CUW",
+        "flag": "🇨🇼",
+        "iso": "cw"
+      },
+      "venue": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "venue_code": "att",
+      "status": "upcoming",
+      "slug": "ecuador-vs-curaçao-2026-06-21"
+    },
+    {
+      "id": 36,
+      "date": "2026-06-21T04:00:00Z",
+      "group": "F",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "突尼斯",
+        "code": "TUN",
+        "flag": "🇹🇳",
+        "iso": "tn"
+      },
+      "away": {
+        "name": "日本",
+        "code": "JPN",
+        "flag": "🇯🇵",
+        "iso": "jp"
+      },
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "venue_code": "hardrock",
+      "status": "upcoming",
+      "slug": "tunisia-vs-japan-2026-06-21"
+    },
+    {
+      "id": 37,
+      "date": "2026-06-21T16:00:00Z",
+      "group": "H",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "西班牙",
+        "code": "ESP",
+        "flag": "🇪🇸",
+        "iso": "es"
+      },
+      "away": {
+        "name": "沙特阿拉伯",
+        "code": "KSA",
+        "flag": "🇸🇦",
+        "iso": "sa"
+      },
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "venue_code": "mercedes",
+      "status": "upcoming",
+      "slug": "spain-vs-saudi-arabia-2026-06-21"
+    },
+    {
+      "id": 38,
+      "date": "2026-06-21T19:00:00Z",
+      "group": "G",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "比利时",
+        "code": "BEL",
+        "flag": "🇧🇪",
+        "iso": "be"
+      },
+      "away": {
+        "name": "伊朗",
+        "code": "IRN",
+        "flag": "🇮🇷",
+        "iso": "ir"
+      },
+      "venue": "NRG Stadium",
+      "city": "Houston, TX",
+      "venue_code": "nrg",
+      "status": "upcoming",
+      "slug": "belgium-vs-iran-2026-06-21"
+    },
+    {
+      "id": 39,
+      "date": "2026-06-21T22:00:00Z",
+      "group": "H",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "Uruguay",
+        "code": "URY",
+        "flag": "🏳",
+        "iso": "ur"
+      },
+      "away": {
+        "name": "Cape Verde Islands",
+        "code": "CPV",
+        "flag": "🇨🇻",
+        "iso": "cp"
+      },
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "venue_code": "lincoln",
+      "status": "upcoming",
+      "slug": "uruguay-vs-cape-verde-islands-2026-06-21"
+    },
+    {
+      "id": 40,
+      "date": "2026-06-22T01:00:00Z",
+      "group": "G",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "新西兰",
+        "code": "NZL",
+        "flag": "🇳🇿",
+        "iso": "nz"
+      },
+      "away": {
+        "name": "埃及",
+        "code": "EGY",
+        "flag": "🇪🇬",
+        "iso": "eg"
+      },
+      "venue": "Lumen Field",
+      "city": "Seattle, WA",
+      "venue_code": "lumen",
+      "status": "upcoming",
+      "slug": "new-zealand-vs-egypt-2026-06-22"
+    },
+    {
+      "id": 41,
+      "date": "2026-06-22T17:00:00Z",
+      "group": "J",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "阿根廷",
+        "code": "ARG",
+        "flag": "🇦🇷",
+        "iso": "ar"
+      },
+      "away": {
+        "name": "奥地利",
+        "code": "AUT",
+        "flag": "🇦🇹",
+        "iso": "at"
+      },
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara, CA",
+      "venue_code": "levis",
+      "status": "upcoming",
+      "slug": "argentina-vs-austria-2026-06-22"
+    },
+    {
+      "id": 42,
+      "date": "2026-06-22T21:00:00Z",
+      "group": "I",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "法国",
+        "code": "FRA",
+        "flag": "🇫🇷",
+        "iso": "fr"
+      },
+      "away": {
+        "name": "伊拉克",
+        "code": "IRQ",
+        "flag": "🇮🇶",
+        "iso": "iq"
+      },
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City, MO",
+      "venue_code": "arrowhead",
+      "status": "upcoming",
+      "slug": "france-vs-iraq-2026-06-22"
+    },
+    {
+      "id": 43,
+      "date": "2026-06-23T00:00:00Z",
+      "group": "I",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "挪威",
+        "code": "NOR",
+        "flag": "🇳🇴",
+        "iso": "no"
+      },
+      "away": {
+        "name": "塞内加尔",
+        "code": "SEN",
+        "flag": "🇸🇳",
+        "iso": "sn"
+      },
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, MA",
+      "venue_code": "gillette",
+      "status": "upcoming",
+      "slug": "norway-vs-senegal-2026-06-23"
+    },
+    {
+      "id": 44,
+      "date": "2026-06-23T03:00:00Z",
+      "group": "J",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "约旦",
+        "code": "JOR",
+        "flag": "🇯🇴",
+        "iso": "jo"
+      },
+      "away": {
+        "name": "阿尔及利亚",
+        "code": "DZA",
+        "flag": "🇩🇿",
+        "iso": "dz"
+      },
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "venue_code": "azteca",
+      "status": "upcoming",
+      "slug": "jordan-vs-algeria-2026-06-23"
+    },
+    {
+      "id": 45,
+      "date": "2026-06-23T17:00:00Z",
+      "group": "K",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "葡萄牙",
+        "code": "POR",
+        "flag": "🇵🇹",
+        "iso": "pt"
+      },
+      "away": {
+        "name": "乌兹别克斯坦",
+        "code": "UZB",
+        "flag": "🇺🇿",
+        "iso": "uz"
+      },
+      "venue": "Estadio Akron",
+      "city": "Guadalajara",
+      "venue_code": "akron",
+      "status": "upcoming",
+      "slug": "portugal-vs-uzbekistan-2026-06-23"
+    },
+    {
+      "id": 46,
+      "date": "2026-06-23T20:00:00Z",
+      "group": "L",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "英格兰",
+        "code": "ENG",
+        "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "iso": "gb-eng"
+      },
+      "away": {
+        "name": "加纳",
+        "code": "GHA",
+        "flag": "🇬🇭",
+        "iso": "gh"
+      },
+      "venue": "Estadio BBVA",
+      "city": "Monterrey",
+      "venue_code": "bbva",
+      "status": "upcoming",
+      "slug": "england-vs-ghana-2026-06-23"
+    },
+    {
+      "id": 47,
+      "date": "2026-06-23T23:00:00Z",
+      "group": "L",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "巴拿马",
+        "code": "PAN",
+        "flag": "🇵🇦",
+        "iso": "pa"
+      },
+      "away": {
+        "name": "克罗地亚",
+        "code": "CRO",
+        "flag": "🇭🇷",
+        "iso": "hr"
+      },
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "venue_code": "bmo",
+      "status": "upcoming",
+      "slug": "panama-vs-croatia-2026-06-23"
+    },
+    {
+      "id": 48,
+      "date": "2026-06-24T02:00:00Z",
+      "group": "K",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "哥伦比亚",
+        "code": "COL",
+        "flag": "🇨🇴",
+        "iso": "co"
+      },
+      "away": {
+        "name": "民主刚果",
+        "code": "COD",
+        "flag": "🇨🇩",
+        "iso": "cd"
+      },
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "venue_code": "bcplace",
+      "status": "upcoming",
+      "slug": "colombia-vs-congo-dr-2026-06-24"
+    },
+    {
+      "id": 49,
+      "date": "2026-06-24T19:00:00Z",
+      "group": "B",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "瑞士",
+        "code": "SUI",
+        "flag": "🇨🇭",
+        "iso": "ch"
+      },
+      "away": {
+        "name": "加拿大",
+        "code": "CAN",
+        "flag": "🇨🇦",
+        "iso": "ca"
+      },
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "venue_code": "metlife",
+      "status": "upcoming",
+      "slug": "switzerland-vs-canada-2026-06-24"
+    },
+    {
+      "id": 50,
+      "date": "2026-06-24T19:00:00Z",
+      "group": "B",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "波黑",
+        "code": "BIH",
+        "flag": "🇧🇦",
+        "iso": "ba"
+      },
+      "away": {
+        "name": "卡塔尔",
+        "code": "QAT",
+        "flag": "🇶🇦",
+        "iso": "qa"
+      },
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "venue_code": "sofi",
+      "status": "upcoming",
+      "slug": "bosnia-herzegovina-vs-qatar-2026-06-24"
+    },
+    {
+      "id": 51,
+      "date": "2026-06-24T22:00:00Z",
+      "group": "C",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "摩洛哥",
+        "code": "MAR",
+        "flag": "🇲🇦",
+        "iso": "ma"
+      },
+      "away": {
+        "name": "海地",
+        "code": "HAI",
+        "flag": "🇭🇹",
+        "iso": "ht"
+      },
+      "venue": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "venue_code": "att",
+      "status": "upcoming",
+      "slug": "morocco-vs-haiti-2026-06-24"
+    },
+    {
+      "id": 52,
+      "date": "2026-06-24T22:00:00Z",
+      "group": "C",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "苏格兰",
+        "code": "SCO",
+        "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "iso": "gb-sct"
+      },
+      "away": {
+        "name": "巴西",
+        "code": "BRA",
+        "flag": "🇧🇷",
+        "iso": "br"
+      },
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "venue_code": "hardrock",
+      "status": "upcoming",
+      "slug": "scotland-vs-brazil-2026-06-24"
+    },
+    {
+      "id": 53,
+      "date": "2026-06-25T01:00:00Z",
+      "group": "A",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "捷克",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "iso": "cz"
+      },
+      "away": {
+        "name": "墨西哥",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "iso": "mx"
+      },
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "venue_code": "mercedes",
+      "status": "upcoming",
+      "slug": "czechia-vs-mexico-2026-06-25"
+    },
+    {
+      "id": 54,
+      "date": "2026-06-25T01:00:00Z",
+      "group": "A",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "南非",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "iso": "za"
+      },
+      "away": {
+        "name": "韩国",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "iso": "kr"
+      },
+      "venue": "NRG Stadium",
+      "city": "Houston, TX",
+      "venue_code": "nrg",
+      "status": "upcoming",
+      "slug": "south-africa-vs-south-korea-2026-06-25"
+    },
+    {
+      "id": 55,
+      "date": "2026-06-25T20:00:00Z",
+      "group": "E",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "厄瓜多尔",
+        "code": "ECU",
+        "flag": "🇪🇨",
+        "iso": "ec"
+      },
+      "away": {
+        "name": "德国",
+        "code": "GER",
+        "flag": "🇩🇪",
+        "iso": "de"
+      },
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "venue_code": "lincoln",
+      "status": "upcoming",
+      "slug": "ecuador-vs-germany-2026-06-25"
+    },
+    {
+      "id": 56,
+      "date": "2026-06-25T20:00:00Z",
+      "group": "E",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "库拉索",
+        "code": "CUW",
+        "flag": "🇨🇼",
+        "iso": "cw"
+      },
+      "away": {
+        "name": "科特迪瓦",
+        "code": "CIV",
+        "flag": "🇨🇮",
+        "iso": "ci"
+      },
+      "venue": "Lumen Field",
+      "city": "Seattle, WA",
+      "venue_code": "lumen",
+      "status": "upcoming",
+      "slug": "curaçao-vs-ivory-coast-2026-06-25"
+    },
+    {
+      "id": 57,
+      "date": "2026-06-25T23:00:00Z",
+      "group": "F",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "突尼斯",
+        "code": "TUN",
+        "flag": "🇹🇳",
+        "iso": "tn"
+      },
+      "away": {
+        "name": "荷兰",
+        "code": "NED",
+        "flag": "🇳🇱",
+        "iso": "nl"
+      },
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara, CA",
+      "venue_code": "levis",
+      "status": "upcoming",
+      "slug": "tunisia-vs-netherlands-2026-06-25"
+    },
+    {
+      "id": 58,
+      "date": "2026-06-25T23:00:00Z",
+      "group": "F",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "日本",
+        "code": "JPN",
+        "flag": "🇯🇵",
+        "iso": "jp"
+      },
+      "away": {
+        "name": "瑞典",
+        "code": "SWE",
+        "flag": "🇸🇪",
+        "iso": "se"
+      },
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City, MO",
+      "venue_code": "arrowhead",
+      "status": "upcoming",
+      "slug": "japan-vs-sweden-2026-06-25"
+    },
+    {
+      "id": 59,
+      "date": "2026-06-26T02:00:00Z",
+      "group": "D",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "土耳其",
+        "code": "TUR",
+        "flag": "🇹🇷",
+        "iso": "tr"
+      },
+      "away": {
+        "name": "美国",
+        "code": "USA",
+        "flag": "🇺🇸",
+        "iso": "us"
+      },
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, MA",
+      "venue_code": "gillette",
+      "status": "upcoming",
+      "slug": "turkey-vs-united-states-2026-06-26"
+    },
+    {
+      "id": 60,
+      "date": "2026-06-26T02:00:00Z",
+      "group": "D",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "巴拉圭",
+        "code": "PAR",
+        "flag": "🇵🇾",
+        "iso": "py"
+      },
+      "away": {
+        "name": "澳大利亚",
+        "code": "AUS",
+        "flag": "🇦🇺",
+        "iso": "au"
+      },
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "venue_code": "azteca",
+      "status": "upcoming",
+      "slug": "paraguay-vs-australia-2026-06-26"
+    },
+    {
+      "id": 61,
+      "date": "2026-06-26T19:00:00Z",
+      "group": "I",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "挪威",
+        "code": "NOR",
+        "flag": "🇳🇴",
+        "iso": "no"
+      },
+      "away": {
+        "name": "法国",
+        "code": "FRA",
+        "flag": "🇫🇷",
+        "iso": "fr"
+      },
+      "venue": "Estadio Akron",
+      "city": "Guadalajara",
+      "venue_code": "akron",
+      "status": "upcoming",
+      "slug": "norway-vs-france-2026-06-26"
+    },
+    {
+      "id": 62,
+      "date": "2026-06-26T19:00:00Z",
+      "group": "I",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "塞内加尔",
+        "code": "SEN",
+        "flag": "🇸🇳",
+        "iso": "sn"
+      },
+      "away": {
+        "name": "伊拉克",
+        "code": "IRQ",
+        "flag": "🇮🇶",
+        "iso": "iq"
+      },
+      "venue": "Estadio BBVA",
+      "city": "Monterrey",
+      "venue_code": "bbva",
+      "status": "upcoming",
+      "slug": "senegal-vs-iraq-2026-06-26"
+    },
+    {
+      "id": 63,
+      "date": "2026-06-27T00:00:00Z",
+      "group": "H",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "Uruguay",
+        "code": "URY",
+        "flag": "🏳",
+        "iso": "ur"
+      },
+      "away": {
+        "name": "西班牙",
+        "code": "ESP",
+        "flag": "🇪🇸",
+        "iso": "es"
+      },
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "venue_code": "bmo",
+      "status": "upcoming",
+      "slug": "uruguay-vs-spain-2026-06-27"
+    },
+    {
+      "id": 64,
+      "date": "2026-06-27T00:00:00Z",
+      "group": "H",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "Cape Verde Islands",
+        "code": "CPV",
+        "flag": "🇨🇻",
+        "iso": "cp"
+      },
+      "away": {
+        "name": "沙特阿拉伯",
+        "code": "KSA",
+        "flag": "🇸🇦",
+        "iso": "sa"
+      },
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "venue_code": "bcplace",
+      "status": "upcoming",
+      "slug": "cape-verde-islands-vs-saudi-arabia-2026-06-27"
+    },
+    {
+      "id": 65,
+      "date": "2026-06-27T03:00:00Z",
+      "group": "G",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "新西兰",
+        "code": "NZL",
+        "flag": "🇳🇿",
+        "iso": "nz"
+      },
+      "away": {
+        "name": "比利时",
+        "code": "BEL",
+        "flag": "🇧🇪",
+        "iso": "be"
+      },
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "venue_code": "metlife",
+      "status": "upcoming",
+      "slug": "new-zealand-vs-belgium-2026-06-27"
+    },
+    {
+      "id": 66,
+      "date": "2026-06-27T03:00:00Z",
+      "group": "G",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "埃及",
+        "code": "EGY",
+        "flag": "🇪🇬",
+        "iso": "eg"
+      },
+      "away": {
+        "name": "伊朗",
+        "code": "IRN",
+        "flag": "🇮🇷",
+        "iso": "ir"
+      },
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "venue_code": "sofi",
+      "status": "upcoming",
+      "slug": "egypt-vs-iran-2026-06-27"
+    },
+    {
+      "id": 67,
+      "date": "2026-06-27T21:00:00Z",
+      "group": "L",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "巴拿马",
+        "code": "PAN",
+        "flag": "🇵🇦",
+        "iso": "pa"
+      },
+      "away": {
+        "name": "英格兰",
+        "code": "ENG",
+        "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "iso": "gb-eng"
+      },
+      "venue": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "venue_code": "att",
+      "status": "upcoming",
+      "slug": "panama-vs-england-2026-06-27"
+    },
+    {
+      "id": 68,
+      "date": "2026-06-27T21:00:00Z",
+      "group": "L",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "克罗地亚",
+        "code": "CRO",
+        "flag": "🇭🇷",
+        "iso": "hr"
+      },
+      "away": {
+        "name": "加纳",
+        "code": "GHA",
+        "flag": "🇬🇭",
+        "iso": "gh"
+      },
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "venue_code": "hardrock",
+      "status": "upcoming",
+      "slug": "croatia-vs-ghana-2026-06-27"
+    },
+    {
+      "id": 69,
+      "date": "2026-06-27T23:30:00Z",
+      "group": "K",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "哥伦比亚",
+        "code": "COL",
+        "flag": "🇨🇴",
+        "iso": "co"
+      },
+      "away": {
+        "name": "葡萄牙",
+        "code": "POR",
+        "flag": "🇵🇹",
+        "iso": "pt"
+      },
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "venue_code": "mercedes",
+      "status": "upcoming",
+      "slug": "colombia-vs-portugal-2026-06-27"
+    },
+    {
+      "id": 70,
+      "date": "2026-06-27T23:30:00Z",
+      "group": "K",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "民主刚果",
+        "code": "COD",
+        "flag": "🇨🇩",
+        "iso": "cd"
+      },
+      "away": {
+        "name": "乌兹别克斯坦",
+        "code": "UZB",
+        "flag": "🇺🇿",
+        "iso": "uz"
+      },
+      "venue": "NRG Stadium",
+      "city": "Houston, TX",
+      "venue_code": "nrg",
+      "status": "upcoming",
+      "slug": "congo-dr-vs-uzbekistan-2026-06-27"
+    },
+    {
+      "id": 71,
+      "date": "2026-06-28T02:00:00Z",
+      "group": "J",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "约旦",
+        "code": "JOR",
+        "flag": "🇯🇴",
+        "iso": "jo"
+      },
+      "away": {
+        "name": "阿根廷",
+        "code": "ARG",
+        "flag": "🇦🇷",
+        "iso": "ar"
+      },
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "venue_code": "lincoln",
+      "status": "upcoming",
+      "slug": "jordan-vs-argentina-2026-06-28"
+    },
+    {
+      "id": 72,
+      "date": "2026-06-28T02:00:00Z",
+      "group": "J",
+      "matchday": 1,
+      "round": "小组赛",
+      "phase": "group",
+      "home": {
+        "name": "阿尔及利亚",
+        "code": "DZA",
+        "flag": "🇩🇿",
+        "iso": "dz"
+      },
+      "away": {
+        "name": "奥地利",
+        "code": "AUT",
+        "flag": "🇦🇹",
+        "iso": "at"
+      },
+      "venue": "Lumen Field",
+      "city": "Seattle, WA",
+      "venue_code": "lumen",
+      "status": "upcoming",
+      "slug": "algeria-vs-austria-2026-06-28"
+    },
+    {
+      "id": 73,
+      "date": "2026-06-28T19:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara, CA",
+      "venue_code": "levis",
+      "status": "upcoming",
+      "slug": "last-32-match-73-2026-06-28"
+    },
+    {
+      "id": 74,
+      "date": "2026-06-29T17:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City, MO",
+      "venue_code": "arrowhead",
+      "status": "upcoming",
+      "slug": "last-32-match-74-2026-06-29"
+    },
+    {
+      "id": 75,
+      "date": "2026-06-29T20:30:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, MA",
+      "venue_code": "gillette",
+      "status": "upcoming",
+      "slug": "last-32-match-75-2026-06-29"
+    },
+    {
+      "id": 76,
+      "date": "2026-06-30T01:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "venue_code": "azteca",
+      "status": "upcoming",
+      "slug": "last-32-match-76-2026-06-30"
+    },
+    {
+      "id": 77,
+      "date": "2026-06-30T17:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Estadio Akron",
+      "city": "Guadalajara",
+      "venue_code": "akron",
+      "status": "upcoming",
+      "slug": "last-32-match-77-2026-06-30"
+    },
+    {
+      "id": 78,
+      "date": "2026-06-30T21:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Estadio BBVA",
+      "city": "Monterrey",
+      "venue_code": "bbva",
+      "status": "upcoming",
+      "slug": "last-32-match-78-2026-06-30"
+    },
+    {
+      "id": 79,
+      "date": "2026-07-01T01:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "venue_code": "bmo",
+      "status": "upcoming",
+      "slug": "last-32-match-79-2026-07-01"
+    },
+    {
+      "id": 80,
+      "date": "2026-07-01T16:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "venue_code": "bcplace",
+      "status": "upcoming",
+      "slug": "last-32-match-80-2026-07-01"
+    },
+    {
+      "id": 81,
+      "date": "2026-07-01T20:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "venue_code": "metlife",
+      "status": "upcoming",
+      "slug": "last-32-match-81-2026-07-01"
+    },
+    {
+      "id": 82,
+      "date": "2026-07-02T00:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "venue_code": "sofi",
+      "status": "upcoming",
+      "slug": "last-32-match-82-2026-07-02"
+    },
+    {
+      "id": 83,
+      "date": "2026-07-02T19:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "venue_code": "att",
+      "status": "upcoming",
+      "slug": "last-32-match-83-2026-07-02"
+    },
+    {
+      "id": 84,
+      "date": "2026-07-02T23:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "venue_code": "hardrock",
+      "status": "upcoming",
+      "slug": "last-32-match-84-2026-07-02"
+    },
+    {
+      "id": 85,
+      "date": "2026-07-03T03:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "venue_code": "mercedes",
+      "status": "upcoming",
+      "slug": "last-32-match-85-2026-07-03"
+    },
+    {
+      "id": 86,
+      "date": "2026-07-03T18:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "NRG Stadium",
+      "city": "Houston, TX",
+      "venue_code": "nrg",
+      "status": "upcoming",
+      "slug": "last-32-match-86-2026-07-03"
+    },
+    {
+      "id": 87,
+      "date": "2026-07-03T22:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "venue_code": "lincoln",
+      "status": "upcoming",
+      "slug": "last-32-match-87-2026-07-03"
+    },
+    {
+      "id": 88,
+      "date": "2026-07-04T01:30:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "last-32",
+      "phase": "last-32",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Lumen Field",
+      "city": "Seattle, WA",
+      "venue_code": "lumen",
+      "status": "upcoming",
+      "slug": "last-32-match-88-2026-07-04"
+    },
+    {
+      "id": 89,
+      "date": "2026-07-04T17:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara, CA",
+      "venue_code": "levis",
+      "status": "upcoming",
+      "slug": "round-of-16-match-89-2026-07-04"
+    },
+    {
+      "id": 90,
+      "date": "2026-07-04T21:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City, MO",
+      "venue_code": "arrowhead",
+      "status": "upcoming",
+      "slug": "round-of-16-match-90-2026-07-04"
+    },
+    {
+      "id": 91,
+      "date": "2026-07-05T20:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Gillette Stadium",
+      "city": "Foxborough, MA",
+      "venue_code": "gillette",
+      "status": "upcoming",
+      "slug": "round-of-16-match-91-2026-07-05"
+    },
+    {
+      "id": 92,
+      "date": "2026-07-06T00:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "venue_code": "azteca",
+      "status": "upcoming",
+      "slug": "round-of-16-match-92-2026-07-06"
+    },
+    {
+      "id": 93,
+      "date": "2026-07-06T19:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Estadio Akron",
+      "city": "Guadalajara",
+      "venue_code": "akron",
+      "status": "upcoming",
+      "slug": "round-of-16-match-93-2026-07-06"
+    },
+    {
+      "id": 94,
+      "date": "2026-07-07T00:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Estadio BBVA",
+      "city": "Monterrey",
+      "venue_code": "bbva",
+      "status": "upcoming",
+      "slug": "round-of-16-match-94-2026-07-07"
+    },
+    {
+      "id": 95,
+      "date": "2026-07-07T16:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "venue_code": "bmo",
+      "status": "upcoming",
+      "slug": "round-of-16-match-95-2026-07-07"
+    },
+    {
+      "id": 96,
+      "date": "2026-07-07T20:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "round-of-16",
+      "phase": "round-of-16",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "venue_code": "bcplace",
+      "status": "upcoming",
+      "slug": "round-of-16-match-96-2026-07-07"
+    },
+    {
+      "id": 97,
+      "date": "2026-07-09T20:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "quarter-finals",
+      "phase": "quarter-finals",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford, NJ",
+      "venue_code": "metlife",
+      "status": "upcoming",
+      "slug": "quarter-finals-match-97-2026-07-09"
+    },
+    {
+      "id": 98,
+      "date": "2026-07-10T19:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "quarter-finals",
+      "phase": "quarter-finals",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles, CA",
+      "venue_code": "sofi",
+      "status": "upcoming",
+      "slug": "quarter-finals-match-98-2026-07-10"
+    },
+    {
+      "id": 99,
+      "date": "2026-07-11T21:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "quarter-finals",
+      "phase": "quarter-finals",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "AT&T Stadium",
+      "city": "Arlington, TX",
+      "venue_code": "att",
+      "status": "upcoming",
+      "slug": "quarter-finals-match-99-2026-07-11"
+    },
+    {
+      "id": 100,
+      "date": "2026-07-12T01:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "quarter-finals",
+      "phase": "quarter-finals",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens, FL",
+      "venue_code": "hardrock",
+      "status": "upcoming",
+      "slug": "quarter-finals-match-100-2026-07-12"
+    },
+    {
+      "id": 101,
+      "date": "2026-07-14T19:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "semi-finals",
+      "phase": "semi-finals",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta, GA",
+      "venue_code": "mercedes",
+      "status": "upcoming",
+      "slug": "semi-finals-match-101-2026-07-14"
+    },
+    {
+      "id": 102,
+      "date": "2026-07-15T19:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "semi-finals",
+      "phase": "semi-finals",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "NRG Stadium",
+      "city": "Houston, TX",
+      "venue_code": "nrg",
+      "status": "upcoming",
+      "slug": "semi-finals-match-102-2026-07-15"
+    },
+    {
+      "id": 103,
+      "date": "2026-07-18T21:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "third-place-play-off",
+      "phase": "third-place-play-off",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia, PA",
+      "venue_code": "lincoln",
+      "status": "upcoming",
+      "slug": "third-place-play-off-match-103-2026-07-18"
+    },
+    {
+      "id": 104,
+      "date": "2026-07-19T19:00:00Z",
+      "group": null,
+      "matchday": null,
+      "round": "final",
+      "phase": "final",
+      "home": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "away": {
+        "name": null,
+        "code": null,
+        "flag": "",
+        "iso": ""
+      },
+      "venue": "Lumen Field",
+      "city": "Seattle, WA",
+      "venue_code": "lumen",
+      "status": "upcoming",
+      "slug": "final-match-104-2026-07-19"
+    }
+  ],
+  "topScorers": [
+    {
+      "rank": 1,
+      "name": "Lionel Messi",
+      "team": "阿根廷",
+      "team_iso": "ar",
+      "team_flag": "🇦🇷",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 2,
+      "name": "Kylian Mbappé",
+      "team": "法国",
+      "team_iso": "fr",
+      "team_flag": "🇫🇷",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 3,
+      "name": "Erling Haaland",
+      "team": "挪威",
+      "team_iso": "no",
+      "team_flag": "🇳🇴",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 4,
+      "name": "Cristiano Ronaldo",
+      "team": "葡萄牙",
+      "team_iso": "pt",
+      "team_flag": "🇵🇹",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 5,
+      "name": "Harry Kane",
+      "team": "英格兰",
+      "team_iso": "gb-eng",
+      "team_flag": "🏴",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 6,
+      "name": "Vinícius Júnior",
+      "team": "巴西",
+      "team_iso": "br",
+      "team_flag": "🇧🇷",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 7,
+      "name": "Jamal Musiala",
+      "team": "德国",
+      "team_iso": "de",
+      "team_flag": "🇩🇪",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前腰"
+    },
+    {
+      "rank": 8,
+      "name": "Jude Bellingham",
+      "team": "英格兰",
+      "team_iso": "gb-eng",
+      "team_flag": "🏴",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "中场"
+    },
+    {
+      "rank": 9,
+      "name": "Rodri",
+      "team": "西班牙",
+      "team_iso": "es",
+      "team_flag": "🇪🇸",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "中场"
+    },
+    {
+      "rank": 10,
+      "name": "Mohamed Salah",
+      "team": "埃及",
+      "team_iso": "eg",
+      "team_flag": "🇪🇬",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 11,
+      "name": "Lamine Yamal",
+      "team": "西班牙",
+      "team_iso": "es",
+      "team_flag": "🇪🇸",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    },
+    {
+      "rank": 12,
+      "name": "Kevin De Bruyne",
+      "team": "比利时",
+      "team_iso": "be",
+      "team_flag": "🇧🇪",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "中场"
+    },
+    {
+      "rank": 13,
+      "name": "Florian Wirtz",
+      "team": "德国",
+      "team_iso": "de",
+      "team_flag": "🇩🇪",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前腰"
+    },
+    {
+      "rank": 14,
+      "name": "Luis Díaz",
+      "team": "哥伦比亚",
+      "team_iso": "co",
+      "team_flag": "🇨🇴",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "边锋"
+    },
+    {
+      "rank": 15,
+      "name": "Son Heung-min",
+      "team": "韩国",
+      "team_iso": "kr",
+      "team_flag": "🇰🇷",
+      "goals": 0,
+      "assists": 0,
+      "matches": 0,
+      "position": "前锋"
+    }
+  ]
+}

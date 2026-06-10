@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 美加墨世界杯 · 赛程与比分追踪</title>
+    <meta name="description" content="2026 FIFA 世界杯（美国/加拿大/墨西哥）实时赛程、比分、积分榜与射手榜">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>🏆 2026 FIFA 世界杯</h1>
+            <p class="subtitle">美加墨 · 48 队 · 104 场</p>
+            <div id="countdown" class="countdown">
+                <div class="countdown-label" id="cd-label">距离下一场比赛</div>
+                <div class="countdown-timer" id="countdown-timer">
+                    <span><strong id="cd-days">--</strong><small>天</small></span>
+                    <span><strong id="cd-hours">--</strong><small>时</small></span>
+                    <span><strong id="cd-mins">--</strong><small>分</small></span>
+                    <span><strong id="cd-secs">--</strong><small>秒</small></span>
+                </div>
+                <div class="next-match" id="next-match">正在加载...</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="filter-bar">
+        <div class="filter-item">
+            <label>🔍 搜索球队</label>
+            <input type="text" id="team-search" placeholder="输入国家名，如：阿根廷">
+        </div>
+        <div class="filter-item">
+            <label>📁 按小组</label>
+            <select id="group-filter">
+                <option value="all">全部小组</option>
+                <option value="A">A 组</option>
+                <option value="B">B 组</option>
+                <option value="C">C 组</option>
+                <option value="D">D 组</option>
+                <option value="E">E 组</option>
+                <option value="F">F 组</option>
+                <option value="G">G 组</option>
+                <option value="H">H 组</option>
+                <option value="I">I 组</option>
+                <option value="J">J 组</option>
+                <option value="K">K 组</option>
+                <option value="L">L 组</option>
+                <option value="KO">淘汰赛</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label>📅 按日期</label>
+            <select id="date-filter">
+                <option value="all">全部日期</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label>⚽ 比赛状态</label>
+            <select id="status-filter">
+                <option value="all">全部状态</option>
+                <option value="upcoming">即将开始</option>
+                <option value="live">🔴 进行中</option>
+                <option value="finished">已结束</option>
+            </select>
+        </div>
+    </section>
+
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="all">📋 全部赛程</button>
+        <button class="tab-btn" data-tab="upcoming">⏭️ 即将开始</button>
+        <button class="tab-btn" data-tab="finished">✅ 已结束</button>
+        <button class="tab-btn" data-tab="standings">📊 积分榜</button>
+        <button class="tab-btn" data-tab="scorers">🥅 射手榜</button>
+        <button class="tab-btn" data-tab="today">📍 今日比赛</button>
+    </nav>
+
+    <main class="content">
+        <section id="matches-section" class="tab-content active">
+            <div id="matches-container" class="matches-grid">
+                <div class="loading">正在加载赛程数据...</div>
+            </div>
+        </section>
+
+        <section id="standings-section" class="tab-content">
+            <div id="standings-container">
+                <div class="loading">正在加载积分榜...</div>
+            </div>
+        </section>
+
+        <section id="scorers-section" class="tab-content">
+            <div id="scorers-container">
+                <div class="loading">正在加载射手榜...</div>
+            </div>
+        </section>
+
+        <section id="today-section" class="tab-content">
+            <div id="today-container" class="matches-grid">
+                <div class="loading">正在加载...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>📅 数据更新时间：<span id="last-updated">--</span></p>
+        <p class="tips">💡 提示：数据来自 <code>matches.json</code>，可通过 <code>sync_sportmonks.py</code> 每天自动同步 Sportmonks API</p>
+        <p class="copyright">2026 FIFA World Cup · 美国 🇺🇸 加拿大 🇨🇦 墨西哥 🇲🇽</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
