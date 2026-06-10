@@ -15,23 +15,79 @@ let currentFilter = {
     tab: 'all'
 };
 
+// 城市中文名映射
+const CITY_CN = {
+    "East Rutherford, NJ": "东卢瑟福",
+    "Los Angeles, CA": "洛杉矶",
+    "Arlington, TX": "阿灵顿",
+    "Miami Gardens, FL": "迈阿密花园",
+    "Atlanta, GA": "亚特兰大",
+    "Houston, TX": "休斯顿",
+    "Philadelphia, PA": "费城",
+    "Seattle, WA": "西雅图",
+    "Santa Clara, CA": "圣克拉拉",
+    "Kansas City, MO": "堪萨斯城",
+    "Foxborough, MA": "福克斯堡",
+    "Mexico City": "墨西哥城",
+    "Guadalajara": "瓜达拉哈拉",
+    "Monterrey": "蒙特雷",
+    "Toronto, ON": "多伦多",
+    "Vancouver, BC": "温哥华",
+};
+
+// 城市时区映射（UTC偏移小时数）
+const CITY_TIMEZONE = {
+    "East Rutherford, NJ": -4,  // 美国东部时间 (UTC-4)
+    "Los Angeles, CA": -7,      // 美国太平洋时间 (UTC-7)
+    "Arlington, TX": -5,        // 美国中部时间 (UTC-5)
+    "Miami Gardens, FL": -4,    // 美国东部时间 (UTC-4)
+    "Atlanta, GA": -4,          // 美国东部时间 (UTC-4)
+    "Houston, TX": -5,          // 美国中部时间 (UTC-5)
+    "Philadelphia, PA": -4,     // 美国东部时间 (UTC-4)
+    "Seattle, WA": -7,          // 美国太平洋时间 (UTC-7)
+    "Santa Clara, CA": -7,      // 美国太平洋时间 (UTC-7)
+    "Kansas City, MO": -5,      // 美国中部时间 (UTC-5)
+    "Foxborough, MA": -4,       // 美国东部时间 (UTC-4)
+    "Mexico City": -6,          // 墨西哥城时间 (UTC-6)
+    "Guadalajara": -6,          // 墨西哥中部时间 (UTC-6)
+    "Monterrey": -6,            // 墨西哥中部时间 (UTC-6)
+    "Toronto, ON": -4,          // 加拿大东部时间 (UTC-4)
+    "Vancouver, BC": -7,        // 加拿大太平洋时间 (UTC-7)
+};
+
 /* ============= 工具函数 ============= */
 
 function formatDateCN(dateStr) {
     const d = new Date(dateStr);
+    d.setTime(d.getTime() + 8 * 60 * 60 * 1000); // 转换为北京时间
     const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
     return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 ${weekdays[d.getDay()]}`;
 }
 
 function formatTime(dateStr) {
     const d = new Date(dateStr);
-    const h = String(d.getHours()).padStart(2, '0');
-    const m = String(d.getMinutes()).padStart(2, '0');
+    // 北京时间 (UTC+8)
+    const utc = d.getTime() + d.getTimezoneOffset() * 60 * 1000;
+    const beijingTime = new Date(utc + 8 * 60 * 60 * 1000);
+    const h = String(beijingTime.getHours()).padStart(2, '0');
+    const m = String(beijingTime.getMinutes()).padStart(2, '0');
+    return `${h}:${m}`;
+}
+
+function formatTimeLocal(dateStr, city) {
+    // 根据城市时区计算当地时间
+    const d = new Date(dateStr);
+    const utc = d.getTime() + d.getTimezoneOffset() * 60 * 1000;
+    const timezoneOffset = CITY_TIMEZONE[city] || -5; // 默认 UTC-5
+    const localTime = new Date(utc + timezoneOffset * 60 * 60 * 1000);
+    const h = String(localTime.getHours()).padStart(2, '0');
+    const m = String(localTime.getMinutes()).padStart(2, '0');
     return `${h}:${m}`;
 }
 
 function getDateKey(dateStr) {
     const d = new Date(dateStr);
+    d.setTime(d.getTime() + 8 * 60 * 60 * 1000); // 转换为北京时间
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
@@ -116,8 +172,11 @@ function populateDateFilter() {
     dates.forEach(d => {
         const opt = document.createElement('option');
         opt.value = d;
+        // 转换为北京时间显示
         const dateObj = new Date(d);
-        opt.textContent = `${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
+        const utc = dateObj.getTime() + dateObj.getTimezoneOffset() * 60 * 1000;
+        const beijingDate = new Date(utc + 8 * 60 * 60 * 1000);
+        opt.textContent = `${beijingDate.getMonth() + 1}月${beijingDate.getDate()}日`;
         select.appendChild(opt);
     });
 }
@@ -318,8 +377,8 @@ function renderMatchCard(match) {
                 </div>
             </div>
             <div class="match-footer">
-                <span class="venue">🏟️ ${match.venue}</span>
-                <span class="time">⏰ ${formatTime(match.date)} 当地时间</span>
+                <span class="venue">📍 ${CITY_CN[match.city] || match.city || match.venue}（${match.venue}）</span>
+                <span class="time">⏰ 北京时间 ${formatTime(match.date)} (当地 ${formatTimeLocal(match.date, match.city)})</span>
             </div>
         </div>
     `;
@@ -504,4 +563,53 @@ function renderAll() {
 }
 
 /* ============= 启动 ============= */
-document.addEventListener('DOMContentLoaded', loadData);
+
+// 自动刷新相关变量
+let refreshInterval = null;
+const REFRESH_INTERVAL_MINUTES = 30; // 每30分钟刷新一次
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+    startAutoRefresh();
+});
+
+// 启动自动刷新
+function startAutoRefresh() {
+    if (refreshInterval) clearInterval(refreshInterval);
+    
+    // 每30分钟刷新一次
+    refreshInterval = setInterval(() => {
+        console.log(`🔄 自动刷新数据 (每 ${REFRESH_INTERVAL_MINUTES} 分钟)`);
+        loadData();
+    }, REFRESH_INTERVAL_MINUTES * 60 * 1000);
+    
+    // 更新刷新状态显示
+    updateRefreshStatus();
+}
+
+// 更新刷新状态显示
+function updateRefreshStatus() {
+    const statusDiv = document.getElementById('refresh-status');
+    if (statusDiv) {
+        statusDiv.innerHTML = `⏱️ 自动刷新: 开启 (每 ${REFRESH_INTERVAL_MINUTES} 分钟)`;
+    }
+}
+
+// 手动刷新按钮点击
+function manualRefresh() {
+    console.log('🔄 手动刷新数据...');
+    loadData();
+}
+
+// 切换自动刷新开关
+function toggleAutoRefresh() {
+    if (refreshInterval) {
+        clearInterval(refreshInterval);
+        refreshInterval = null;
+        document.getElementById('refresh-status').innerHTML = '⏱️ 自动刷新: 关闭';
+        document.getElementById('toggle-refresh').textContent = '开启自动刷新';
+    } else {
+        startAutoRefresh();
+        document.getElementById('toggle-refresh').textContent = '关闭自动刷新';
+    }
+}

@@ -105,17 +105,44 @@ body {
 .next-match {
     font-size: 1rem;
     color: #fff;
-    padding: 8px 15px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 8px;
-    display: inline-block;
-    margin-top: 5px;
-    line-height: 1.5;
-    display: inline-flex;
+    opacity: 0.9;
+    margin-top: 8px;
+}
+
+.refresh-controls {
+    display: flex;
     align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
     justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.refresh-controls span {
+    font-size: 0.85rem;
+    color: #b3e5fc;
+}
+
+.refresh-btn {
+    background: linear-gradient(145deg, #1976d2, #0d47a1);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+}
+
+.refresh-btn:hover {
+    background: linear-gradient(145deg, #42a5f5, #1976d2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
+}
+
+.refresh-btn:active {
+    transform: translateY(0);
 }
 
 /* ========== 筛选栏 ========== */
