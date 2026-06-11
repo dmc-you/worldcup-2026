@@ -601,6 +601,261 @@ function manualRefresh() {
     loadData();
 }
 
+// 一键生图功能
+function captureScreenshot() {
+    console.log('🎨 正在生成赛程图片...');
+    
+    const statusElement = document.getElementById('refresh-status');
+    const originalText = statusElement.innerHTML;
+    statusElement.innerHTML = '🎨 正在生成赛程图片...';
+    
+    const matchesContainer = document.getElementById('matches-container');
+    const activeTab = document.querySelector('.tab-btn.active');
+    const tabName = activeTab ? activeTab.textContent.replace(/[📋⏭️✅📊🥅📍]/g, '').trim() : '赛程';
+    
+    // 获取所有比赛卡片（不限制 date-group）
+    const matchCards = matchesContainer.querySelectorAll('.match-card');
+    
+    if (matchCards.length === 0) {
+        alert('当前没有可生成的赛程数据');
+        statusElement.innerHTML = originalText;
+        return;
+    }
+    
+    // 按日期分组比赛
+    const matchByDate = new Map();
+    matchCards.forEach(card => {
+        // 查找日期标题
+        let dateTitle = '其他';
+        let parent = card.parentElement;
+        while (parent && parent !== matchesContainer) {
+            const title = parent.querySelector('.date-title');
+            if (title) {
+                dateTitle = title.textContent.trim();
+                break;
+            }
+            parent = parent.parentElement;
+        }
+        
+        if (!matchByDate.has(dateTitle)) {
+            matchByDate.set(dateTitle, []);
+        }
+        matchByDate.get(dateTitle).push(card);
+    });
+    
+    // 计算图片尺寸
+    const padding = 40;
+    const titleHeight = 130;
+    const footerHeight = 50;
+    const matchCardHeight = 130;
+    const dateHeaderHeight = 40;
+    
+    let totalMatchCount = 0;
+    matchByDate.forEach(cards => totalMatchCount += cards.length);
+    
+    const totalHeight = padding * 2 + titleHeight + footerHeight + 
+                       matchByDate.size * dateHeaderHeight + 
+                       totalMatchCount * matchCardHeight;
+    const width = 650;
+    
+    // 创建 Canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = totalHeight;
+    const ctx = canvas.getContext('2d');
+    
+    // 绘制背景渐变
+    const gradient = ctx.createLinearGradient(0, 0, 0, totalHeight);
+    gradient.addColorStop(0, '#1a1a2e');
+    gradient.addColorStop(0.5, '#16213e');
+    gradient.addColorStop(1, '#0f3460');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, totalHeight);
+    
+    // 绘制标题区域
+    ctx.textAlign = 'center';
+    ctx.shadowColor = '#ffd700';
+    ctx.shadowBlur = 15;
+    ctx.fillStyle = '#ffd700';
+    ctx.font = 'bold 32px Arial, sans-serif';
+    ctx.fillText('🏆 2026 美加墨世界杯', width / 2, padding + 50);
+    
+    ctx.shadowBlur = 0;
+    ctx.font = 'bold 18px Arial, sans-serif';
+    ctx.fillStyle = '#ffd700';
+    ctx.fillText(tabName, width / 2, padding + 85);
+    
+    ctx.fillStyle = '#888';
+    ctx.font = '12px Arial, sans-serif';
+    ctx.fillText(`生成时间: ${new Date().toLocaleString('zh-CN')}  |  共 ${totalMatchCount} 场比赛`, width / 2, padding + 110);
+    
+    // 绘制比赛内容
+    let currentY = padding + titleHeight;
+    
+    matchByDate.forEach((cards, dateTitle) => {
+        // 绘制日期标题
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 18px Arial, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(dateTitle, padding, currentY + 25);
+        
+        // 绘制分割线
+        ctx.strokeStyle = 'rgba(255,215,0,0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(padding, currentY + 38);
+        ctx.lineTo(width - padding, currentY + 38);
+        ctx.stroke();
+        
+        currentY += dateHeaderHeight;
+        
+        // 绘制该日期的比赛
+        cards.forEach((card, index) => {
+            // 卡片背景
+            ctx.fillStyle = 'rgba(255,255,255,0.05)';
+            const cardX = padding;
+            const cardY = currentY;
+            const cardW = width - padding * 2;
+            const cardH = matchCardHeight - 10;
+            
+            // 圆角矩形
+            const radius = 10;
+            ctx.beginPath();
+            ctx.moveTo(cardX + radius, cardY);
+            ctx.lineTo(cardX + cardW - radius, cardY);
+            ctx.quadraticCurveTo(cardX + cardW, cardY, cardX + cardW, cardY + radius);
+            ctx.lineTo(cardX + cardW, cardY + cardH - radius);
+            ctx.quadraticCurveTo(cardX + cardW, cardY + cardH, cardX + cardW - radius, cardY + cardH);
+            ctx.lineTo(cardX + radius, cardY + cardH);
+            ctx.quadraticCurveTo(cardX, cardY + cardH, cardX, cardY + cardH - radius);
+            ctx.lineTo(cardX, cardY + radius);
+            ctx.quadraticCurveTo(cardX, cardY, cardX + radius, cardY);
+            ctx.closePath();
+            ctx.fill();
+            
+            // 获取比赛信息
+            const teams = card.querySelectorAll('.team .team-name');
+            const time = card.querySelector('.time');
+            const venue = card.querySelector('.venue');
+            const matchBadge = card.querySelector('.match-badge');
+            const matchStatus = card.querySelector('.match-status');
+            
+            const team1Name = teams[0]?.textContent.trim() || 'TBD';
+            const team2Name = teams[1]?.textContent.trim() || 'TBD';
+            
+            // 绘制轮次徽章
+            if (matchBadge) {
+                ctx.fillStyle = '#ffd700';
+                ctx.font = 'bold 10px Arial, sans-serif';
+                ctx.textAlign = 'center';
+                const bx = cardX + 35;
+                const by = cardY + 18;
+                ctx.fillRect(bx - 30, by - 9, 60, 18);
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fillText(matchBadge.textContent.trim(), bx, by + 3);
+            }
+            
+            // 绘制状态徽章
+            if (matchStatus) {
+                ctx.fillStyle = '#4caf50';
+                ctx.font = 'bold 10px Arial, sans-serif';
+                ctx.textAlign = 'center';
+                const bx = cardX + cardW - 35;
+                const by = cardY + 18;
+                ctx.fillRect(bx - 30, by - 9, 60, 18);
+                ctx.fillStyle = '#fff';
+                ctx.fillText(matchStatus.textContent.trim(), bx, by + 3);
+            }
+            
+            // 绘制球队名称
+            const centerY = cardY + cardH / 2;
+            ctx.font = 'bold 16px Arial, sans-serif';
+            ctx.fillStyle = '#fff';
+            ctx.textAlign = 'center';
+            
+            ctx.fillText(team1Name, cardX + cardW * 0.25, centerY + 5);
+            
+            // VS
+            ctx.fillStyle = '#ffd700';
+            ctx.font = 'bold 20px Arial, sans-serif';
+            ctx.fillText('VS', cardX + cardW * 0.5, centerY + 7);
+            
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 16px Arial, sans-serif';
+            ctx.fillText(team2Name, cardX + cardW * 0.75, centerY + 5);
+            
+            // 绘制时间和场馆
+            ctx.font = '12px Arial, sans-serif';
+            ctx.fillStyle = '#aaa';
+            
+            if (time) {
+                ctx.textAlign = 'center';
+                ctx.fillText(time.textContent.trim(), cardX + cardW * 0.5, centerY + 35);
+            }
+            
+            if (venue) {
+                ctx.textAlign = 'center';
+                ctx.font = '11px Arial, sans-serif';
+                ctx.fillText(venue.textContent.trim(), cardX + cardW * 0.5, centerY + 55);
+            }
+            
+            currentY += matchCardHeight;
+        });
+    });
+    
+    // 绘制底部
+    ctx.fillStyle = '#666';
+    ctx.font = '12px Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('⚽ 2026 FIFA World Cup · USA / Canada / Mexico', width / 2, totalHeight - 25);
+    
+    // 下载图片
+    try {
+        const link = document.createElement('a');
+        link.download = `worldcup_${tabName}_${new Date().toISOString().split('T')[0]}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        
+        statusElement.innerHTML = originalText;
+        console.log('🎨 赛程图片已生成！共生成 ' + totalMatchCount + ' 场比赛');
+    } catch (e) {
+        console.error('图片下载失败:', e);
+        statusElement.innerHTML = originalText;
+        alert('图片生成失败: ' + e.message);
+    }
+}
+
+// 备用截图方法
+function fallbackScreenshot() {
+    console.log('使用备用截图方法...');
+    
+    const matchesContainer = document.getElementById('matches-container');
+    let textContent = '🏆 2026 美加墨世界杯\n';
+    textContent += '===================\n\n';
+    
+    const matchCards = matchesContainer.querySelectorAll('.match-card');
+    matchCards.forEach((card, index) => {
+        const teams = card.querySelectorAll('.team-name');
+        const time = card.querySelector('.time');
+        const venue = card.querySelector('.venue');
+        
+        if (teams.length === 2) {
+            textContent += `${index + 1}. ${teams[0].textContent.trim()} vs ${teams[1].textContent.trim()}\n`;
+            if (time) textContent += `   ⏰ ${time.textContent.trim()}\n`;
+            if (venue) textContent += `   📍 ${venue.textContent.trim()}\n`;
+            textContent += '\n';
+        }
+    });
+    
+    const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `worldcup_schedule_${new Date().toISOString().split('T')[0]}.txt`;
+    link.click();
+    
+    console.log('📋 赛程文本已保存！');
+}
+
 // 切换自动刷新开关
 function toggleAutoRefresh() {
     if (refreshInterval) {
