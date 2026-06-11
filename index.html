@@ -7,7 +7,7 @@
     <meta name="description" content="2026 FIFA 世界杯（美国/加拿大/墨西哥）实时赛程、比分、积分榜与射手榜">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script data-preview-injected src="https://lf3-static.bytednsdoc.com/obj/eden-cn/8011eh7nupenuvonuhd/previewer-tools.de3cd6a1.umd.js"></script></head>
+</head>
 <body>
     <header class="hero">
         <div class="hero-content">
@@ -125,13 +125,32 @@
     <div id="screenshot-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>📷 赛程截图工具</h2>
+                <h2>📷 截图工具</h2>
                 <button onclick="closeScreenshotPanel()" class="modal-close">✕</button>
             </div>
             
             <div class="modal-body">
-                <!-- 日期选择 -->
+                <!-- 内容类型 -->
                 <div class="form-section">
+                    <h3>📋 内容类型</h3>
+                    <div class="content-type-options">
+                        <label class="radio-label">
+                            <input type="radio" name="content-type" value="matches" checked>
+                            <span>⚽ 赛程</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="content-type" value="standings">
+                            <span>📊 积分榜</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="content-type" value="scorers">
+                            <span>🥅 射手榜</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- 日期选择（赛程专用） -->
+                <div class="form-section" id="date-section">
                     <h3>📅 日期范围</h3>
                     <div class="date-range">
                         <div>
@@ -151,9 +170,9 @@
                     </div>
                 </div>
                 
-                <!-- 布局设置 -->
-                <div class="form-section">
-                    <h3>📐 布局设置</h3>
+                <!-- 列数设置（所有内容类型通用） -->
+                <div class="form-section" id="cols-section">
+                    <h3>📐 列数设置</h3>
                     <div class="layout-options">
                         <div>
                             <label>列数</label>
@@ -161,10 +180,18 @@
                                 <option value="1">1 列</option>
                                 <option value="2" selected>2 列</option>
                                 <option value="3">3 列</option>
+                                <option value="4">4 列</option>
                             </select>
                         </div>
+                    </div>
+                </div>
+
+                <!-- 赛程阶段（赛程专用） -->
+                <div class="form-section" id="stage-section">
+                    <h3>🏆 比赛阶段</h3>
+                    <div class="layout-options">
                         <div>
-                            <label>比赛阶段</label>
+                            <label>阶段</label>
                             <select id="screenshot-stage">
                                 <option value="all">全部阶段</option>
                                 <option value="group">小组赛</option>

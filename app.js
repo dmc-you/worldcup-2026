@@ -143,6 +143,7 @@ async function loadData() {
         allMatches = data.matches || [];
         allTeams = data.teams || {};
         topScorers = data.topScorers || [];
+        window.topScorersData = data.topScorers || [];
         if (data.flagCdn) flagCdnBase = data.flagCdn;
         document.getElementById('last-updated').textContent =
             data.lastUpdated || new Date().toLocaleString('zh-CN');
@@ -627,6 +628,25 @@ function openScreenshotPanel() {
     document.getElementById('screenshot-start-date').value = formatDateInput(today);
     document.getElementById('screenshot-end-date').value = formatDateInput(nextWeek);
     
+    // 内容类型切换时显示/隐藏对应的设置
+    const contentRadios = document.querySelectorAll('input[name="content-type"]');
+    contentRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const dateSection = document.getElementById('date-section');
+            const stageSection = document.getElementById('stage-section');
+            const colsSection = document.getElementById('cols-section');
+            // 列数始终显示，日期和阶段只在赛程时显示
+            colsSection.style.display = 'block';
+            if (this.value === 'matches') {
+                dateSection.style.display = 'block';
+                stageSection.style.display = 'block';
+            } else {
+                dateSection.style.display = 'none';
+                stageSection.style.display = 'none';
+            }
+        });
+    });
+    
     // 禁止页面滚动
     document.body.style.overflow = 'hidden';
 }
@@ -683,7 +703,9 @@ function setQuickDate(type) {
 
 // 获取当前设置的筛选条件
 function getScreenshotSettings() {
+    const contentType = document.querySelector('input[name="content-type"]:checked').value;
     return {
+        contentType: contentType,
         startDate: document.getElementById('screenshot-start-date').value,
         endDate: document.getElementById('screenshot-end-date').value,
         cols: parseInt(document.getElementById('screenshot-cols').value),
@@ -729,21 +751,35 @@ function filterMatchesForScreenshot(settings) {
 
 // 生成预览
 function generatePreview() {
-    if (!allMatches || allMatches.length === 0) {
-        alert('暂无赛程数据');
-        return;
-    }
-    
     const settings = getScreenshotSettings();
-    const matches = filterMatchesForScreenshot(settings);
     
-    if (matches.length === 0) {
-        alert('当前筛选条件下没有比赛');
+    if (!allMatches || allMatches.length === 0) {
+        alert('暂无数据');
         return;
     }
     
     const previewContainer = document.getElementById('preview-container');
     previewContainer.innerHTML = '<div class="preview-placeholder">正在生成预览...</div>';
+    
+    // 根据内容类型生成不同图片
+    if (settings.contentType === 'matches') {
+        generateMatchesPreview(settings);
+    } else if (settings.contentType === 'standings') {
+        generateStandingsPreview(settings);
+    } else if (settings.contentType === 'scorers') {
+        generateScorersPreview(settings);
+    }
+}
+
+// 生成赛程预览
+function generateMatchesPreview(settings) {
+    const matches = filterMatchesForScreenshot(settings);
+    
+    if (matches.length === 0) {
+        alert('当前筛选条件下没有比赛');
+        document.getElementById('preview-container').innerHTML = '<div class="preview-placeholder">当前筛选条件下没有比赛</div>';
+        return;
+    }
     
     // 收集国旗
     const isoCodes = new Set();
@@ -752,7 +788,195 @@ function generatePreview() {
         if (m.away && m.away.iso) isoCodes.add(m.away.iso);
     });
     
-    // 加载国旗
+    loadFlags(isoCodes).then(() => {
+        screenshotCanvas = generateScheduleImage(matches, settings.cols, settings.stage);
+        document.getElementById('preview-container').innerHTML = '';
+        document.getElementById('preview-container').appendChild(screenshotCanvas);
+        console.log(`预览生成完成！${matches.length} 场比赛，${settings.cols} 列布局`);
+    });
+}
+
+// 生成积分榜预览
+function generateStandingsPreview(settings) {
+    // 获取积分榜数据
+    const standings = getStandingsData();
+    
+    if (!standings || standings.length === 0) {
+        alert('暂无积分榜数据');
+        document.getElementById('preview-container').innerHTML = '<div class="preview-placeholder">暂无积分榜数据</div>';
+        return;
+    }
+    
+    // 收集国旗
+    const isoCodes = new Set();
+    standings.forEach(group => {
+        group.teams.forEach(team => {
+            if (team.iso) isoCodes.add(team.iso);
+        });
+    });
+    
+    const cols = settings.cols || 2;
+    
+    loadFlags(isoCodes).then(() => {
+        screenshotCanvas = generateStandingsImage(standings, cols);
+        document.getElementById('preview-container').innerHTML = '';
+        const previewImg = screenshotCanvas;
+        previewImg.style.maxWidth = '100%';
+        previewImg.style.height = 'auto';
+        previewImg.style.maxHeight = '700px';
+        document.getElementById('preview-container').appendChild(previewImg);
+        console.log(`积分榜预览生成完成！${standings.length} 个小组, ${cols} 列`);
+    });
+}
+
+// 生成射手榜预览
+function generateScorersPreview(settings) {
+    // 获取射手榜数据
+    const scorers = getScorersData();
+    
+    if (!scorers || scorers.length === 0) {
+        alert('暂无射手榜数据');
+        document.getElementById('preview-container').innerHTML = '<div class="preview-placeholder">暂无射手榜数据</div>';
+        return;
+    }
+    
+    // 收集国旗
+    const isoCodes = new Set();
+    scorers.forEach(scorer => {
+        if (scorer.team && scorer.team.iso) isoCodes.add(scorer.team.iso);
+    });
+    
+    const cols = settings.cols || 2;
+    
+    loadFlags(isoCodes).then(() => {
+        screenshotCanvas = generateScorersImage(scorers, cols);
+        document.getElementById('preview-container').innerHTML = '';
+        const previewImg = screenshotCanvas;
+        previewImg.style.maxWidth = '100%';
+        previewImg.style.height = 'auto';
+        previewImg.style.maxHeight = '700px';
+        document.getElementById('preview-container').appendChild(previewImg);
+        console.log(`射手榜预览生成完成！${scorers.length} 名球员, ${cols} 列`);
+    });
+}
+
+// 从数据中获取积分榜
+function getStandingsData() {
+    // 动态获取所有小组名
+    const groupSet = new Set();
+    allMatches.forEach(m => { if (m.group) groupSet.add(m.group); });
+    const groups = Array.from(groupSet).sort();
+    const standings = [];
+    
+    groups.forEach(groupName => {
+        const groupMatches = allMatches.filter(m => m.group === groupName);
+        const teamStats = {};
+        
+        // 初始化球队数据
+        groupMatches.forEach(m => {
+            if (m.home && m.home.iso) {
+                if (!teamStats[m.home.iso]) {
+                    teamStats[m.home.iso] = { 
+                        name: m.home.name, 
+                        iso: m.home.iso,
+                        games: 0, wins: 0, draws: 0, losses: 0, points: 0, gf: 0, ga: 0 
+                    };
+                }
+            }
+            if (m.away && m.away.iso) {
+                if (!teamStats[m.away.iso]) {
+                    teamStats[m.away.iso] = { 
+                        name: m.away.name, 
+                        iso: m.away.iso,
+                        games: 0, wins: 0, draws: 0, losses: 0, points: 0, gf: 0, ga: 0 
+                    };
+                }
+            }
+        });
+        
+        // 统计比赛结果
+        groupMatches.forEach(m => {
+            if (m.status !== 'finished' || !m.home_score || !m.away_score) return;
+            
+            const home = teamStats[m.home.iso];
+            const away = teamStats[m.away.iso];
+            if (!home || !away) return;
+            
+            home.games++;
+            away.games++;
+            home.gf += m.home_score;
+            home.ga += m.away_score;
+            away.gf += m.away_score;
+            away.ga += m.home_score;
+            
+            if (m.home_score > m.away_score) {
+                home.wins++;
+                home.points += 3;
+                away.losses++;
+            } else if (m.home_score < m.away_score) {
+                away.wins++;
+                away.points += 3;
+                home.losses++;
+            } else {
+                home.draws++;
+                away.draws++;
+                home.points++;
+                away.points++;
+            }
+        });
+        
+        // 排序
+        const teams = Object.values(teamStats).sort((a, b) => {
+            if (b.points !== a.points) return b.points - a.points;
+            if ((b.gf - b.ga) !== (a.gf - a.ga)) return (b.gf - b.ga) - (a.gf - a.ga);
+            return b.gf - a.gf;
+        });
+        
+        standings.push({ name: groupName, teams });
+    });
+    
+    return standings;
+}
+
+// 从数据中获取射手榜
+function getScorersData() {
+    // 检查是否有射手榜数据（从 matches.json 的 topScorers 字段）
+    if (window.topScorersData && window.topScorersData.length > 0) {
+        return window.topScorersData.map(s => ({
+            name: s.name,
+            goals: s.goals,
+            assists: s.assists,
+            team: { 
+                name: s.team, 
+                iso: s.team_iso 
+            }
+        }));
+    }
+    
+    // 从 matches.json 的 scorers 字段获取
+    const scorersMap = {};
+    allMatches.forEach(m => {
+        if (m.scorers && Array.isArray(m.scorers)) {
+            m.scorers.forEach(s => {
+                const key = s.name;
+                if (!scorersMap[key]) {
+                    scorersMap[key] = {
+                        name: s.name,
+                        goals: 0,
+                        assists: s.assists || 0,
+                        team: { name: s.team, iso: s.team_iso }
+                    };
+                }
+                scorersMap[key].goals += s.goals || 1;
+            });
+        }
+    });
+    
+    return Object.values(scorersMap).sort((a, b) => b.goals - a.goals);
+}
+
+// 加载国旗图片
+function loadFlags(isoCodes) {
     const loadPromises = [];
     screenshotFlagImages = {};
     
@@ -772,16 +996,383 @@ function generatePreview() {
         loadPromises.push(p);
     });
     
-    Promise.all(loadPromises).then(() => {
-        // 生成预览画布（缩小版）
-        screenshotCanvas = generateScheduleImage(matches, settings.cols, settings.stage);
+    return Promise.all(loadPromises);
+}
+
+// 生成积分榜图片（真正自适应：内容少就放大，内容多才缩小）
+function generateStandingsImage(standings, cols = 2) {
+    const canvasW = 1320;
+    const canvasH = 2868;
+    const padding = 45;
+    
+    // 第一步：先用基准尺寸计算内容总高度
+    const baseRowH = 60;           // 基准球队行高
+    const baseHeaderH = 45;        // 基准表头高度
+    const baseGroupTitleH = 35;    // 基准组标题高度
+    const groupGap = 25;           // 组间距
+    const baseFontSize = 16;
+    
+    let totalRows = 0;
+    let totalGroups = standings.length;
+    standings.forEach(g => totalRows += g.teams.length);
+    
+    // 按列数计算总行数（每列的行数）
+    const maxRowsPerCol = Math.ceil(totalGroups / cols) * (1 + 1) + totalRows; // 组标题 + 表头 + 球队行
+    
+    // 基准状态下的内容高度（不包括标题区、底部）
+    let baseContentH = 0;
+    for (let col = 0; col < cols; col++) {
+        let colH = 0;
+        for (let i = col; i < standings.length; i += cols) {
+            colH += baseGroupTitleH + baseHeaderH + standings[i].teams.length * baseRowH + groupGap;
+        }
+        baseContentH = Math.max(baseContentH, colH);
+    }
+    
+    // 标题和底部高度（也会随缩放变化）
+    const baseTitleH = 200;
+    const baseFooterH = 40;
+    const totalBaseH = baseTitleH + baseContentH + baseFooterH;
+    const availableH = canvasH - padding * 2;
+    
+    // 第二步：计算缩放比例 —— 关键：内容少时 scale > 1 放大
+    let scale = availableH / totalBaseH;
+    // 限制最大放大到 1.5 倍，最小 0.4 倍
+    scale = Math.min(1.5, Math.max(0.4, scale));
+    
+    // 实际尺寸
+    const rowH = Math.floor(baseRowH * scale);
+    const headerH = Math.floor(baseHeaderH * scale);
+    const groupTitleH = Math.floor(baseGroupTitleH * scale);
+    const titleH = Math.floor(baseTitleH * scale);
+    const footerH = Math.floor(baseFooterH * scale);
+    const fontSize = Math.max(10, Math.floor(baseFontSize * scale));
+    const groupTitleFont = Math.max(14, Math.floor(22 * scale));
+    const titleFont = Math.max(24, Math.floor(52 * scale));
+    const subtitleFont = Math.max(16, Math.floor(26 * scale));
+    const smallFont = Math.max(10, Math.floor(14 * scale));
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = canvasW;
+    canvas.height = canvasH;
+    const ctx = canvas.getContext('2d');
+    
+    // 背景
+    const grad = ctx.createLinearGradient(0, 0, 0, canvasH);
+    grad.addColorStop(0, '#0a0e27');
+    grad.addColorStop(0.5, '#16204a');
+    grad.addColorStop(1, '#0a0e27');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvasW, canvasH);
+    
+    // 金色边框
+    ctx.strokeStyle = 'rgba(255,215,0,0.2)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(padding - 8, padding - 8, canvasW - padding * 2 + 16, canvasH - padding * 2 + 16);
+    
+    // 标题区
+    ctx.textAlign = 'center';
+    ctx.shadowColor = '#ffd700';
+    ctx.shadowBlur = 15;
+    ctx.fillStyle = '#ffd700';
+    ctx.font = `bold ${titleFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillText('🏆 2026 美加墨世界杯', canvasW / 2, padding + titleFont);
+    
+    ctx.shadowBlur = 0;
+    ctx.font = `bold ${subtitleFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillStyle = '#e8e8e8';
+    ctx.fillText('📊 积分榜', canvasW / 2, padding + titleFont + subtitleFont + 20);
+    
+    ctx.fillStyle = '#8899bb';
+    ctx.font = `${smallFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillText(`更新: ${new Date().toLocaleString('zh-CN')}`, canvasW / 2, padding + titleFont + subtitleFont + 20 + smallFont + 15);
+    
+    // 分隔线
+    ctx.strokeStyle = 'rgba(255,215,0,0.3)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(canvasW * 0.1, padding + titleH - 10);
+    ctx.lineTo(canvasW * 0.9, padding + titleH - 10);
+    ctx.stroke();
+    
+    // 列宽
+    const colW = (canvasW - padding * 2 - (cols - 1) * 15) / cols;
+    const startY = padding + titleH;
+    
+    // 绘制各列
+    for (let col = 0; col < cols; col++) {
+        const colX = padding + col * (colW + 15);
+        let y = startY;
         
-        // 清空并显示预览
-        previewContainer.innerHTML = '';
-        previewContainer.appendChild(screenshotCanvas);
+        for (let i = col; i < standings.length; i += cols) {
+            const group = standings[i];
+            
+            // 组标题（金色背景条）
+            ctx.fillStyle = 'rgba(255, 215, 0, 0.12)';
+            ctx.fillRect(colX, y, colW, groupTitleH);
+            
+            ctx.fillStyle = '#ffd700';
+            ctx.font = `bold ${groupTitleFont}px "Microsoft YaHei", Arial, sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.fillText(`${group.name}组`, colX + 10, y + groupTitleH * 0.68);
+            
+            y += groupTitleH;
+            
+            // 表头（深色背景）
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillRect(colX, y, colW, headerH);
+            
+            ctx.fillStyle = '#99aabb';
+            ctx.font = `bold ${fontSize}px "Microsoft YaHei", Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('#', colX + colW * 0.05, y + headerH * 0.65);
+            ctx.textAlign = 'left';
+            ctx.fillText('球队', colX + colW * 0.1, y + headerH * 0.65);
+            ctx.textAlign = 'center';
+            ctx.fillText('赛', colX + colW * 0.55, y + headerH * 0.65);
+            ctx.fillText('胜', colX + colW * 0.65, y + headerH * 0.65);
+            ctx.fillText('平', colX + colW * 0.73, y + headerH * 0.65);
+            ctx.fillText('负', colX + colW * 0.81, y + headerH * 0.65);
+            ctx.fillText('分', colX + colW * 0.92, y + headerH * 0.65);
+            
+            y += headerH;
+            
+            // 球队行
+            group.teams.forEach((team, idx) => {
+                // 交替背景
+                ctx.fillStyle = idx % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.07)';
+                ctx.fillRect(colX, y, colW, rowH);
+                
+                // 排名
+                ctx.fillStyle = idx === 0 ? '#ffd700' : '#8899aa';
+                ctx.font = `bold ${fontSize}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.fillText(String(idx + 1), colX + colW * 0.05, y + rowH * 0.65);
+                
+                // 国旗
+                const flagW = Math.floor(rowH * 1.4);
+                const flagH = rowH - 10;
+                const flagY = y + 5;
+                const flagX = colX + colW * 0.1 + 5;
+                if (team.iso && screenshotFlagImages[team.iso]) {
+                    ctx.drawImage(screenshotFlagImages[team.iso], flagX, flagY, flagW, flagH);
+                }
+                
+                // 队名（截断）
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `bold ${fontSize}px "Microsoft YaHei", Arial, sans-serif`;
+                ctx.textAlign = 'left';
+                let name = team.name || '未知';
+                const maxNameW = colW * 0.3;
+                while (ctx.measureText(name).width > maxNameW && name.length > 1) {
+                    name = name.slice(0, -1);
+                }
+                if (name !== team.name) name += '…';
+                ctx.fillText(name, flagX + flagW + 8, y + rowH * 0.65);
+                
+                // 数据列
+                ctx.fillStyle = '#ccddee';
+                ctx.font = `${fontSize}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.fillText(String(team.games || 0), colX + colW * 0.55, y + rowH * 0.65);
+                ctx.fillText(String(team.wins || 0), colX + colW * 0.65, y + rowH * 0.65);
+                ctx.fillText(String(team.draws || 0), colX + colW * 0.73, y + rowH * 0.65);
+                ctx.fillText(String(team.losses || 0), colX + colW * 0.81, y + rowH * 0.65);
+                
+                // 积分（金色大字）
+                ctx.fillStyle = '#ffd700';
+                ctx.font = `bold ${Math.floor(fontSize * 1.2)}px Arial`;
+                ctx.fillText(String(team.points || 0), colX + colW * 0.92, y + rowH * 0.65);
+                
+                y += rowH;
+            });
+            
+            y += groupGap;
+        }
+    }
+    
+    // 底部
+    ctx.fillStyle = '#667799';
+    ctx.font = `${smallFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('⚽ 2026 FIFA World Cup · USA / Canada / Mexico', canvasW / 2, canvasH - padding / 2);
+    
+    return canvas;
+}
+
+// 生成射手榜图片（真正自适应：内容少就放大，内容多才缩小）
+function generateScorersImage(scorers, cols = 2) {
+    const canvasW = 1320;
+    const canvasH = 2868;
+    const padding = 45;
+    
+    // 第一步：基准尺寸
+    const baseRowH = 65;           // 基准行高
+    const baseHeaderH = 50;        // 基准表头高度
+    const baseFontSize = 16;
+    
+    // 按列数计算每列的行数
+    const rowsPerCol = Math.ceil(scorers.length / cols);
+    
+    // 基准状态下内容总高度
+    const baseTitleH = 200;
+    const baseFooterH = 40;
+    const baseContentH = baseHeaderH + rowsPerCol * baseRowH;
+    const totalBaseH = baseTitleH + baseContentH + baseFooterH;
+    const availableH = canvasH - padding * 2;
+    
+    // 第二步：计算缩放比例 —— 关键：内容少时 scale > 1 放大
+    let scale = availableH / totalBaseH;
+    scale = Math.min(1.5, Math.max(0.4, scale));
+    
+    // 实际尺寸
+    const rowH = Math.floor(baseRowH * scale);
+    const headerH = Math.floor(baseHeaderH * scale);
+    const titleH = Math.floor(baseTitleH * scale);
+    const fontSize = Math.max(10, Math.floor(baseFontSize * scale));
+    const titleFont = Math.max(24, Math.floor(52 * scale));
+    const subtitleFont = Math.max(16, Math.floor(26 * scale));
+    const smallFont = Math.max(10, Math.floor(14 * scale));
+    const goalsFont = Math.max(14, Math.floor(24 * scale));
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = canvasW;
+    canvas.height = canvasH;
+    const ctx = canvas.getContext('2d');
+    
+    // 背景
+    const grad = ctx.createLinearGradient(0, 0, 0, canvasH);
+    grad.addColorStop(0, '#0a0e27');
+    grad.addColorStop(0.5, '#16204a');
+    grad.addColorStop(1, '#0a0e27');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvasW, canvasH);
+    
+    // 金色边框
+    ctx.strokeStyle = 'rgba(255,215,0,0.2)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(padding - 8, padding - 8, canvasW - padding * 2 + 16, canvasH - padding * 2 + 16);
+    
+    // 标题
+    ctx.textAlign = 'center';
+    ctx.shadowColor = '#ffd700';
+    ctx.shadowBlur = 15;
+    ctx.fillStyle = '#ffd700';
+    ctx.font = `bold ${titleFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillText('🏆 2026 美加墨世界杯', canvasW / 2, padding + titleFont);
+    
+    ctx.shadowBlur = 0;
+    ctx.font = `bold ${subtitleFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillStyle = '#e8e8e8';
+    ctx.fillText('🥅 射手榜', canvasW / 2, padding + titleFont + subtitleFont + 20);
+    
+    ctx.fillStyle = '#8899bb';
+    ctx.font = `${smallFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillText(`更新: ${new Date().toLocaleString('zh-CN')} | 共 ${scorers.length} 人`, canvasW / 2, padding + titleFont + subtitleFont + 20 + smallFont + 15);
+    
+    // 分隔线
+    ctx.strokeStyle = 'rgba(255,215,0,0.3)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(canvasW * 0.1, padding + titleH - 10);
+    ctx.lineTo(canvasW * 0.9, padding + titleH - 10);
+    ctx.stroke();
+    
+    // 列宽
+    const colW = (canvasW - padding * 2 - (cols - 1) * 15) / cols;
+    const startY = padding + titleH;
+    
+    // 绘制各列
+    for (let col = 0; col < cols; col++) {
+        const colX = padding + col * (colW + 15);
+        let y = startY;
         
-        console.log(`预览生成完成！${matches.length} 场比赛，${settings.cols} 列布局`);
-    });
+        // 表头（深色背景）
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.fillRect(colX, y, colW, headerH);
+        
+        ctx.fillStyle = '#99aabb';
+        ctx.font = `bold ${fontSize}px "Microsoft YaHei", Arial, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText('#', colX + colW * 0.05, y + headerH * 0.65);
+        ctx.textAlign = 'left';
+        ctx.fillText('球员', colX + colW * 0.1, y + headerH * 0.65);
+        ctx.textAlign = 'center';
+        ctx.fillText('球队', colX + colW * 0.4, y + headerH * 0.65);
+        ctx.fillText('进球', colX + colW * 0.6, y + headerH * 0.65);
+        ctx.fillText('助攻', colX + colW * 0.73, y + headerH * 0.65);
+        
+        y += headerH;
+        
+        // 数据行
+        for (let i = col; i < scorers.length; i += cols) {
+            const scorer = scorers[i];
+            
+            // 交替背景
+            ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.07)';
+            ctx.fillRect(colX, y, colW, rowH);
+            
+            // 排名（前三名金银铜色）
+            const rankColors = ['#ffd700', '#c0c0c0', '#cd7f32'];
+            ctx.fillStyle = i < 3 ? rankColors[i] : '#8899aa';
+            ctx.font = `bold ${fontSize}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillText(String(i + 1), colX + colW * 0.05, y + rowH * 0.65);
+            
+            // 球员名（截断）
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${fontSize}px "Microsoft YaHei", Arial, sans-serif`;
+            ctx.textAlign = 'left';
+            let name = scorer.name || '未知';
+            const maxNameW = colW * 0.25;
+            while (ctx.measureText(name).width > maxNameW && name.length > 1) {
+                name = name.slice(0, -1);
+            }
+            if (name !== scorer.name) name += '…';
+            ctx.fillText(name, colX + colW * 0.1, y + rowH * 0.65);
+            
+            // 国旗
+            const flagW = Math.floor(rowH * 1.4);
+            const flagH = rowH - 10;
+            if (scorer.team && scorer.team.iso && screenshotFlagImages[scorer.team.iso]) {
+                const flagX = colX + colW * 0.4 - flagW / 2;
+                ctx.drawImage(screenshotFlagImages[scorer.team.iso], flagX, y + 5, flagW, flagH);
+            }
+            
+            // 进球数（金色大字）
+            ctx.fillStyle = '#ffd700';
+            ctx.font = `bold ${goalsFont}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillText(String(scorer.goals || 0), colX + colW * 0.6, y + rowH * 0.65);
+            
+            // 助攻数
+            ctx.fillStyle = '#aabbcc';
+            ctx.font = `${fontSize}px Arial`;
+            ctx.fillText(String(scorer.assists || 0), colX + colW * 0.73, y + rowH * 0.65);
+            
+            // 球队名（右侧）
+            ctx.fillStyle = '#aabbcc';
+            ctx.font = `${fontSize - 1}px "Microsoft YaHei", Arial, sans-serif`;
+            ctx.textAlign = 'right';
+            let teamName = scorer.team ? (scorer.team.name || '未知') : '未知';
+            const maxTeamW = colW * 0.2;
+            while (ctx.measureText(teamName).width > maxTeamW && teamName.length > 1) {
+                teamName = teamName.slice(0, -1);
+            }
+            if (teamName !== (scorer.team && scorer.team.name)) teamName += '…';
+            ctx.fillText(teamName, colX + colW - 8, y + rowH * 0.65);
+            
+            y += rowH;
+        }
+    }
+    
+    // 底部
+    ctx.fillStyle = '#667799';
+    ctx.font = `${smallFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('⚽ 2026 FIFA World Cup · USA / Canada / Mexico', canvasW / 2, canvasH - padding / 2);
+    
+    return canvas;
 }
 
 // 生成赛程图片（核心函数）- 固定尺寸 1320 x 2868 (19.5:9)
@@ -834,23 +1425,24 @@ function generateScheduleImage(matches, cols = 2, stage = 'all') {
     let cardH = Math.floor((availableH - totalGap) / totalUnits);
     let dateHeaderH = Math.floor(cardH * dateHeaderRatio);
     
-    // 设置最小卡片高度（内容多时不至于文字挤成一团）
+    // 设置最小/最大卡片高度（内容少时放大，内容多时缩小）
     if (cardH < 80) cardH = 80;
     if (dateHeaderH < 30) dateHeaderH = 30;
+    if (cardH > 400) cardH = 400;  // 最大400，避免内容太少时过度放大
     
-    // ============ 字体大小（根据卡片高度动态缩放） ============
-    // 基准：cardH = 200 时使用以下字体大小
-    const fontScale = Math.min(1.0, cardH / 200);
+    // ============ 字体大小（根据卡片高度动态缩放，支持放大和缩小） ============
+    // 基准：cardH = 200 时使用以下字体大小；cardH > 200 时放大，cardH < 200 时缩小
+    const fontScale = cardH / 200;
     
-    const titleFont = Math.floor(62 * Math.min(1.2, cardH / 200));       // 主标题
-    const titleSubFont = Math.floor(32 * Math.min(1.2, cardH / 200));    // 副标题
-    const metaFont = Math.max(16, Math.floor(22 * Math.min(1.2, cardH / 200))); // 元信息
-    const dateFont = Math.max(18, Math.floor(30 * fontScale));           // 日期
-    const teamFont = Math.max(16, Math.floor(28 * fontScale));           // 球队名
-    const scoreFont = Math.max(20, Math.floor(36 * fontScale));          // 比分
-    const timeFont = Math.max(12, Math.floor(20 * fontScale));           // 时间
-    const venueFont = Math.max(11, Math.floor(18 * fontScale));          // 场馆
-    const badgeFont = Math.max(12, Math.floor(20 * fontScale));          // 徽章
+    const titleFont = Math.max(20, Math.floor(62 * fontScale));       // 主标题
+    const titleSubFont = Math.max(14, Math.floor(32 * fontScale));    // 副标题
+    const metaFont = Math.max(12, Math.floor(22 * fontScale));        // 元信息
+    const dateFont = Math.max(14, Math.floor(30 * fontScale));        // 日期
+    const teamFont = Math.max(14, Math.floor(28 * fontScale));        // 球队名
+    const scoreFont = Math.max(16, Math.floor(36 * fontScale));       // 比分
+    const timeFont = Math.max(10, Math.floor(20 * fontScale));        // 时间
+    const venueFont = Math.max(10, Math.floor(18 * fontScale));       // 场馆
+    const badgeFont = Math.max(10, Math.floor(20 * fontScale));       // 徽章
     
     // ============ 创建画布 ============
     const canvas = document.createElement('canvas');
