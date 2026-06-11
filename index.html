@@ -6,6 +6,7 @@
     <title>2026 美加墨世界杯 · 赛程与比分追踪</title>
     <meta name="description" content="2026 FIFA 世界杯（美国/加拿大/墨西哥）实时赛程、比分、积分榜与射手榜">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <header class="hero">
@@ -26,6 +27,7 @@
                 <span id="refresh-status">⏱️ 自动刷新: 加载中...</span>
                 <button id="toggle-refresh" onclick="toggleAutoRefresh()" class="refresh-btn">关闭自动刷新</button>
                 <button onclick="manualRefresh()" class="refresh-btn">🔄 手动刷新</button>
+                <button onclick="captureScreenshot()" class="refresh-btn screenshot-btn">🎨 一键生图</button>
             </div>
         </div>
     </header>
