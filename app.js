@@ -610,279 +610,582 @@ function manualRefresh() {
     loadData();
 }
 
-// 一键生图功能（固定 iPhone 12 Pro Max 屏幕尺寸 1284x2778）
-function captureScreenshot() {
-    console.log('🎨 正在生成赛程图片...');
+// 截图工具相关变量
+let screenshotCanvas = null;
+let screenshotFlagImages = {};
+
+// 打开截图设置面板
+function openScreenshotPanel() {
+    const modal = document.getElementById('screenshot-modal');
+    modal.classList.add('active');
     
-    const statusElement = document.getElementById('refresh-status');
-    const originalText = statusElement.innerHTML;
-    statusElement.innerHTML = '🎨 正在生成赛程图片...';
+    // 设置默认日期（今天和7天后）
+    const today = new Date();
+    const nextWeek = new Date();
+    nextWeek.setDate(today.getDate() + 7);
     
-    const matchesContainer = document.getElementById('matches-container');
-    const activeTab = document.querySelector('.tab-btn.active');
-    const tabName = activeTab ? activeTab.textContent.replace(/[📋⏭️✅📊🥅📍]/g, '').trim() : '赛程';
+    document.getElementById('screenshot-start-date').value = formatDateInput(today);
+    document.getElementById('screenshot-end-date').value = formatDateInput(nextWeek);
     
-    // 获取所有比赛卡片
-    const matchCards = matchesContainer.querySelectorAll('.match-card');
+    // 禁止页面滚动
+    document.body.style.overflow = 'hidden';
+}
+
+// 关闭截图设置面板
+function closeScreenshotPanel() {
+    const modal = document.getElementById('screenshot-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
     
-    if (matchCards.length === 0) {
-        alert('当前没有可生成的赛程数据');
-        statusElement.innerHTML = originalText;
+    // 清空预览
+    document.getElementById('preview-container').innerHTML = 
+        '<div class="preview-placeholder">调整参数后点击下方按钮生成预览</div>';
+    screenshotCanvas = null;
+}
+
+// 格式化日期为 input 格式
+function formatDateInput(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
+
+// 快速设置日期范围
+function setQuickDate(type) {
+    const startInput = document.getElementById('screenshot-start-date');
+    const endInput = document.getElementById('screenshot-end-date');
+    const today = new Date();
+    
+    switch(type) {
+        case 'today':
+            startInput.value = formatDateInput(today);
+            endInput.value = formatDateInput(today);
+            break;
+        case 'week':
+            startInput.value = formatDateInput(today);
+            const nextWeek = new Date();
+            nextWeek.setDate(today.getDate() + 7);
+            endInput.value = formatDateInput(nextWeek);
+            break;
+        case 'month':
+            startInput.value = formatDateInput(today);
+            const nextMonth = new Date();
+            nextMonth.setMonth(today.getMonth() + 1);
+            endInput.value = formatDateInput(nextMonth);
+            break;
+        case 'all':
+            startInput.value = '';
+            endInput.value = '';
+            break;
+    }
+}
+
+// 获取当前设置的筛选条件
+function getScreenshotSettings() {
+    return {
+        startDate: document.getElementById('screenshot-start-date').value,
+        endDate: document.getElementById('screenshot-end-date').value,
+        cols: parseInt(document.getElementById('screenshot-cols').value),
+        stage: document.getElementById('screenshot-stage').value
+    };
+}
+
+// 根据设置筛选比赛
+function filterMatchesForScreenshot(settings) {
+    let filtered = [...allMatches];
+    
+    // 日期筛选
+    if (settings.startDate) {
+        const start = new Date(settings.startDate);
+        start.setHours(0, 0, 0, 0);
+        filtered = filtered.filter(m => {
+            const matchDate = new Date(m.date);
+            return matchDate >= start;
+        });
+    }
+    
+    if (settings.endDate) {
+        const end = new Date(settings.endDate);
+        end.setHours(23, 59, 59, 999);
+        filtered = filtered.filter(m => {
+            const matchDate = new Date(m.date);
+            return matchDate <= end;
+        });
+    }
+    
+    // 阶段筛选
+    if (settings.stage === 'group') {
+        filtered = filtered.filter(m => m.group);
+    } else if (settings.stage === 'knockout') {
+        filtered = filtered.filter(m => !m.group);
+    }
+    
+    // 按日期排序
+    filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    return filtered;
+}
+
+// 生成预览
+function generatePreview() {
+    if (!allMatches || allMatches.length === 0) {
+        alert('暂无赛程数据');
         return;
     }
     
-    // 按日期分组比赛
-    const matchByDate = new Map();
-    matchCards.forEach(card => {
-        let dateTitle = '其他';
-        let parent = card.parentElement;
-        while (parent && parent !== matchesContainer) {
-            const title = parent.querySelector('.date-title');
-            if (title) {
-                dateTitle = title.textContent.trim();
-                break;
-            }
-            parent = parent.parentElement;
-        }
-        if (!matchByDate.has(dateTitle)) {
-            matchByDate.set(dateTitle, []);
-        }
-        matchByDate.get(dateTitle).push(card);
-    });
+    const settings = getScreenshotSettings();
+    const matches = filterMatchesForScreenshot(settings);
     
-    let totalMatchCount = 0;
-    matchByDate.forEach(cards => totalMatchCount += cards.length);
-    
-    // ============= 固定画布尺寸：iPhone 12 Pro Max (1284 x 2778) =============
-    const canvasW = 1284;
-    const canvasH = 2778;
-    
-    // ============= 标准尺寸参数（如果内容少，用这个尺寸绘制） =============
-    const S = {
-        padding: 60,
-        titleHeight: 200,
-        footerHeight: 80,
-        matchCardHeight: 200,
-        dateHeaderHeight: 70,
-    };
-    
-    // ============= 估算标准总高度，判断是否需要缩放 =============
-    const baseHeight = S.padding * 2 + S.titleHeight + S.footerHeight;
-    const contentHeight = matchByDate.size * S.dateHeaderHeight + totalMatchCount * S.matchCardHeight;
-    const estimatedTotal = baseHeight + contentHeight;
-    const availableHeight = canvasH - S.padding * 2 - S.titleHeight - S.footerHeight;
-    
-    // 计算缩放比例：如果内容超出，就整体缩小；内容少则保持标准尺寸（不放大）
-    let scale = 1.0;
-    if (contentHeight > availableHeight) {
-        scale = availableHeight / contentHeight;
+    if (matches.length === 0) {
+        alert('当前筛选条件下没有比赛');
+        return;
     }
     
-    // 应用缩放后的实际尺寸
-    const padding = S.padding;
-    const titleHeight = S.titleHeight;
-    const footerHeight = S.footerHeight;
-    const matchCardHeight = Math.max(70, Math.floor(S.matchCardHeight * scale));
-    const dateHeaderHeight = Math.max(30, Math.floor(S.dateHeaderHeight * scale));
+    const previewContainer = document.getElementById('preview-container');
+    previewContainer.innerHTML = '<div class="preview-placeholder">正在生成预览...</div>';
     
-    // 字体大小随缩放调整（设定最小值，保证可读性）
-    const titleFontSize = Math.floor(56 * Math.min(1, scale * 1.2));
-    const subtitleFontSize = Math.floor(32 * Math.min(1, scale * 1.2));
-    const metaFontSize = Math.max(14, Math.floor(22 * scale));
-    const dateFontSize = Math.max(18, Math.floor(32 * scale));
-    const badgeFontSize = Math.max(12, Math.floor(20 * scale));
-    const teamFontSize = Math.max(16, Math.floor(28 * scale));
-    const vsFontSize = Math.max(18, Math.floor(36 * scale));
-    const timeFontSize = Math.max(12, Math.floor(22 * scale));
-    const venueFontSize = Math.max(10, Math.floor(20 * scale));
-    const footerFontSize = Math.max(14, Math.floor(22 * Math.min(1, scale * 1.2)));
+    // 收集国旗
+    const isoCodes = new Set();
+    matches.forEach(m => {
+        if (m.home && m.home.iso) isoCodes.add(m.home.iso);
+        if (m.away && m.away.iso) isoCodes.add(m.away.iso);
+    });
     
-    // 创建固定尺寸 Canvas
+    // 加载国旗
+    const loadPromises = [];
+    screenshotFlagImages = {};
+    
+    isoCodes.forEach(iso => {
+        if (screenshotFlagImages[iso]) {
+            loadPromises.push(Promise.resolve());
+            return;
+        }
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        const url = `https://flagcdn.com/w80/${iso}.png`;
+        const p = new Promise(resolve => {
+            img.onload = () => { screenshotFlagImages[iso] = img; resolve(); };
+            img.onerror = () => resolve();
+        });
+        img.src = url;
+        loadPromises.push(p);
+    });
+    
+    Promise.all(loadPromises).then(() => {
+        // 生成预览画布（缩小版）
+        screenshotCanvas = generateScheduleImage(matches, settings.cols, settings.stage);
+        
+        // 清空并显示预览
+        previewContainer.innerHTML = '';
+        previewContainer.appendChild(screenshotCanvas);
+        
+        console.log(`预览生成完成！${matches.length} 场比赛，${settings.cols} 列布局`);
+    });
+}
+
+// 生成赛程图片（核心函数）- 固定尺寸 1320 x 2868 (19.5:9)
+function generateScheduleImage(matches, cols = 2, stage = 'all') {
+    // 按日期分组
+    const matchByDate = new Map();
+    matches.forEach(m => {
+        const dateKey = formatDateCN(m.date);
+        if (!matchByDate.has(dateKey)) matchByDate.set(dateKey, []);
+        matchByDate.get(dateKey).push(m);
+    });
+    
+    const totalMatchCount = matches.length;
+    const stageText = stage === 'group' ? '小组赛' : stage === 'knockout' ? '淘汰赛' : '全部阶段';
+    
+    // ============ 固定画布尺寸：1320 (宽) x 2868 (高) = 19.5:9 ============
+    const canvasW = 1320;
+    const canvasH = 2868;
+    
+    // ============ 基础尺寸参数（相对画布大小设计） ============
+    const padding = 45;
+    const titleHeight = 180;
+    const footerHeight = 50;
+    const gapX = 18;
+    const gapY = 12;
+    
+    // 列宽（根据列数分配宽度）
+    const colW = (canvasW - padding * 2 - gapX * (cols - 1)) / cols;
+    
+    // ============ 计算总行数，推算缩放比例 ============
+    let totalDateHeaders = matchByDate.size; // 日期标题数量
+    let totalCardRows = 0;
+    matchByDate.forEach(cards => {
+        totalCardRows += Math.ceil(cards.length / cols);
+    });
+    
+    // 日期标题高度比例：每一个日期标题占一个单位行高
+    const dateHeaderRatio = 0.35; // 日期标题 = 0.35 倍卡片高度
+    
+    // 可用内容区高度 = 总高度 - 上下padding - 标题区 - 底部
+    const availableH = canvasH - padding * 2 - titleHeight - footerHeight;
+    
+    // 内容高度 = dateHeader数 * dateHeaderH + cardRow数 * cardH + 间隙
+    // dateHeaderH = cardH * dateHeaderRatio
+    // 设 cardH 为基准单位，求内容能放得下的最大 cardH
+    const totalUnits = totalDateHeaders * dateHeaderRatio + totalCardRows;
+    const totalGap = (totalDateHeaders + totalCardRows) * gapY;
+    
+    // 解: totalUnits * cardH + totalGap = availableH
+    let cardH = Math.floor((availableH - totalGap) / totalUnits);
+    let dateHeaderH = Math.floor(cardH * dateHeaderRatio);
+    
+    // 设置最小卡片高度（内容多时不至于文字挤成一团）
+    if (cardH < 80) cardH = 80;
+    if (dateHeaderH < 30) dateHeaderH = 30;
+    
+    // ============ 字体大小（根据卡片高度动态缩放） ============
+    // 基准：cardH = 200 时使用以下字体大小
+    const fontScale = Math.min(1.0, cardH / 200);
+    
+    const titleFont = Math.floor(62 * Math.min(1.2, cardH / 200));       // 主标题
+    const titleSubFont = Math.floor(32 * Math.min(1.2, cardH / 200));    // 副标题
+    const metaFont = Math.max(16, Math.floor(22 * Math.min(1.2, cardH / 200))); // 元信息
+    const dateFont = Math.max(18, Math.floor(30 * fontScale));           // 日期
+    const teamFont = Math.max(16, Math.floor(28 * fontScale));           // 球队名
+    const scoreFont = Math.max(20, Math.floor(36 * fontScale));          // 比分
+    const timeFont = Math.max(12, Math.floor(20 * fontScale));           // 时间
+    const venueFont = Math.max(11, Math.floor(18 * fontScale));          // 场馆
+    const badgeFont = Math.max(12, Math.floor(20 * fontScale));          // 徽章
+    
+    // ============ 创建画布 ============
     const canvas = document.createElement('canvas');
     canvas.width = canvasW;
     canvas.height = canvasH;
     const ctx = canvas.getContext('2d');
     
-    // 绘制背景渐变
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvasH);
-    gradient.addColorStop(0, '#1a1a2e');
-    gradient.addColorStop(0.5, '#16213e');
-    gradient.addColorStop(1, '#0f3460');
-    ctx.fillStyle = gradient;
+    // 背景渐变
+    const grad = ctx.createLinearGradient(0, 0, 0, canvasH);
+    grad.addColorStop(0, '#0a0e27');
+    grad.addColorStop(0.5, '#16204a');
+    grad.addColorStop(1, '#0a0e27');
+    ctx.fillStyle = grad;
     ctx.fillRect(0, 0, canvasW, canvasH);
     
-    // 绘制标题区域
+    // 金色边框
+    ctx.strokeStyle = 'rgba(255,215,0,0.18)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(padding - 8, padding - 8, canvasW - padding * 2 + 16, canvasH - padding * 2 + 16);
+    
+    // ============ 标题区 ============
     ctx.textAlign = 'center';
     ctx.shadowColor = '#ffd700';
-    ctx.shadowBlur = 20;
+    ctx.shadowBlur = 15;
     ctx.fillStyle = '#ffd700';
-    ctx.font = `bold ${titleFontSize}px Arial, sans-serif`;
-    ctx.fillText('🏆 2026 美加墨世界杯', canvasW / 2, padding + titleFontSize + 10);
+    ctx.font = `bold ${titleFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillText('🏆 2026 美加墨世界杯', canvasW / 2, padding + titleFont + 10);
     
     ctx.shadowBlur = 0;
-    ctx.font = `bold ${subtitleFontSize}px Arial, sans-serif`;
-    ctx.fillStyle = '#ffd700';
-    ctx.fillText(tabName, canvasW / 2, padding + titleFontSize + subtitleFontSize + 35);
+    ctx.font = `bold ${titleSubFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillStyle = '#e8e8e8';
+    ctx.fillText(`${stageText} · 共 ${totalMatchCount} 场`, canvasW / 2, padding + titleFont + titleSubFont + 35);
     
-    ctx.fillStyle = '#888';
-    ctx.font = `${metaFontSize}px Arial, sans-serif`;
-    ctx.fillText(`生成时间: ${new Date().toLocaleString('zh-CN')}  |  共 ${totalMatchCount} 场比赛`,
-                 canvasW / 2, padding + titleFontSize + subtitleFontSize + metaFontSize + 70);
+    ctx.fillStyle = '#8899bb';
+    ctx.font = `${metaFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.fillText(`更新: ${new Date().toLocaleString('zh-CN')}`, canvasW / 2, padding + titleFont + titleSubFont + metaFont + 70);
     
-    // 绘制比赛内容
-    let currentY = padding + titleHeight;
+    // 分隔线
+    ctx.strokeStyle = 'rgba(255,215,0,0.3)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(padding + 80, padding + titleHeight - 10);
+    ctx.lineTo(canvasW - padding - 80, padding + titleHeight - 10);
+    ctx.stroke();
+    
+    // ============ 绘制比赛内容 ============
+    let y = padding + titleHeight;
     
     matchByDate.forEach((cards, dateTitle) => {
-        // 绘制日期标题
+        // 日期标题
         ctx.fillStyle = '#ffd700';
-        ctx.font = `bold ${dateFontSize}px Arial, sans-serif`;
+        ctx.font = `bold ${dateFont}px "Microsoft YaHei", Arial, sans-serif`;
         ctx.textAlign = 'left';
-        ctx.fillText(dateTitle, padding, currentY + dateFontSize);
+        ctx.fillText('📅 ' + dateTitle, padding, y + dateFont);
         
-        // 绘制分割线
-        ctx.strokeStyle = 'rgba(255,215,0,0.3)';
-        ctx.lineWidth = 1.5;
+        // 日期分隔线
+        ctx.strokeStyle = 'rgba(255,215,0,0.15)';
+        ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(padding, currentY + dateHeaderHeight - 10);
-        ctx.lineTo(canvasW - padding, currentY + dateHeaderHeight - 10);
+        ctx.moveTo(padding, y + dateHeaderH - 3);
+        ctx.lineTo(canvasW - padding, y + dateHeaderH - 3);
         ctx.stroke();
         
-        currentY += dateHeaderHeight;
+        y += dateHeaderH;
         
-        // 绘制该日期的比赛
-        cards.forEach((card) => {
-            // 卡片背景
-            ctx.fillStyle = 'rgba(255,255,255,0.05)';
-            const cardX = padding;
-            const cardY = currentY;
-            const cardW = canvasW - padding * 2;
-            const cardH = matchCardHeight - 8;
+        // 多列绘制
+        cards.forEach((match, idx) => {
+            const row = Math.floor(idx / cols);
+            const col = idx % cols;
+            const cardX = padding + col * (colW + gapX);
+            const cardY = y + row * (cardH + gapY);
             
-            // 圆角矩形
-            const radius = Math.max(5, Math.floor(12 * scale));
-            ctx.beginPath();
-            ctx.moveTo(cardX + radius, cardY);
-            ctx.lineTo(cardX + cardW - radius, cardY);
-            ctx.quadraticCurveTo(cardX + cardW, cardY, cardX + cardW, cardY + radius);
-            ctx.lineTo(cardX + cardW, cardY + cardH - radius);
-            ctx.quadraticCurveTo(cardX + cardW, cardY + cardH, cardX + cardW - radius, cardY + cardH);
-            ctx.lineTo(cardX + radius, cardY + cardH);
-            ctx.quadraticCurveTo(cardX, cardY + cardH, cardX, cardY + cardH - radius);
-            ctx.lineTo(cardX, cardY + radius);
-            ctx.quadraticCurveTo(cardX, cardY, cardX + radius, cardY);
-            ctx.closePath();
-            ctx.fill();
-            
-            // 获取比赛信息
-            const teams = card.querySelectorAll('.team .team-name');
-            const time = card.querySelector('.time');
-            const venue = card.querySelector('.venue');
-            const matchBadge = card.querySelector('.match-badge');
-            const matchStatus = card.querySelector('.match-status');
-            
-            const team1Name = teams[0]?.textContent.trim() || 'TBD';
-            const team2Name = teams[1]?.textContent.trim() || 'TBD';
-            
-            // 徽章尺寸计算
-            const badgeBoxW = Math.max(60, Math.floor(100 * scale));
-            const badgeBoxH = Math.max(20, Math.floor(30 * scale));
-            const badgeOffsetX = Math.max(50, Math.floor(80 * scale));
-            const badgeOffsetY = Math.floor(badgeBoxH / 2 + 8);
-            
-            // 绘制轮次徽章（左上）
-            if (matchBadge) {
-                ctx.fillStyle = '#ffd700';
-                const bx = cardX + badgeOffsetX;
-                const by = cardY + badgeOffsetY;
-                ctx.fillRect(bx - badgeBoxW / 2, by - badgeBoxH / 2, badgeBoxW, badgeBoxH);
-                ctx.fillStyle = '#1a1a2e';
-                ctx.font = `bold ${badgeFontSize}px Arial, sans-serif`;
-                ctx.textAlign = 'center';
-                ctx.fillText(matchBadge.textContent.trim(), bx, by + badgeFontSize / 3);
-            }
-            
-            // 绘制状态徽章（右上）
-            if (matchStatus) {
-                ctx.fillStyle = '#4caf50';
-                const bx = cardX + cardW - badgeOffsetX;
-                const by = cardY + badgeOffsetY;
-                ctx.fillRect(bx - badgeBoxW / 2, by - badgeBoxH / 2, badgeBoxW, badgeBoxH);
-                ctx.fillStyle = '#fff';
-                ctx.font = `bold ${badgeFontSize}px Arial, sans-serif`;
-                ctx.textAlign = 'center';
-                ctx.fillText(matchStatus.textContent.trim(), bx, by + badgeFontSize / 3);
-            }
-            
-            // 绘制球队名称 + VS（卡片中部）
-            const centerY = cardY + cardH / 2 + badgeOffsetY / 2;
-            ctx.font = `bold ${teamFontSize}px Arial, sans-serif`;
-            ctx.fillStyle = '#fff';
-            ctx.textAlign = 'center';
-            
-            // 球队名过长时截断
-            const maxTeamChars = Math.floor(10 / Math.max(0.5, scale));
-            const drawTeamName = (name, x) => {
-                const display = name.length > maxTeamChars ? name.substring(0, maxTeamChars) + '…' : name;
-                ctx.fillText(display, x, centerY);
-            };
-            
-            drawTeamName(team1Name, cardX + cardW * 0.25);
-            
-            ctx.fillStyle = '#ffd700';
-            ctx.font = `bold ${vsFontSize}px Arial, sans-serif`;
-            ctx.fillText('VS', cardX + cardW * 0.5, centerY + vsFontSize / 4);
-            
-            ctx.fillStyle = '#fff';
-            ctx.font = `bold ${teamFontSize}px Arial, sans-serif`;
-            drawTeamName(team2Name, cardX + cardW * 0.75);
-            
-            // 绘制时间和场馆（卡片底部）
-            const timeY = centerY + teamFontSize + Math.max(10, Math.floor(18 * scale));
-            const venueY = timeY + timeFontSize + Math.max(4, Math.floor(8 * scale));
-            
-            if (time) {
-                ctx.font = `${timeFontSize}px Arial, sans-serif`;
-                ctx.fillStyle = '#aaa';
-                ctx.textAlign = 'center';
-                ctx.fillText(time.textContent.trim(), cardX + cardW * 0.5, timeY);
-            }
-            
-            if (venue && venueY < cardY + cardH - 6) {
-                ctx.font = `${venueFontSize}px Arial, sans-serif`;
-                ctx.fillStyle = '#888';
-                ctx.textAlign = 'center';
-                let venueText = venue.textContent.trim();
-                const maxVenueChars = Math.floor(30 / Math.max(0.5, scale));
-                if (venueText.length > maxVenueChars) {
-                    venueText = venueText.substring(0, maxVenueChars) + '…';
-                }
-                ctx.fillText(venueText, cardX + cardW * 0.5, venueY);
-            }
-            
-            currentY += matchCardHeight;
+            drawMatchCard(ctx, match, cardX, cardY, colW, cardH - 5,
+                          { teamFont, scoreFont, timeFont, venueFont, badgeFont }, screenshotFlagImages);
         });
+        
+        const groupRows = Math.ceil(cards.length / cols);
+        y += groupRows * cardH + (groupRows - 1) * gapY + 3;
     });
     
-    // 绘制底部
-    ctx.fillStyle = '#666';
-    ctx.font = `${footerFontSize}px Arial, sans-serif`;
+    // ============ 底部 ============
+    ctx.fillStyle = '#667799';
+    ctx.font = `${Math.max(14, metaFont - 4)}px "Microsoft YaHei", Arial, sans-serif`;
     ctx.textAlign = 'center';
     ctx.fillText('⚽ 2026 FIFA World Cup · USA / Canada / Mexico', canvasW / 2, canvasH - padding / 2);
     
-    // 下载图片
+    return canvas;
+}
+
+// 下载截图
+function downloadScreenshot() {
+    if (!screenshotCanvas) {
+        alert('请先生成预览');
+        return;
+    }
+    
     try {
         const link = document.createElement('a');
-        link.download = `worldcup_${tabName}_${new Date().toISOString().split('T')[0]}.png`;
-        link.href = canvas.toDataURL('image/png');
+        const settings = getScreenshotSettings();
+        const dateStr = new Date().toISOString().split('T')[0];
+        link.download = `worldcup_${settings.cols}col_${dateStr}.png`;
+        link.href = screenshotCanvas.toDataURL('image/png');
         link.click();
-        
-        statusElement.innerHTML = originalText;
-        console.log(`🎨 赛程图片已生成！尺寸 ${canvasW}x${canvasH}, 缩放比 ${scale.toFixed(2)}, 共 ${totalMatchCount} 场`);
+        console.log('截图已下载');
     } catch (e) {
-        console.error('图片下载失败:', e);
-        statusElement.innerHTML = originalText;
-        alert('图片生成失败: ' + e.message);
+        console.error('下载失败:', e);
+        alert('下载失败: ' + e.message);
     }
+}
+
+// 绘制单张比赛卡片 - 对称对齐版本
+function drawMatchCard(ctx, match, x, y, w, h, fonts, flagImages) {
+    const { teamFont, scoreFont, timeFont, venueFont, badgeFont } = fonts;
+    
+    const cardScale = h / 200;
+    
+    // ========== 圆角卡片背景 ==========
+    const radius = Math.max(6, Math.floor(14 * cardScale));
+    const cardGrad = ctx.createLinearGradient(x, y, x, y + h);
+    cardGrad.addColorStop(0, 'rgba(255,255,255,0.06)');
+    cardGrad.addColorStop(1, 'rgba(255,255,255,0.02)');
+    ctx.fillStyle = cardGrad;
+    roundRect(ctx, x, y, w, h, radius);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,215,0,0.25)';
+    ctx.lineWidth = Math.max(1, 1.5 * cardScale);
+    roundRect(ctx, x, y, w, h, radius);
+    ctx.stroke();
+    
+    // ========== 三分区高度 ==========
+    const topH = Math.max(34, badgeFont + 18);
+    const bottomH = Math.max(30, timeFont + 18);
+    const middleH = h - topH - bottomH;
+    const margin = Math.max(10, 12 * cardScale);
+    
+    // ========== 顶部徽章 ==========
+    const badgeH = Math.max(20, badgeFont + 10);
+    const badgeY = y + (topH - badgeH) / 2;
+    
+    let badgeText = '';
+    if (match.group) {
+        badgeText = `${match.group}组 · ${match.round || ''}`.trim();
+    } else if (match.round) {
+        badgeText = match.round;
+    }
+    
+    if (badgeText) {
+        const maxBadgeChars = Math.floor((w / 2 - margin * 2) / (badgeFont * 0.62));
+        if (badgeText.length > maxBadgeChars) badgeText = badgeText.substring(0, maxBadgeChars) + '…';
+        const badgeW = Math.max(badgeFont * 5.5, badgeText.length * badgeFont * 0.62 + badgeFont * 1.2);
+        const bx = x + margin;
+        ctx.fillStyle = '#ffd700';
+        roundRect(ctx, bx, badgeY, badgeW, badgeH, Math.floor(badgeH / 3));
+        ctx.fill();
+        ctx.fillStyle = '#1a1a2e';
+        ctx.font = `bold ${badgeFont}px "Microsoft YaHei", Arial, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(badgeText, bx + badgeW / 2, badgeY + badgeH / 2);
+    }
+    
+    const status = getMatchStatus(match);
+    let statusText = '即将开始';
+    let statusColor = '#4caf50';
+    if (status === 'finished') { statusText = '已结束'; statusColor = '#7a8599'; }
+    else if (status === 'live') { statusText = '⚡进行中'; statusColor = '#ff6b6b'; }
+    const statusBadgeW = Math.max(badgeFont * 5.5, statusText.length * badgeFont * 0.62 + badgeFont * 1.2);
+    const sbx = x + w - margin - statusBadgeW;
+    ctx.fillStyle = statusColor;
+    roundRect(ctx, sbx, badgeY, statusBadgeW, badgeH, Math.floor(badgeH / 3));
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `bold ${badgeFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(statusText, sbx + statusBadgeW / 2, badgeY + badgeH / 2);
+    
+    // ========== 中部核心：对称布局 ==========
+    // 垂直中心基准线（国旗、队名、VS 都在这条线上）
+    const centerY = y + topH + middleH / 2;
+    const centerX = x + w / 2;
+    
+    // 元素尺寸
+    const flagH = Math.min(middleH * 0.45, teamFont * 2.0);
+    const flagW = flagH * 1.5;
+    const gap = Math.max(6, Math.floor(8 * cardScale));
+    
+    // 比赛信息
+    const homeName = match.home?.name || 'TBD';
+    const awayName = match.away?.name || 'TBD';
+    const homeIso = match.home?.iso;
+    const awayIso = match.away?.iso;
+    const homeScore = (match.home_score !== undefined && match.home_score !== null) ? match.home_score : null;
+    const awayScore = (match.away_score !== undefined && match.away_score !== null) ? match.away_score : null;
+    
+    // 测量文字宽度
+    ctx.font = `bold ${scoreFont}px Arial, sans-serif`;
+    const vsText = (homeScore !== null && awayScore !== null) ? `${homeScore} : ${awayScore}` : 'VS';
+    const vsWidth = ctx.measureText(vsText).width;
+    
+    ctx.font = `bold ${teamFont}px "Microsoft YaHei", Arial, sans-serif`;
+    const maxTextWidth = w / 2 - vsWidth / 2 - flagW - gap * 3 - margin;
+    
+    let displayHome = homeName;
+    if (ctx.measureText(displayHome).width > maxTextWidth) {
+        while (displayHome.length > 2 && ctx.measureText(displayHome + '…').width > maxTextWidth) {
+            displayHome = displayHome.substring(0, displayHome.length - 1);
+        }
+        displayHome += '…';
+    }
+    
+    let displayAway = awayName;
+    if (ctx.measureText(displayAway).width > maxTextWidth) {
+        while (displayAway.length > 2 && ctx.measureText(displayAway + '…').width > maxTextWidth) {
+            displayAway = displayAway.substring(0, displayAway.length - 1);
+        }
+        displayAway += '…';
+    }
+    
+    const homeTextW = ctx.measureText(displayHome).width;
+    const awayTextW = ctx.measureText(displayAway).width;
+    
+    // ========== 精确坐标计算 ==========
+    // 布局：[margin] 🇨🇦 队名 [gap-gap] VS [gap-gap] 队名 🇿🇦 [margin]
+    //                    ^                                      ^
+    //            homeContentRightX                    awayContentLeftX
+    // 主场内容块（国旗+队名）总宽 = flagW + gap + homeTextW
+    // 客场内容块（队名+国旗）总宽 = awayTextW + gap + flagW
+    
+    const homeContentW = flagW + gap + homeTextW;
+    const awayContentW = awayTextW + gap + flagW;
+    
+    // 主场内容块右侧对齐到 centerX - vsWidth/2 - gap
+    // 客场内容块左侧对齐到 centerX + vsWidth/2 + gap
+    const homeContentRightX = centerX - vsWidth / 2 - gap;
+    const awayContentLeftX = centerX + vsWidth / 2 + gap;
+    
+    // 主场各元素 x 坐标
+    const homeFlagX = homeContentRightX - homeContentW;  // 国旗左边
+    const homeTextX = homeContentRightX - homeTextW;      // 队名左边
+    
+    // 客场各元素 x 坐标
+    const awayTextX = awayContentLeftX;                   // 队名左边
+    const awayFlagX = awayContentLeftX + awayTextW + gap; // 国旗左边
+    
+    // 边界检查：如果超出边缘，整体内移
+    let homeShift = 0;
+    if (homeFlagX < x + margin) {
+        homeShift = x + margin - homeFlagX;
+    }
+    let awayShift = 0;
+    if (awayFlagX + flagW > x + w - margin) {
+        awayShift = x + w - margin - (awayFlagX + flagW);
+    }
+    
+    // ========== 绘制主场 ==========
+    if (homeIso && flagImages[homeIso]) {
+        ctx.drawImage(flagImages[homeIso], homeFlagX + homeShift, centerY - flagH / 2, flagW, flagH);
+    }
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `bold ${teamFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(displayHome, homeTextX + homeShift, centerY);
+    
+    // ========== 绘制 VS/比分 ==========
+    ctx.fillStyle = '#ffd700';
+    ctx.font = `bold ${scoreFont}px Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(vsText, centerX, centerY);
+    
+    // ========== 绘制客场 ==========
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `bold ${teamFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(displayAway, awayTextX + awayShift, centerY);
+    
+    if (awayIso && flagImages[awayIso]) {
+        ctx.drawImage(flagImages[awayIso], awayFlagX + awayShift, centerY - flagH / 2, flagW, flagH);
+    }
+    
+    // ========== 底部：时间 + 场馆 ==========
+    const bottomCenterY = y + topH + middleH + bottomH / 2;
+    const bottomMargin = Math.max(10, 12 * cardScale);
+    
+    const timeStr = formatTime(match.date) + ' 北京时间';
+    ctx.fillStyle = '#aabbcc';
+    ctx.font = `${timeFont}px "Microsoft YaHei", Arial, sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    let timeDisplay = '⏰ ' + timeStr;
+    const maxTimeWidth = w / 2 - bottomMargin;
+    if (ctx.measureText(timeDisplay).width > maxTimeWidth) {
+        while (timeDisplay.length > 5 && ctx.measureText(timeDisplay + '…').width > maxTimeWidth) {
+            timeDisplay = timeDisplay.substring(0, timeDisplay.length - 1);
+        }
+        timeDisplay += '…';
+    }
+    ctx.fillText(timeDisplay, x + bottomMargin, bottomCenterY);
+    
+    let venueStr = '';
+    if (match.venue) venueStr = match.venue;
+    else if (match.city) venueStr = match.city;
+    
+    if (venueStr) {
+        ctx.fillStyle = '#aabbcc';
+        ctx.font = `${venueFont}px "Microsoft YaHei", Arial, sans-serif`;
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        let venueDisplay = '📍 ' + venueStr;
+        if (ctx.measureText(venueDisplay).width > maxTimeWidth) {
+            while (venueDisplay.length > 5 && ctx.measureText(venueDisplay + '…').width > maxTimeWidth) {
+                venueDisplay = venueDisplay.substring(0, venueDisplay.length - 1);
+            }
+            venueDisplay += '…';
+        }
+        ctx.fillText(venueDisplay, x + w - bottomMargin, bottomCenterY);
+    }
+}
+
+// 辅助函数：绘制圆角矩形
+function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
 }
 
 // 备用截图方法

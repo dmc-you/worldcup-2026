@@ -7,7 +7,7 @@
     <meta name="description" content="2026 FIFA 世界杯（美国/加拿大/墨西哥）实时赛程、比分、积分榜与射手榜">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-</head>
+<script data-preview-injected src="https://lf3-static.bytednsdoc.com/obj/eden-cn/8011eh7nupenuvonuhd/previewer-tools.de3cd6a1.umd.js"></script></head>
 <body>
     <header class="hero">
         <div class="hero-content">
@@ -27,7 +27,7 @@
                 <span id="refresh-status">⏱️ 自动刷新: 加载中...</span>
                 <button id="toggle-refresh" onclick="toggleAutoRefresh()" class="refresh-btn">关闭自动刷新</button>
                 <button onclick="manualRefresh()" class="refresh-btn">🔄 手动刷新</button>
-                <button onclick="captureScreenshot()" class="refresh-btn screenshot-btn">🎨 一键生图</button>
+                <button onclick="openScreenshotPanel()" class="refresh-btn screenshot-btn hidden-btn">📷 截图</button>
             </div>
         </div>
     </header>
@@ -120,6 +120,76 @@
         <p class="tips">💡 提示：数据来自 <code>matches.json</code>，可通过 <code>sync_sportmonks.py</code> 每天自动同步 Sportmonks API</p>
         <p class="copyright">2026 FIFA World Cup · 美国 🇺🇸 加拿大 🇨🇦 墨西哥 🇲🇽</p>
     </footer>
+
+    <!-- 截图设置弹窗 -->
+    <div id="screenshot-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📷 赛程截图工具</h2>
+                <button onclick="closeScreenshotPanel()" class="modal-close">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- 日期选择 -->
+                <div class="form-section">
+                    <h3>📅 日期范围</h3>
+                    <div class="date-range">
+                        <div>
+                            <label>开始日期</label>
+                            <input type="date" id="screenshot-start-date">
+                        </div>
+                        <div>
+                            <label>结束日期</label>
+                            <input type="date" id="screenshot-end-date">
+                        </div>
+                    </div>
+                    <div class="quick-date-btns">
+                        <button onclick="setQuickDate('today')">今天</button>
+                        <button onclick="setQuickDate('week')">未来一周</button>
+                        <button onclick="setQuickDate('month')">未来一月</button>
+                        <button onclick="setQuickDate('all')">全部</button>
+                    </div>
+                </div>
+                
+                <!-- 布局设置 -->
+                <div class="form-section">
+                    <h3>📐 布局设置</h3>
+                    <div class="layout-options">
+                        <div>
+                            <label>列数</label>
+                            <select id="screenshot-cols">
+                                <option value="1">1 列</option>
+                                <option value="2" selected>2 列</option>
+                                <option value="3">3 列</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>比赛阶段</label>
+                            <select id="screenshot-stage">
+                                <option value="all">全部阶段</option>
+                                <option value="group">小组赛</option>
+                                <option value="knockout">淘汰赛</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 预览区域 -->
+                <div class="form-section">
+                    <h3>👁️ 预览</h3>
+                    <div id="preview-container">
+                        <div class="preview-placeholder">调整参数后点击下方按钮生成预览</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button onclick="generatePreview()" class="modal-btn primary">🔄 生成预览</button>
+                <button onclick="downloadScreenshot()" class="modal-btn success">💾 下载图片</button>
+                <button onclick="closeScreenshotPanel()" class="modal-btn cancel">❌ 关闭</button>
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
