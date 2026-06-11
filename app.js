@@ -12,6 +12,7 @@ let currentFilter = {
     group: 'all',
     date: 'all',
     status: 'all',
+    stage: 'all',
     tab: 'all'
 };
 
@@ -217,6 +218,10 @@ function bindEvents() {
         currentFilter.status = e.target.value;
         renderMatches();
     });
+    document.getElementById('stage-filter').addEventListener('change', e => {
+        currentFilter.stage = e.target.value;
+        renderMatches();
+    });
 }
 
 /* ============= 倒计时 ============= */
@@ -297,6 +302,10 @@ function filterMatches(matches) {
             const q = currentFilter.search.toLowerCase();
             if (!m.home.name.toLowerCase().includes(q) &&
                 !m.away.name.toLowerCase().includes(q)) return false;
+        }
+        if (currentFilter.stage !== 'all') {
+            if (currentFilter.stage === 'group') { if (!m.group) return false; }
+            else if (currentFilter.stage === 'knockout') { if (m.group) return false; }
         }
         if (currentFilter.group !== 'all') {
             if (currentFilter.group === 'KO') { if (m.group) return false; }
@@ -601,7 +610,7 @@ function manualRefresh() {
     loadData();
 }
 
-// 一键生图功能
+// 一键生图功能（固定 iPhone 12 Pro Max 屏幕尺寸 1284x2778）
 function captureScreenshot() {
     console.log('🎨 正在生成赛程图片...');
     
@@ -613,7 +622,7 @@ function captureScreenshot() {
     const activeTab = document.querySelector('.tab-btn.active');
     const tabName = activeTab ? activeTab.textContent.replace(/[📋⏭️✅📊🥅📍]/g, '').trim() : '赛程';
     
-    // 获取所有比赛卡片（不限制 date-group）
+    // 获取所有比赛卡片
     const matchCards = matchesContainer.querySelectorAll('.match-card');
     
     if (matchCards.length === 0) {
@@ -625,7 +634,6 @@ function captureScreenshot() {
     // 按日期分组比赛
     const matchByDate = new Map();
     matchCards.forEach(card => {
-        // 查找日期标题
         let dateTitle = '其他';
         let parent = card.parentElement;
         while (parent && parent !== matchesContainer) {
@@ -636,58 +644,90 @@ function captureScreenshot() {
             }
             parent = parent.parentElement;
         }
-        
         if (!matchByDate.has(dateTitle)) {
             matchByDate.set(dateTitle, []);
         }
         matchByDate.get(dateTitle).push(card);
     });
     
-    // 计算图片尺寸
-    const padding = 40;
-    const titleHeight = 130;
-    const footerHeight = 50;
-    const matchCardHeight = 130;
-    const dateHeaderHeight = 40;
-    
     let totalMatchCount = 0;
     matchByDate.forEach(cards => totalMatchCount += cards.length);
     
-    const totalHeight = padding * 2 + titleHeight + footerHeight + 
-                       matchByDate.size * dateHeaderHeight + 
-                       totalMatchCount * matchCardHeight;
-    const width = 650;
+    // ============= 固定画布尺寸：iPhone 12 Pro Max (1284 x 2778) =============
+    const canvasW = 1284;
+    const canvasH = 2778;
     
-    // 创建 Canvas
+    // ============= 标准尺寸参数（如果内容少，用这个尺寸绘制） =============
+    const S = {
+        padding: 60,
+        titleHeight: 200,
+        footerHeight: 80,
+        matchCardHeight: 200,
+        dateHeaderHeight: 70,
+    };
+    
+    // ============= 估算标准总高度，判断是否需要缩放 =============
+    const baseHeight = S.padding * 2 + S.titleHeight + S.footerHeight;
+    const contentHeight = matchByDate.size * S.dateHeaderHeight + totalMatchCount * S.matchCardHeight;
+    const estimatedTotal = baseHeight + contentHeight;
+    const availableHeight = canvasH - S.padding * 2 - S.titleHeight - S.footerHeight;
+    
+    // 计算缩放比例：如果内容超出，就整体缩小；内容少则保持标准尺寸（不放大）
+    let scale = 1.0;
+    if (contentHeight > availableHeight) {
+        scale = availableHeight / contentHeight;
+    }
+    
+    // 应用缩放后的实际尺寸
+    const padding = S.padding;
+    const titleHeight = S.titleHeight;
+    const footerHeight = S.footerHeight;
+    const matchCardHeight = Math.max(70, Math.floor(S.matchCardHeight * scale));
+    const dateHeaderHeight = Math.max(30, Math.floor(S.dateHeaderHeight * scale));
+    
+    // 字体大小随缩放调整（设定最小值，保证可读性）
+    const titleFontSize = Math.floor(56 * Math.min(1, scale * 1.2));
+    const subtitleFontSize = Math.floor(32 * Math.min(1, scale * 1.2));
+    const metaFontSize = Math.max(14, Math.floor(22 * scale));
+    const dateFontSize = Math.max(18, Math.floor(32 * scale));
+    const badgeFontSize = Math.max(12, Math.floor(20 * scale));
+    const teamFontSize = Math.max(16, Math.floor(28 * scale));
+    const vsFontSize = Math.max(18, Math.floor(36 * scale));
+    const timeFontSize = Math.max(12, Math.floor(22 * scale));
+    const venueFontSize = Math.max(10, Math.floor(20 * scale));
+    const footerFontSize = Math.max(14, Math.floor(22 * Math.min(1, scale * 1.2)));
+    
+    // 创建固定尺寸 Canvas
     const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = totalHeight;
+    canvas.width = canvasW;
+    canvas.height = canvasH;
     const ctx = canvas.getContext('2d');
     
     // 绘制背景渐变
-    const gradient = ctx.createLinearGradient(0, 0, 0, totalHeight);
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvasH);
     gradient.addColorStop(0, '#1a1a2e');
     gradient.addColorStop(0.5, '#16213e');
     gradient.addColorStop(1, '#0f3460');
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, totalHeight);
+    ctx.fillRect(0, 0, canvasW, canvasH);
     
     // 绘制标题区域
     ctx.textAlign = 'center';
     ctx.shadowColor = '#ffd700';
-    ctx.shadowBlur = 15;
+    ctx.shadowBlur = 20;
     ctx.fillStyle = '#ffd700';
-    ctx.font = 'bold 32px Arial, sans-serif';
-    ctx.fillText('🏆 2026 美加墨世界杯', width / 2, padding + 50);
+    ctx.font = `bold ${titleFontSize}px Arial, sans-serif`;
+    ctx.fillText('🏆 2026 美加墨世界杯', canvasW / 2, padding + titleFontSize + 10);
     
     ctx.shadowBlur = 0;
-    ctx.font = 'bold 18px Arial, sans-serif';
+    ctx.font = `bold ${subtitleFontSize}px Arial, sans-serif`;
     ctx.fillStyle = '#ffd700';
-    ctx.fillText(tabName, width / 2, padding + 85);
+    ctx.fillText(tabName, canvasW / 2, padding + titleFontSize + subtitleFontSize + 35);
     
     ctx.fillStyle = '#888';
-    ctx.font = '12px Arial, sans-serif';
-    ctx.fillText(`生成时间: ${new Date().toLocaleString('zh-CN')}  |  共 ${totalMatchCount} 场比赛`, width / 2, padding + 110);
+    ctx.font = `${metaFontSize}px Arial, sans-serif`;
+    ctx.fillText(`生成时间: ${new Date().toLocaleString('zh-CN')}  |  共 ${totalMatchCount} 场比赛`,
+                 canvasW / 2, padding + titleFontSize + subtitleFontSize + metaFontSize + 70);
     
     // 绘制比赛内容
     let currentY = padding + titleHeight;
@@ -695,31 +735,31 @@ function captureScreenshot() {
     matchByDate.forEach((cards, dateTitle) => {
         // 绘制日期标题
         ctx.fillStyle = '#ffd700';
-        ctx.font = 'bold 18px Arial, sans-serif';
+        ctx.font = `bold ${dateFontSize}px Arial, sans-serif`;
         ctx.textAlign = 'left';
-        ctx.fillText(dateTitle, padding, currentY + 25);
+        ctx.fillText(dateTitle, padding, currentY + dateFontSize);
         
         // 绘制分割线
         ctx.strokeStyle = 'rgba(255,215,0,0.3)';
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.moveTo(padding, currentY + 38);
-        ctx.lineTo(width - padding, currentY + 38);
+        ctx.moveTo(padding, currentY + dateHeaderHeight - 10);
+        ctx.lineTo(canvasW - padding, currentY + dateHeaderHeight - 10);
         ctx.stroke();
         
         currentY += dateHeaderHeight;
         
         // 绘制该日期的比赛
-        cards.forEach((card, index) => {
+        cards.forEach((card) => {
             // 卡片背景
             ctx.fillStyle = 'rgba(255,255,255,0.05)';
             const cardX = padding;
             const cardY = currentY;
-            const cardW = width - padding * 2;
-            const cardH = matchCardHeight - 10;
+            const cardW = canvasW - padding * 2;
+            const cardH = matchCardHeight - 8;
             
             // 圆角矩形
-            const radius = 10;
+            const radius = Math.max(5, Math.floor(12 * scale));
             ctx.beginPath();
             ctx.moveTo(cardX + radius, cardY);
             ctx.lineTo(cardX + cardW - radius, cardY);
@@ -743,60 +783,80 @@ function captureScreenshot() {
             const team1Name = teams[0]?.textContent.trim() || 'TBD';
             const team2Name = teams[1]?.textContent.trim() || 'TBD';
             
-            // 绘制轮次徽章
+            // 徽章尺寸计算
+            const badgeBoxW = Math.max(60, Math.floor(100 * scale));
+            const badgeBoxH = Math.max(20, Math.floor(30 * scale));
+            const badgeOffsetX = Math.max(50, Math.floor(80 * scale));
+            const badgeOffsetY = Math.floor(badgeBoxH / 2 + 8);
+            
+            // 绘制轮次徽章（左上）
             if (matchBadge) {
                 ctx.fillStyle = '#ffd700';
-                ctx.font = 'bold 10px Arial, sans-serif';
-                ctx.textAlign = 'center';
-                const bx = cardX + 35;
-                const by = cardY + 18;
-                ctx.fillRect(bx - 30, by - 9, 60, 18);
+                const bx = cardX + badgeOffsetX;
+                const by = cardY + badgeOffsetY;
+                ctx.fillRect(bx - badgeBoxW / 2, by - badgeBoxH / 2, badgeBoxW, badgeBoxH);
                 ctx.fillStyle = '#1a1a2e';
-                ctx.fillText(matchBadge.textContent.trim(), bx, by + 3);
+                ctx.font = `bold ${badgeFontSize}px Arial, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText(matchBadge.textContent.trim(), bx, by + badgeFontSize / 3);
             }
             
-            // 绘制状态徽章
+            // 绘制状态徽章（右上）
             if (matchStatus) {
                 ctx.fillStyle = '#4caf50';
-                ctx.font = 'bold 10px Arial, sans-serif';
-                ctx.textAlign = 'center';
-                const bx = cardX + cardW - 35;
-                const by = cardY + 18;
-                ctx.fillRect(bx - 30, by - 9, 60, 18);
+                const bx = cardX + cardW - badgeOffsetX;
+                const by = cardY + badgeOffsetY;
+                ctx.fillRect(bx - badgeBoxW / 2, by - badgeBoxH / 2, badgeBoxW, badgeBoxH);
                 ctx.fillStyle = '#fff';
-                ctx.fillText(matchStatus.textContent.trim(), bx, by + 3);
+                ctx.font = `bold ${badgeFontSize}px Arial, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText(matchStatus.textContent.trim(), bx, by + badgeFontSize / 3);
             }
             
-            // 绘制球队名称
-            const centerY = cardY + cardH / 2;
-            ctx.font = 'bold 16px Arial, sans-serif';
+            // 绘制球队名称 + VS（卡片中部）
+            const centerY = cardY + cardH / 2 + badgeOffsetY / 2;
+            ctx.font = `bold ${teamFontSize}px Arial, sans-serif`;
             ctx.fillStyle = '#fff';
             ctx.textAlign = 'center';
             
-            ctx.fillText(team1Name, cardX + cardW * 0.25, centerY + 5);
+            // 球队名过长时截断
+            const maxTeamChars = Math.floor(10 / Math.max(0.5, scale));
+            const drawTeamName = (name, x) => {
+                const display = name.length > maxTeamChars ? name.substring(0, maxTeamChars) + '…' : name;
+                ctx.fillText(display, x, centerY);
+            };
             
-            // VS
+            drawTeamName(team1Name, cardX + cardW * 0.25);
+            
             ctx.fillStyle = '#ffd700';
-            ctx.font = 'bold 20px Arial, sans-serif';
-            ctx.fillText('VS', cardX + cardW * 0.5, centerY + 7);
+            ctx.font = `bold ${vsFontSize}px Arial, sans-serif`;
+            ctx.fillText('VS', cardX + cardW * 0.5, centerY + vsFontSize / 4);
             
             ctx.fillStyle = '#fff';
-            ctx.font = 'bold 16px Arial, sans-serif';
-            ctx.fillText(team2Name, cardX + cardW * 0.75, centerY + 5);
+            ctx.font = `bold ${teamFontSize}px Arial, sans-serif`;
+            drawTeamName(team2Name, cardX + cardW * 0.75);
             
-            // 绘制时间和场馆
-            ctx.font = '12px Arial, sans-serif';
-            ctx.fillStyle = '#aaa';
+            // 绘制时间和场馆（卡片底部）
+            const timeY = centerY + teamFontSize + Math.max(10, Math.floor(18 * scale));
+            const venueY = timeY + timeFontSize + Math.max(4, Math.floor(8 * scale));
             
             if (time) {
+                ctx.font = `${timeFontSize}px Arial, sans-serif`;
+                ctx.fillStyle = '#aaa';
                 ctx.textAlign = 'center';
-                ctx.fillText(time.textContent.trim(), cardX + cardW * 0.5, centerY + 35);
+                ctx.fillText(time.textContent.trim(), cardX + cardW * 0.5, timeY);
             }
             
-            if (venue) {
+            if (venue && venueY < cardY + cardH - 6) {
+                ctx.font = `${venueFontSize}px Arial, sans-serif`;
+                ctx.fillStyle = '#888';
                 ctx.textAlign = 'center';
-                ctx.font = '11px Arial, sans-serif';
-                ctx.fillText(venue.textContent.trim(), cardX + cardW * 0.5, centerY + 55);
+                let venueText = venue.textContent.trim();
+                const maxVenueChars = Math.floor(30 / Math.max(0.5, scale));
+                if (venueText.length > maxVenueChars) {
+                    venueText = venueText.substring(0, maxVenueChars) + '…';
+                }
+                ctx.fillText(venueText, cardX + cardW * 0.5, venueY);
             }
             
             currentY += matchCardHeight;
@@ -805,9 +865,9 @@ function captureScreenshot() {
     
     // 绘制底部
     ctx.fillStyle = '#666';
-    ctx.font = '12px Arial, sans-serif';
+    ctx.font = `${footerFontSize}px Arial, sans-serif`;
     ctx.textAlign = 'center';
-    ctx.fillText('⚽ 2026 FIFA World Cup · USA / Canada / Mexico', width / 2, totalHeight - 25);
+    ctx.fillText('⚽ 2026 FIFA World Cup · USA / Canada / Mexico', canvasW / 2, canvasH - padding / 2);
     
     // 下载图片
     try {
@@ -817,7 +877,7 @@ function captureScreenshot() {
         link.click();
         
         statusElement.innerHTML = originalText;
-        console.log('🎨 赛程图片已生成！共生成 ' + totalMatchCount + ' 场比赛');
+        console.log(`🎨 赛程图片已生成！尺寸 ${canvasW}x${canvasH}, 缩放比 ${scale.toFixed(2)}, 共 ${totalMatchCount} 场`);
     } catch (e) {
         console.error('图片下载失败:', e);
         statusElement.innerHTML = originalText;
