@@ -145,6 +145,16 @@ body {
     transform: translateY(0);
 }
 
+.screenshot-btn {
+    background: linear-gradient(145deg, #4caf50, #2e7d32);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.screenshot-btn:hover {
+    background: linear-gradient(145deg, #66bb6a, #4caf50);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
 /* ========== 筛选栏 ========== */
 .filter-bar {
     max-width: 1200px;
