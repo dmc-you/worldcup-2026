@@ -135,19 +135,287 @@ function flagImg(team, sizeClass = 'team-flag-img') {
 
 /* ============= 数据加载 ============= */
 
+// wheniskickoff.com API 地址
+const API_BASE = 'https://wheniskickoff.com/data/v1';
+
+// football-data.org API（实时比分）
+const FOOTBALL_API_KEY = '458e4345ec604c9aa396b970387aee56';
+const FOOTBALL_API_BASE = 'https://api.football-data.org/v4';
+
+// FIFA 代码到中文名映射
+const FIFA_TO_CN = {
+    "ARG": "阿根廷", "AUS": "澳大利亚", "AUT": "奥地利", "BEL": "比利时",
+    "BIH": "波黑", "BRA": "巴西", "CAN": "加拿大", "CHE": "瑞士",
+    "CHN": "中国", "COL": "哥伦比亚", "CRI": "佛得角", "CZE": "捷克",
+    "DEN": "丹麦", "DZA": "阿尔及利亚", "ECU": "厄瓜多尔", "ENG": "英格兰",
+    "ESP": "西班牙", "FRA": "法国", "GER": "德国", "GHA": "加纳",
+    "GRE": "希腊", "HRV": "克罗地亚", "IRN": "伊朗", "IRQ": "伊拉克",
+    "ITA": "意大利", "JOR": "约旦", "JPN": "日本", "KOR": "韩国",
+    "MAR": "摩洛哥", "MEX": "墨西哥", "NED": "荷兰", "NGA": "尼日利亚",
+    "NOR": "挪威", "NZL": "新西兰", "PAR": "巴拉圭", "PER": "秘鲁",
+    "POL": "波兰", "POR": "葡萄牙", "QAT": "卡塔尔", "RSA": "南非",
+    "RUS": "俄罗斯", "SAU": "沙特阿拉伯", "SEN": "塞内加尔", "SRB": "塞尔维亚",
+    "SUI": "瑞士", "SVK": "斯洛伐克", "SWE": "瑞典", "TUR": "土耳其",
+    "URU": "乌拉圭", "USA": "美国", "VEN": "委内瑞拉", "CIV": "科特迪瓦",
+    "PAN": "巴拿马", "COD": "民主刚果", "UZB": "乌兹别克斯坦",
+    "TUN": "突尼斯", "EGY": "埃及", "CRO": "克罗地亚", "SCO": "苏格兰",
+    "HAI": "海地", "CUW": "库拉索", "KSA": "沙特阿拉伯", "MOR": "摩洛哥"
+};
+
+// FIFA 代码到 ISO 代码映射
+const FIFA_TO_ISO = {
+    "ARG": "ar", "AUS": "au", "AUT": "at", "BEL": "be", "BIH": "ba",
+    "BRA": "br", "CAN": "ca", "CHE": "ch", "CHN": "cn", "COL": "co",
+    "CRI": "cv", "CZE": "cz", "DEN": "dk", "DZA": "dz", "ECU": "ec",
+    "ENG": "gb-eng", "ESP": "es", "FRA": "fr", "GER": "de", "GHA": "gh",
+    "GRE": "gr", "HRV": "hr", "IRN": "ir", "IRQ": "iq", "ITA": "it",
+    "JOR": "jo", "JPN": "jp", "KOR": "kr", "MAR": "ma", "MEX": "mx",
+    "NED": "nl", "NGA": "ng", "NOR": "no", "NZL": "nz", "PAR": "py",
+    "PER": "pe", "POL": "pl", "POR": "pt", "QAT": "qa", "RSA": "za",
+    "RUS": "ru", "SAU": "sa", "SEN": "sn", "SRB": "rs", "SUI": "ch",
+    "SVK": "sk", "SWE": "se", "TUR": "tr", "URU": "uy", "USA": "us",
+    "VEN": "ve", "CIV": "ci", "PAN": "pa", "COD": "cd", "UZB": "uz",
+    "TUN": "tn", "EGY": "eg", "CRO": "hr", "SCO": "gb-sct", "HAI": "ht",
+    "CUW": "cw", "KSA": "sa", "MOR": "ma"
+};
+
+// 从 football-data.org 获取实时比分
+async function fetchFootballDataScores() {
+    try {
+        console.log('正在从 football-data.org 获取实时比分...');
+        
+        const headers = {
+            'X-Auth-Token': FOOTBALL_API_KEY
+        };
+        
+        const response = await fetch(`${FOOTBALL_API_BASE}/competitions/WC/matches`, { headers });
+        if (!response.ok) {
+            console.log('football-data.org API 请求失败');
+            return {};
+        }
+        
+        const data = await response.json();
+        const scores = {};
+        
+        // 遍历比赛数据，提取比分
+        (data.matches || []).forEach(match => {
+            const homeTla = match.homeTeam?.tla || '';
+            const awayTla = match.awayTeam?.tla || '';
+            const matchDate = match.utcDate?.split('T')[0] || '';
+            const key = `${homeTla}-${awayTla}`;
+            
+            // 转换状态
+            let status = 'upcoming';
+            if (match.status === 'FINISHED') {
+                status = 'finished';
+            } else if (match.status === 'LIVE' || match.status === 'IN_PLAY') {
+                status = 'live';
+            }
+            
+            scores[key] = {
+                home_score: match.score?.fullTime?.home ?? null,
+                away_score: match.score?.fullTime?.away ?? null,
+                status: status,
+                minute: match.minute || null
+            };
+        });
+        
+        console.log(`✓ 获取到 ${Object.keys(scores).length} 场比赛比分`);
+        return scores;
+        
+    } catch (err) {
+        console.error('football-data.org 获取失败:', err);
+        return {};
+    }
+}
+
+// 从 wheniskickoff.com API 获取最新数据
+async function fetchLiveData() {
+    try {
+        console.log('正在从 wheniskickoff.com 获取最新数据...');
+        
+        const [matchesRes, teamsRes] = await Promise.all([
+            fetch(`${API_BASE}/matches.json`),
+            fetch(`${API_BASE}/teams.json`)
+        ]);
+        
+        if (!matchesRes.ok || !teamsRes.ok) {
+            throw new Error('API 请求失败');
+        }
+        
+        const matchesData = await matchesRes.json();
+        const teamsData = await teamsRes.json();
+        
+        const matchesRaw = matchesData.data || matchesData;
+        const teamsRaw = teamsData.data || teamsData;
+        
+        // 同时获取 football-data.org 的实时比分
+        const liveScores = await fetchFootballDataScores();
+        
+        // 合并比分数据
+        if (Object.keys(liveScores).length > 0) {
+            matchesRaw.forEach(m => {
+                const homeCode = m.home || '';
+                const awayCode = m.away || '';
+                const key = `${homeCode}-${awayCode}`;
+                
+                if (liveScores[key]) {
+                    m.homeScore = liveScores[key].home_score;
+                    m.awayScore = liveScores[key].away_score;
+                    m.status = liveScores[key].status;
+                }
+            });
+        }
+        
+        // 转换数据格式
+        const teamsMap = {};
+        teamsRaw.forEach(t => {
+            teamsMap[t.code] = t;
+        });
+        
+        const matches = matchesRaw.map(m => {
+            const homeCode = m.home || '';
+            const awayCode = m.away || '';
+            const homeTeam = teamsMap[homeCode] || {};
+            const awayTeam = teamsMap[awayCode] || {};
+            
+            return {
+                id: m.num || m.id || 0,
+                date: m.datetime_utc || m.date || '',
+                group: m.group || '',
+                matchday: m.matchday || 1,
+                round: m.phase === 'group' ? '小组赛' : '淘汰赛',
+                phase: m.phase || 'group',
+                home: {
+                    name: FIFA_TO_CN[homeCode] || homeTeam.name || homeCode,
+                    code: homeCode,
+                    flag: homeTeam.flag || '',
+                    iso: FIFA_TO_ISO[homeCode] || (homeCode ? homeCode.toLowerCase().substring(0, 2) : '')
+                },
+                away: {
+                    name: FIFA_TO_CN[awayCode] || awayTeam.name || awayCode,
+                    code: awayCode,
+                    flag: awayTeam.flag || '',
+                    iso: FIFA_TO_ISO[awayCode] || (awayCode ? awayCode.toLowerCase().substring(0, 2) : '')
+                },
+                venue: m.venue_name || '',
+                city: m.venue_city || '',
+                venue_code: m.venue || '',
+                status: m.status || 'upcoming',
+                home_score: m.homeScore || m.home_score || null,
+                away_score: m.awayScore || m.away_score || null,
+                slug: m.slug || ''
+            };
+        });
+        
+        console.log(`✓ 获取到 ${matches.length} 场比赛`);
+        return { matches, lastUpdated: new Date().toISOString() };
+        
+    } catch (err) {
+        console.error('API 获取失败:', err);
+        return null;
+    }
+}
+
+// 显示数据更新提示
+let updateNotification = null;
+function showUpdateNotification(message, type = 'info') {
+    // 移除现有提示
+    if (updateNotification) {
+        updateNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = `update-notification ${type}`;
+    notification.innerHTML = `
+        <span class="notification-icon">${type === 'success' ? '✓' : '🔄'}</span>
+        <span class="notification-text">${message}</span>
+    `;
+    notification.style.cssText = `
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 10000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    updateNotification = notification;
+    
+    // 3秒后自动移除
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 3000);
+}
+
+// 自动更新数据（每5分钟）
+let autoUpdateInterval = null;
+async function startAutoUpdate() {
+    // 首次尝试从 API 获取数据
+    const liveData = await fetchLiveData();
+    if (liveData) {
+        allMatches = liveData.matches;
+        document.getElementById('last-updated').textContent = 
+            new Date().toLocaleString('zh-CN') + ' (实时)';
+        renderAll();
+        showUpdateNotification('数据已从服务器更新!', 'success');
+    }
+    
+    // 每30分钟自动更新
+    if (autoUpdateInterval) clearInterval(autoUpdateInterval);
+    autoUpdateInterval = setInterval(async () => {
+        console.log('自动检查数据更新...');
+        const liveData = await fetchLiveData();
+        if (liveData) {
+            allMatches = liveData.matches;
+            document.getElementById('last-updated').textContent = 
+                new Date().toLocaleString('zh-CN') + ' (实时)';
+            renderAll();
+            showUpdateNotification('数据已自动更新!', 'success');
+        }
+    }, 30 * 60 * 1000); // 30分钟
+}
+
 async function loadData() {
     try {
-        const res = await fetch('matches.json');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        allMatches = data.matches || [];
-        allTeams = data.teams || {};
-        topScorers = data.topScorers || [];
-        window.topScorersData = data.topScorers || [];
-        if (data.flagCdn) flagCdnBase = data.flagCdn;
-        document.getElementById('last-updated').textContent =
-            data.lastUpdated || new Date().toLocaleString('zh-CN');
-        initPage();
+        // 先尝试从 API 获取最新数据
+        const liveData = await fetchLiveData();
+        if (liveData) {
+            allMatches = liveData.matches;
+            document.getElementById('last-updated').textContent = 
+                new Date().toLocaleString('zh-CN') + ' (实时)';
+            // 启动自动更新
+            startAutoUpdate();
+            allTeams = {};
+            topScorers = [];
+            window.topScorersData = [];
+            initPage();
+        } else {
+            // API 获取失败，使用本地文件
+            const res = await fetch('matches.json');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+            allMatches = data.matches || [];
+            allTeams = data.teams || {};
+            topScorers = data.topScorers || [];
+            window.topScorersData = data.topScorers || [];
+            if (data.flagCdn) flagCdnBase = data.flagCdn;
+            document.getElementById('last-updated').textContent =
+                data.lastUpdated || new Date().toLocaleString('zh-CN');
+            initPage();
+        }
     } catch (err) {
         console.error('数据加载失败：', err);
         document.getElementById('matches-container').innerHTML =

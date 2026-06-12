@@ -8,9 +8,10 @@
   "startDate": "2026-06-11",
   "endDate": "2026-07-19",
   "totalMatches": 104,
+  "finishedMatches": 2,
   "flagCdn": "https://flagcdn.com/w40",
-  "lastUpdated": "2026-06-10 13:40:03",
-  "source": "wheniskickoff.com",
+  "lastUpdated": "2026-06-12 03:28:52",
+  "source": "wheniskickoff.com + manual updates",
   "teams": {
     "ARG": {
       "name": "阿根廷",
@@ -169,7 +170,7 @@
       "name": "英格兰",
       "code": "ENG",
       "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-      "iso": "gb-eng",
+      "iso": "gb",
       "group": "L",
       "rank": 5,
       "confederation": "UEFA"
@@ -456,8 +457,7 @@
   },
   "groups": [
     {
-      "name": "",
-      "letter": "",
+      "group": "A",
       "teams": [
         "MEX",
         "RSA",
@@ -466,8 +466,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "B",
       "teams": [
         "CAN",
         "QAT",
@@ -476,8 +475,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "C",
       "teams": [
         "BRA",
         "MAR",
@@ -486,8 +484,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "D",
       "teams": [
         "USA",
         "PAR",
@@ -496,8 +493,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "E",
       "teams": [
         "GER",
         "CUW",
@@ -506,8 +502,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "F",
       "teams": [
         "NED",
         "JPN",
@@ -516,8 +511,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "G",
       "teams": [
         "BEL",
         "EGY",
@@ -526,8 +520,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "H",
       "teams": [
         "ESP",
         "CPV",
@@ -537,8 +530,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "I",
       "teams": [
         "FRA",
         "SEN",
@@ -547,8 +539,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "J",
       "teams": [
         "ARG",
         "DZA",
@@ -557,8 +548,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "K",
       "teams": [
         "POR",
         "COD",
@@ -567,8 +557,7 @@
       ]
     },
     {
-      "name": "",
-      "letter": "",
+      "group": "L",
       "teams": [
         "ENG",
         "CRO",
@@ -714,8 +703,10 @@
       "venue": "MetLife Stadium",
       "city": "East Rutherford, NJ",
       "venue_code": "metlife",
-      "status": "upcoming",
-      "slug": "mexico-vs-south-africa-2026-06-11"
+      "status": "finished",
+      "slug": "mexico-vs-south-africa-2026-06-11",
+      "home_score": 2,
+      "away_score": 0
     },
     {
       "id": 2,
@@ -739,8 +730,10 @@
       "venue": "SoFi Stadium",
       "city": "Los Angeles, CA",
       "venue_code": "sofi",
-      "status": "upcoming",
-      "slug": "south-korea-vs-czechia-2026-06-12"
+      "status": "finished",
+      "slug": "south-korea-vs-czechia-2026-06-12",
+      "home_score": 1,
+      "away_score": 1
     },
     {
       "id": 3,
@@ -1006,7 +999,7 @@
         "iso": "es"
       },
       "away": {
-        "name": "Cape Verde Islands",
+        "name": "CPV",
         "code": "CPV",
         "flag": "🇨🇻",
         "iso": "cp"
@@ -1056,7 +1049,7 @@
         "iso": "sa"
       },
       "away": {
-        "name": "Uruguay",
+        "name": "URY",
         "code": "URY",
         "flag": "🏳",
         "iso": "ur"
@@ -1228,7 +1221,7 @@
         "name": "英格兰",
         "code": "ENG",
         "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        "iso": "gb-eng"
+        "iso": "gb"
       },
       "away": {
         "name": "克罗地亚",
@@ -1650,13 +1643,13 @@
       "round": "小组赛",
       "phase": "group",
       "home": {
-        "name": "Uruguay",
+        "name": "URY",
         "code": "URY",
         "flag": "🏳",
         "iso": "ur"
       },
       "away": {
-        "name": "Cape Verde Islands",
+        "name": "CPV",
         "code": "CPV",
         "flag": "🇨🇻",
         "iso": "cp"
@@ -1828,7 +1821,7 @@
         "name": "英格兰",
         "code": "ENG",
         "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        "iso": "gb-eng"
+        "iso": "gb"
       },
       "away": {
         "name": "加纳",
@@ -2250,7 +2243,7 @@
       "round": "小组赛",
       "phase": "group",
       "home": {
-        "name": "Uruguay",
+        "name": "URY",
         "code": "URY",
         "flag": "🏳",
         "iso": "ur"
@@ -2275,7 +2268,7 @@
       "round": "小组赛",
       "phase": "group",
       "home": {
-        "name": "Cape Verde Islands",
+        "name": "CPV",
         "code": "CPV",
         "flag": "🇨🇻",
         "iso": "cp"
@@ -2359,7 +2352,7 @@
         "name": "英格兰",
         "code": "ENG",
         "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        "iso": "gb-eng"
+        "iso": "gb"
       },
       "venue": "AT&T Stadium",
       "city": "Arlington, TX",
@@ -2496,8 +2489,8 @@
       "id": 73,
       "date": "2026-06-28T19:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2521,8 +2514,8 @@
       "id": 74,
       "date": "2026-06-29T17:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2546,8 +2539,8 @@
       "id": 75,
       "date": "2026-06-29T20:30:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2571,8 +2564,8 @@
       "id": 76,
       "date": "2026-06-30T01:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2596,8 +2589,8 @@
       "id": 77,
       "date": "2026-06-30T17:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2621,8 +2614,8 @@
       "id": 78,
       "date": "2026-06-30T21:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2646,8 +2639,8 @@
       "id": 79,
       "date": "2026-07-01T01:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2671,8 +2664,8 @@
       "id": 80,
       "date": "2026-07-01T16:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2696,8 +2689,8 @@
       "id": 81,
       "date": "2026-07-01T20:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2721,8 +2714,8 @@
       "id": 82,
       "date": "2026-07-02T00:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2746,8 +2739,8 @@
       "id": 83,
       "date": "2026-07-02T19:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2771,8 +2764,8 @@
       "id": 84,
       "date": "2026-07-02T23:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2796,8 +2789,8 @@
       "id": 85,
       "date": "2026-07-03T03:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2821,8 +2814,8 @@
       "id": 86,
       "date": "2026-07-03T18:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2846,8 +2839,8 @@
       "id": 87,
       "date": "2026-07-03T22:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2871,8 +2864,8 @@
       "id": 88,
       "date": "2026-07-04T01:30:00Z",
       "group": null,
-      "matchday": null,
-      "round": "last-32",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "last-32",
       "home": {
         "name": null,
@@ -2896,8 +2889,8 @@
       "id": 89,
       "date": "2026-07-04T17:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -2921,8 +2914,8 @@
       "id": 90,
       "date": "2026-07-04T21:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -2946,8 +2939,8 @@
       "id": 91,
       "date": "2026-07-05T20:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -2971,8 +2964,8 @@
       "id": 92,
       "date": "2026-07-06T00:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -2996,8 +2989,8 @@
       "id": 93,
       "date": "2026-07-06T19:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -3021,8 +3014,8 @@
       "id": 94,
       "date": "2026-07-07T00:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -3046,8 +3039,8 @@
       "id": 95,
       "date": "2026-07-07T16:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -3071,8 +3064,8 @@
       "id": 96,
       "date": "2026-07-07T20:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "round-of-16",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "round-of-16",
       "home": {
         "name": null,
@@ -3096,8 +3089,8 @@
       "id": 97,
       "date": "2026-07-09T20:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "quarter-finals",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "quarter-finals",
       "home": {
         "name": null,
@@ -3121,8 +3114,8 @@
       "id": 98,
       "date": "2026-07-10T19:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "quarter-finals",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "quarter-finals",
       "home": {
         "name": null,
@@ -3146,8 +3139,8 @@
       "id": 99,
       "date": "2026-07-11T21:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "quarter-finals",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "quarter-finals",
       "home": {
         "name": null,
@@ -3171,8 +3164,8 @@
       "id": 100,
       "date": "2026-07-12T01:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "quarter-finals",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "quarter-finals",
       "home": {
         "name": null,
@@ -3196,8 +3189,8 @@
       "id": 101,
       "date": "2026-07-14T19:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "semi-finals",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "semi-finals",
       "home": {
         "name": null,
@@ -3221,8 +3214,8 @@
       "id": 102,
       "date": "2026-07-15T19:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "semi-finals",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "semi-finals",
       "home": {
         "name": null,
@@ -3246,8 +3239,8 @@
       "id": 103,
       "date": "2026-07-18T21:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "third-place-play-off",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "third-place-play-off",
       "home": {
         "name": null,
@@ -3271,8 +3264,8 @@
       "id": 104,
       "date": "2026-07-19T19:00:00Z",
       "group": null,
-      "matchday": null,
-      "round": "final",
+      "matchday": 1,
+      "round": "淘汰赛",
       "phase": "final",
       "home": {
         "name": null,
@@ -3293,171 +3286,5 @@
       "slug": "final-match-104-2026-07-19"
     }
   ],
-  "topScorers": [
-    {
-      "rank": 1,
-      "name": "利昂内尔·梅西",
-      "team": "阿根廷",
-      "team_iso": "ar",
-      "team_flag": "🇦🇷",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 2,
-      "name": "基利安·姆巴佩",
-      "team": "法国",
-      "team_iso": "fr",
-      "team_flag": "🇫🇷",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 3,
-      "name": "埃尔林·哈兰德",
-      "team": "挪威",
-      "team_iso": "no",
-      "team_flag": "🇳🇴",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 4,
-      "name": "克里斯蒂亚诺·罗纳尔多",
-      "team": "葡萄牙",
-      "team_iso": "pt",
-      "team_flag": "🇵🇹",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 5,
-      "name": "哈里·凯恩",
-      "team": "英格兰",
-      "team_iso": "gb-eng",
-      "team_flag": "🏴",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 6,
-      "name": "维尼修斯·儒尼奥尔",
-      "team": "巴西",
-      "team_iso": "br",
-      "team_flag": "🇧🇷",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 7,
-      "name": "贾马尔·穆西亚拉",
-      "team": "德国",
-      "team_iso": "de",
-      "team_flag": "🇩🇪",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前腰"
-    },
-    {
-      "rank": 8,
-      "name": "裘德·贝林厄姆",
-      "team": "英格兰",
-      "team_iso": "gb-eng",
-      "team_flag": "🏴",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "中场"
-    },
-    {
-      "rank": 9,
-      "name": "罗德里",
-      "team": "西班牙",
-      "team_iso": "es",
-      "team_flag": "🇪🇸",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "中场"
-    },
-    {
-      "rank": 10,
-      "name": "穆罕默德·萨拉赫",
-      "team": "埃及",
-      "team_iso": "eg",
-      "team_flag": "🇪🇬",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 11,
-      "name": "拉明·亚马尔",
-      "team": "西班牙",
-      "team_iso": "es",
-      "team_flag": "🇪🇸",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    },
-    {
-      "rank": 12,
-      "name": "凯文·德布劳内",
-      "team": "比利时",
-      "team_iso": "be",
-      "team_flag": "🇧🇪",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "中场"
-    },
-    {
-      "rank": 13,
-      "name": "弗洛里安·维尔茨",
-      "team": "德国",
-      "team_iso": "de",
-      "team_flag": "🇩🇪",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前腰"
-    },
-    {
-      "rank": 14,
-      "name": "路易斯·迪亚斯",
-      "team": "哥伦比亚",
-      "team_iso": "co",
-      "team_flag": "🇨🇴",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "边锋"
-    },
-    {
-      "rank": 15,
-      "name": "孙兴慜",
-      "team": "韩国",
-      "team_iso": "kr",
-      "team_flag": "🇰🇷",
-      "goals": 0,
-      "assists": 0,
-      "matches": 0,
-      "position": "前锋"
-    }
-  ]
+  "topScorers": []
 }
