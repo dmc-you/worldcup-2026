@@ -93,11 +93,13 @@ function getDateKey(dateStr) {
 }
 
 function getMatchStatus(match) {
-    if (match.status) return match.status;
+    if (match.status && match.status !== 'upcoming') return match.status;
     const now = new Date();
     const matchDate = new Date(match.date);
-    if (match.homeScore !== undefined) return 'finished';
-    if (matchDate < now) return 'upcoming';
+    const hs = match.homeScore !== undefined ? match.homeScore : match.home_score;
+    const as = match.awayScore !== undefined ? match.awayScore : match.away_score;
+    if (hs !== undefined && hs !== null && as !== undefined && as !== null) return 'finished';
+    if (matchDate < now) return 'finished';
     return 'upcoming';
 }
 
@@ -302,8 +304,8 @@ async function fetchLiveData() {
                 city: m.venue_city || '',
                 venue_code: m.venue || '',
                 status: m.status || 'upcoming',
-                home_score: m.homeScore || m.home_score || null,
-                away_score: m.awayScore || m.away_score || null,
+                homeScore: m.homeScore !== undefined ? m.homeScore : (m.home_score !== undefined ? m.home_score : null),
+                awayScore: m.awayScore !== undefined ? m.awayScore : (m.away_score !== undefined ? m.away_score : null),
                 slug: m.slug || ''
             };
         });
@@ -363,58 +365,236 @@ function showUpdateNotification(message, type = 'info') {
 // 自动更新数据（每5分钟）
 let autoUpdateInterval = null;
 async function startAutoUpdate() {
-    // 首次尝试从 API 获取数据
-    const liveData = await fetchLiveData();
-    if (liveData) {
-        allMatches = liveData.matches;
-        document.getElementById('last-updated').textContent = 
-            new Date().toLocaleString('zh-CN') + ' (实时)';
-        renderAll();
-        showUpdateNotification('数据已从服务器更新!', 'success');
-    }
-    
-    // 每30分钟自动更新
+    // 每30分钟自动更新比分
     if (autoUpdateInterval) clearInterval(autoUpdateInterval);
     autoUpdateInterval = setInterval(async () => {
-        console.log('自动检查数据更新...');
-        const liveData = await fetchLiveData();
-        if (liveData) {
-            allMatches = liveData.matches;
-            document.getElementById('last-updated').textContent = 
-                new Date().toLocaleString('zh-CN') + ' (实时)';
-            renderAll();
-            showUpdateNotification('数据已自动更新!', 'success');
+        console.log('自动检查比分更新...');
+        // 重新加载数据（自动更新比分
+        try {
+            // 只尝试从 football-data.org 获取最新比分
+            const scoreRes = await fetch(`${FOOTBALL_API_BASE}/competitions/WC/matches`, {
+                headers: { 'X-Auth-Token': FOOTBALL_API_KEY }
+            });
+            if (scoreRes.ok) {
+                const scoreData = await scoreRes.json();
+                const liveScores = {};
+                (scoreData.matches || []).forEach(m => {
+                    const homeTla = m.homeTeam?.tla || '';
+                    const awayTla = m.awayTeam?.tla || '';
+                    const key = `${homeTla}-${awayTla}`;
+                    let status = 'upcoming';
+                    if (m.status === 'FINISHED') status = 'finished';
+                    else if (m.status === 'LIVE' || m.status === 'IN_PLAY') status = 'live';
+                    const hs = m.score?.fullTime?.home;
+                    const as = m.score?.fullTime?.away;
+                    if (hs !== undefined && hs !== null) {
+                        liveScores[key] = { homeScore: hs, awayScore: as, status };
+                    }
+                });
+                
+                // 更新现有比赛
+                let updated = 0;
+                allMatches.forEach(match => {
+                    const key = `${match.home.code}-${match.away.code}`;
+                    if (liveScores[key]) {
+                        if (match.homeScore !== liveScores[key].homeScore || 
+                            match.awayScore !== liveScores[key].awayScore ||
+                            match.status !== liveScores[key].status) {
+                            match.homeScore = liveScores[key].homeScore;
+                            match.awayScore = liveScores[key].awayScore;
+                            match.status = liveScores[key].status;
+                            updated++;
+                        }
+                    }
+                });
+                
+                const scoreCount = allMatches.filter(m => hasValidScore(m)).length;
+                document.getElementById('last-updated').textContent = 
+                    `${new Date().toLocaleString('zh-CN')} (已更新 ${scoreCount} 场比分)`;
+                renderAll();
+                if (updated > 0) {
+                    showUpdateNotification(`比分自动更新成功！更新 ${updated} 场比赛`, 'success');
+                }
+            }
+        } catch (e) {
+            console.log('自动更新失败:', e);
         }
     }, 30 * 60 * 1000); // 30分钟
 }
 
+// 统一比名字段名：将 home_score/away_score 转换为 homeScore/awayScore
+function normalizeMatch(match) {
+    if (!match) return match;
+    if (match.home_score !== undefined && match.homeScore === undefined) {
+        match.homeScore = match.home_score;
+    }
+    if (match.away_score !== undefined && match.awayScore === undefined) {
+        match.awayScore = match.away_score;
+    }
+    return match;
+}
+
+// 判断是否有有效比分
+function hasValidScore(match) {
+    if (!match) return false;
+    const hs = match.homeScore !== undefined ? match.homeScore : match.home_score;
+    const as = match.awayScore !== undefined ? match.awayScore : match.away_score;
+    return hs !== undefined && hs !== null && as !== undefined && as !== null;
+}
+
 async function loadData() {
     try {
-        // 先尝试从 API 获取最新数据
-        const liveData = await fetchLiveData();
-        if (liveData) {
-            allMatches = liveData.matches;
-            document.getElementById('last-updated').textContent = 
-                new Date().toLocaleString('zh-CN') + ' (实时)';
-            // 启动自动更新
-            startAutoUpdate();
-            allTeams = {};
-            topScorers = [];
-            window.topScorersData = [];
-            initPage();
-        } else {
-            // API 获取失败，使用本地文件
+        // 先加载 matches.json 获取球队信息和手动比分
+        let localData = null;
+        try {
             const res = await fetch('matches.json');
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const data = await res.json();
-            allMatches = data.matches || [];
-            allTeams = data.teams || {};
-            topScorers = data.topScorers || [];
-            window.topScorersData = data.topScorers || [];
-            if (data.flagCdn) flagCdnBase = data.flagCdn;
-            document.getElementById('last-updated').textContent =
-                data.lastUpdated || new Date().toLocaleString('zh-CN');
-            initPage();
+            if (res.ok) {
+                localData = await res.json();
+            }
+        } catch (e) {
+            console.log('本地 matches.json 加载失败:', e);
+        }
+        
+        // 尝试从 wheniskickoff.com 获取赛程
+        let scheduleData = null;
+        try {
+            console.log('正在从 wheniskickoff.com 获取赛程...');
+            const scheduleRes = await fetch('https://wheniskickoff.com/data/v1/matches.json');
+            if (scheduleRes.ok) {
+                const scheduleRaw = await scheduleRes.json();
+                scheduleData = scheduleRaw.data || scheduleRaw;
+            }
+        } catch (e) {
+            console.log('wheniskickoff.com 获取失败:', e);
+        }
+        
+        // 尝试从 football-data.org 获取比分
+        let liveScores = {};
+        try {
+            console.log('正在从 football-data.org 获取比分...');
+            const scoreRes = await fetch(`${FOOTBALL_API_BASE}/competitions/WC/matches`, {
+                headers: { 'X-Auth-Token': FOOTBALL_API_KEY }
+            });
+            if (scoreRes.ok) {
+                const scoreData = await scoreRes.json();
+                (scoreData.matches || []).forEach(m => {
+                    const homeTla = m.homeTeam?.tla || '';
+                    const awayTla = m.awayTeam?.tla || '';
+                    const key = `${homeTla}-${awayTla}`;
+                    let status = 'upcoming';
+                    if (m.status === 'FINISHED') status = 'finished';
+                    else if (m.status === 'LIVE' || m.status === 'IN_PLAY') status = 'live';
+                    const hs = m.score?.fullTime?.home;
+                    const as = m.score?.fullTime?.away;
+                    if (hs !== undefined && hs !== null) {
+                        liveScores[key] = { homeScore: hs, awayScore: as, status };
+                    }
+                });
+                console.log(`✓ football-data.org: 获取到 ${Object.keys(liveScores).length} 场比分`);
+            } else {
+                console.log(`football-data.org API 返回 ${scoreRes.status}`);
+            }
+        } catch (e) {
+            console.log('football-data.org 获取失败:', e);
+        }
+        
+        // 合并数据源：优先赛程，再合并比分
+        let matches = [];
+        if (scheduleData && scheduleData.length > 0) {
+            // 使用 wheniskickoff.com 赛程作为基础
+            const teamsMap = {};
+            try {
+                const teamsRes = await fetch('https://wheniskickoff.com/data/v1/teams.json');
+                if (teamsRes.ok) {
+                    const teamsRaw = await teamsRes.json();
+                    (teamsRaw.data || teamsRaw).forEach(t => teamsMap[t.code] = t);
+                }
+            } catch (e) {
+                console.log('球队数据获取失败:', e);
+            }
+            
+            matches = scheduleData.map(m => {
+                const homeCode = m.home || '';
+                const awayCode = m.away || '';
+                const homeTeam = teamsMap[homeCode] || {};
+                const awayTeam = teamsMap[awayCode] || {};
+                const key = `${homeCode}-${awayCode}`;
+                
+                let homeScore = null, awayScore = null, status = m.status || 'upcoming';
+                // 优先使用 football-data.org 比分
+                if (liveScores[key]) {
+                    homeScore = liveScores[key].homeScore;
+                    awayScore = liveScores[key].awayScore;
+                    status = liveScores[key].status;
+                }
+                // 其次用 matches.json 中已有的比分
+                else if (localData && localData.matches) {
+                    const local = localData.matches.find(lm => 
+                        lm.home?.code === homeCode && lm.away?.code === awayCode
+                    );
+                    if (local) {
+                        const hs = local.homeScore !== undefined ? local.homeScore : local.home_score;
+                        const as = local.awayScore !== undefined ? local.awayScore : local.away_score;
+                        if (hs !== undefined && hs !== null) {
+                            homeScore = hs;
+                            awayScore = as;
+                            status = local.status || 'finished';
+                        }
+                    }
+                }
+                
+                return {
+                    id: m.num || m.id || 0,
+                    date: m.datetime_utc || m.date || '',
+                    group: m.group || '',
+                    matchday: m.matchday || 1,
+                    round: m.phase === 'group' ? '小组赛' : '淘汰赛',
+                    phase: m.phase || 'group',
+                    home: {
+                        name: FIFA_TO_CN[homeCode] || homeTeam.name || homeCode,
+                        code: homeCode,
+                        flag: homeTeam.flag || '',
+                        iso: FIFA_TO_ISO[homeCode] || (homeCode ? homeCode.toLowerCase().substring(0, 2) : '')
+                    },
+                    away: {
+                        name: FIFA_TO_CN[awayCode] || awayTeam.name || awayCode,
+                        code: awayCode,
+                        flag: awayTeam.flag || '',
+                        iso: FIFA_TO_ISO[awayCode] || (awayCode ? awayCode.toLowerCase().substring(0, 2) : '')
+                    },
+                    venue: m.venue_name || '',
+                    city: m.venue_city || '',
+                    venue_code: m.venue || '',
+                    status: status,
+                    homeScore: homeScore,
+                    awayScore: awayScore,
+                    slug: m.slug || ''
+                };
+            });
+        } else if (localData && localData.matches) {
+            // API 失败，只使用本地 matches.json
+            matches = localData.matches.map(m => normalizeMatch(m));
+        }
+        
+        allMatches = matches;
+        allTeams = localData ? (localData.teams || {}) : {};
+        topScorers = localData ? (localData.topScorers || []) : [];
+        window.topScorersData = topScorers;
+        if (localData && localData.flagCdn) flagCdnBase = localData.flagCdn;
+        
+        // 显示更新时间
+        const scoreCount = matches.filter(m => hasValidScore(m)).length;
+        document.getElementById('last-updated').textContent = 
+            `${new Date().toLocaleString('zh-CN')} (已更新 ${scoreCount} 场比分)`;
+        
+        console.log(`✓ 共 ${matches.length} 场比赛，其中 ${scoreCount} 场有比分`);
+        
+        // 启动自动更新
+        startAutoUpdate();
+        initPage();
+        
+        if (scoreCount > 0) {
+            showUpdateNotification(`比分更新成功！共 ${scoreCount} 场比赛`, 'success');
         }
     } catch (err) {
         console.error('数据加载失败：', err);
@@ -620,18 +800,20 @@ function renderMatches() {
 
 function renderMatchCard(match) {
     const status = getMatchStatus(match);
-    const hasScore = (status === 'finished' || status === 'live') && match.homeScore !== undefined;
+    const hs = match.homeScore !== undefined ? match.homeScore : match.home_score;
+    const as = match.awayScore !== undefined ? match.awayScore : match.away_score;
+    const hasScore = (status === 'finished' || status === 'live') && hs !== null && hs !== undefined;
     let homeWinner = false, awayWinner = false;
     if (hasScore) {
-        if (match.homeScore > match.awayScore) homeWinner = true;
-        else if (match.awayScore > match.homeScore) awayWinner = true;
+        if (hs > as) homeWinner = true;
+        else if (as > hs) awayWinner = true;
     }
 
     const scoreHtml = hasScore
         ? `<div class="match-score">
-             <span class="${homeWinner ? 'winner' : ''}">${match.homeScore}</span>
+             <span class="${homeWinner ? 'winner' : ''}">${hs}</span>
              <small>-</small>
-             <span class="${awayWinner ? 'winner' : ''}">${match.awayScore}</span>
+             <span class="${awayWinner ? 'winner' : ''}">${as}</span>
            </div>`
         : `<div class="match-score vs">VS</div>`;
 
@@ -1164,7 +1346,9 @@ function getStandingsData() {
         
         // 统计比赛结果
         groupMatches.forEach(m => {
-            if (m.status !== 'finished' || !m.home_score || !m.away_score) return;
+            const hs = m.homeScore !== undefined ? m.homeScore : m.home_score;
+            const as = m.awayScore !== undefined ? m.awayScore : m.away_score;
+            if (m.status !== 'finished' || hs === null || hs === undefined || as === null || as === undefined) return;
             
             const home = teamStats[m.home.iso];
             const away = teamStats[m.away.iso];
@@ -1172,16 +1356,16 @@ function getStandingsData() {
             
             home.games++;
             away.games++;
-            home.gf += m.home_score;
-            home.ga += m.away_score;
-            away.gf += m.away_score;
-            away.ga += m.home_score;
+            home.gf += hs;
+            home.ga += as;
+            away.gf += as;
+            away.ga += hs;
             
-            if (m.home_score > m.away_score) {
+            if (hs > as) {
                 home.wins++;
                 home.points += 3;
                 away.losses++;
-            } else if (m.home_score < m.away_score) {
+            } else if (hs < as) {
                 away.wins++;
                 away.points += 3;
                 home.losses++;
@@ -1903,8 +2087,8 @@ function drawMatchCard(ctx, match, x, y, w, h, fonts, flagImages) {
     const awayName = match.away?.name || 'TBD';
     const homeIso = match.home?.iso;
     const awayIso = match.away?.iso;
-    const homeScore = (match.home_score !== undefined && match.home_score !== null) ? match.home_score : null;
-    const awayScore = (match.away_score !== undefined && match.away_score !== null) ? match.away_score : null;
+    const homeScore = (match.homeScore !== undefined && match.homeScore !== null) ? match.homeScore : ((match.home_score !== undefined && match.home_score !== null) ? match.home_score : null;
+    const awayScore = (match.awayScore !== undefined && match.awayScore !== null) ? match.awayScore : ((match.away_score !== undefined && match.away_score !== null) ? match.away_score : null;
     
     // 测量文字宽度
     ctx.font = `bold ${scoreFont}px Arial, sans-serif`;

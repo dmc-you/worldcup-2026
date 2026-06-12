@@ -706,7 +706,9 @@
       "status": "finished",
       "slug": "mexico-vs-south-africa-2026-06-11",
       "home_score": 2,
-      "away_score": 0
+      "away_score": 0,
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "id": 2,
@@ -733,7 +735,9 @@
       "status": "finished",
       "slug": "south-korea-vs-czechia-2026-06-12",
       "home_score": 1,
-      "away_score": 1
+      "away_score": 1,
+      "homeScore": 1,
+      "awayScore": 1
     },
     {
       "id": 3,
