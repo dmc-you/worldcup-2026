@@ -790,8 +790,12 @@
       "venue": "Hard Rock Stadium",
       "city": "Miami Gardens, FL",
       "venue_code": "hardrock",
-      "status": "upcoming",
-      "slug": "united-states-vs-paraguay-2026-06-13"
+      "status": "finished",
+      "slug": "united-states-vs-paraguay-2026-06-13",
+      "homeScore": 2,
+      "awayScore": 0,
+      "home_score": 2,
+      "away_score": 0
     },
     {
       "id": 5,
@@ -840,8 +844,12 @@
       "venue": "NRG Stadium",
       "city": "Houston, TX",
       "venue_code": "nrg",
-      "status": "upcoming",
-      "slug": "brazil-vs-morocco-2026-06-13"
+      "status": "finished",
+      "slug": "brazil-vs-morocco-2026-06-13",
+      "homeScore": 3,
+      "awayScore": 2,
+      "home_score": 3,
+      "away_score": 2
     },
     {
       "id": 7,
@@ -865,8 +873,12 @@
       "venue": "Lincoln Financial Field",
       "city": "Philadelphia, PA",
       "venue_code": "lincoln",
-      "status": "upcoming",
-      "slug": "haiti-vs-scotland-2026-06-14"
+      "status": "finished",
+      "slug": "haiti-vs-scotland-2026-06-14",
+      "homeScore": 0,
+      "awayScore": 3,
+      "home_score": 0,
+      "away_score": 3
     },
     {
       "id": 8,
@@ -890,8 +902,12 @@
       "venue": "Lumen Field",
       "city": "Seattle, WA",
       "venue_code": "lumen",
-      "status": "upcoming",
-      "slug": "australia-vs-turkey-2026-06-14"
+      "status": "finished",
+      "slug": "australia-vs-turkey-2026-06-14",
+      "homeScore": 1,
+      "awayScore": 2,
+      "home_score": 1,
+      "away_score": 2
     },
     {
       "id": 9,
@@ -915,8 +931,12 @@
       "venue": "Levi's Stadium",
       "city": "Santa Clara, CA",
       "venue_code": "levis",
-      "status": "upcoming",
-      "slug": "germany-vs-curaçao-2026-06-14"
+      "status": "finished",
+      "slug": "germany-vs-curaçao-2026-06-14",
+      "homeScore": 4,
+      "awayScore": 1,
+      "home_score": 4,
+      "away_score": 1
     },
     {
       "id": 10,
@@ -940,8 +960,12 @@
       "venue": "Arrowhead Stadium",
       "city": "Kansas City, MO",
       "venue_code": "arrowhead",
-      "status": "upcoming",
-      "slug": "netherlands-vs-japan-2026-06-14"
+      "status": "finished",
+      "slug": "netherlands-vs-japan-2026-06-14",
+      "homeScore": 2,
+      "awayScore": 1,
+      "home_score": 2,
+      "away_score": 1
     },
     {
       "id": 11,
@@ -994,8 +1018,12 @@
       "venue": "Estadio Azteca",
       "city": "Mexico City",
       "venue_code": "azteca",
-      "status": "upcoming",
-      "slug": "sweden-vs-tunisia-2026-06-15"
+      "status": "finished",
+      "slug": "sweden-vs-tunisia-2026-06-15",
+      "homeScore": 1,
+      "awayScore": 1,
+      "home_score": 1,
+      "away_score": 1
     },
     {
       "id": 13,
@@ -1019,8 +1047,12 @@
       "venue": "Estadio Akron",
       "city": "Guadalajara",
       "venue_code": "akron",
-      "status": "upcoming",
-      "slug": "spain-vs-cape-verde-islands-2026-06-15"
+      "status": "finished",
+      "slug": "spain-vs-cape-verde-islands-2026-06-15",
+      "homeScore": 4,
+      "awayScore": 0,
+      "home_score": 4,
+      "away_score": 0
     },
     {
       "id": 14,
@@ -1073,8 +1105,12 @@
       "venue": "BMO Field",
       "city": "Toronto",
       "venue_code": "bmo",
-      "status": "upcoming",
-      "slug": "saudi-arabia-vs-uruguay-2026-06-15"
+      "status": "finished",
+      "slug": "saudi-arabia-vs-uruguay-2026-06-15",
+      "homeScore": 0,
+      "awayScore": 2,
+      "home_score": 0,
+      "away_score": 2
     },
     {
       "id": 16,
@@ -1127,8 +1163,12 @@
       "venue": "MetLife Stadium",
       "city": "East Rutherford, NJ",
       "venue_code": "metlife",
-      "status": "upcoming",
-      "slug": "france-vs-senegal-2026-06-16"
+      "status": "finished",
+      "slug": "france-vs-senegal-2026-06-16",
+      "homeScore": 3,
+      "awayScore": 1,
+      "home_score": 3,
+      "away_score": 1
     },
     {
       "id": 18,
@@ -1152,8 +1192,12 @@
       "venue": "SoFi Stadium",
       "city": "Los Angeles, CA",
       "venue_code": "sofi",
-      "status": "upcoming",
-      "slug": "iraq-vs-norway-2026-06-16"
+      "status": "finished",
+      "slug": "iraq-vs-norway-2026-06-16",
+      "homeScore": 0,
+      "awayScore": 2,
+      "home_score": 0,
+      "away_score": 2
     },
     {
       "id": 19,
@@ -1202,8 +1246,12 @@
       "venue": "Hard Rock Stadium",
       "city": "Miami Gardens, FL",
       "venue_code": "hardrock",
-      "status": "upcoming",
-      "slug": "austria-vs-jordan-2026-06-17"
+      "status": "finished",
+      "slug": "austria-vs-jordan-2026-06-17",
+      "homeScore": 2,
+      "awayScore": 0,
+      "home_score": 2,
+      "away_score": 0
     },
     {
       "id": 21,
@@ -1256,8 +1304,12 @@
       "venue": "NRG Stadium",
       "city": "Houston, TX",
       "venue_code": "nrg",
-      "status": "upcoming",
-      "slug": "england-vs-croatia-2026-06-17"
+      "status": "finished",
+      "slug": "england-vs-croatia-2026-06-17",
+      "homeScore": 2,
+      "awayScore": 1,
+      "home_score": 2,
+      "away_score": 1
     },
     {
       "id": 23,
@@ -1281,8 +1333,12 @@
       "venue": "Lincoln Financial Field",
       "city": "Philadelphia, PA",
       "venue_code": "lincoln",
-      "status": "upcoming",
-      "slug": "ghana-vs-panama-2026-06-17"
+      "status": "finished",
+      "slug": "ghana-vs-panama-2026-06-17",
+      "homeScore": 1,
+      "awayScore": 0,
+      "home_score": 1,
+      "away_score": 0
     },
     {
       "id": 24,
@@ -1306,8 +1362,12 @@
       "venue": "Lumen Field",
       "city": "Seattle, WA",
       "venue_code": "lumen",
-      "status": "upcoming",
-      "slug": "uzbekistan-vs-colombia-2026-06-18"
+      "status": "finished",
+      "slug": "uzbekistan-vs-colombia-2026-06-18",
+      "homeScore": 0,
+      "awayScore": 3,
+      "home_score": 0,
+      "away_score": 3
     },
     {
       "id": 25,
@@ -1331,8 +1391,12 @@
       "venue": "Levi's Stadium",
       "city": "Santa Clara, CA",
       "venue_code": "levis",
-      "status": "upcoming",
-      "slug": "czechia-vs-south-africa-2026-06-18"
+      "status": "finished",
+      "slug": "czechia-vs-south-africa-2026-06-18",
+      "homeScore": 1,
+      "awayScore": 2,
+      "home_score": 1,
+      "away_score": 2
     },
     {
       "id": 26,
@@ -1381,8 +1445,12 @@
       "venue": "Gillette Stadium",
       "city": "Foxborough, MA",
       "venue_code": "gillette",
-      "status": "upcoming",
-      "slug": "canada-vs-qatar-2026-06-18"
+      "status": "finished",
+      "slug": "canada-vs-qatar-2026-06-18",
+      "homeScore": 3,
+      "awayScore": 0,
+      "home_score": 3,
+      "away_score": 0
     },
     {
       "id": 28,
@@ -1406,8 +1474,12 @@
       "venue": "Estadio Azteca",
       "city": "Mexico City",
       "venue_code": "azteca",
-      "status": "upcoming",
-      "slug": "mexico-vs-south-korea-2026-06-19"
+      "status": "finished",
+      "slug": "mexico-vs-south-korea-2026-06-19",
+      "homeScore": 2,
+      "awayScore": 1,
+      "home_score": 2,
+      "away_score": 1
     },
     {
       "id": 29,
@@ -3373,6 +3445,15 @@
       "matches": 1
     },
     {
+      "name": "路易斯·迪亚斯",
+      "team": "哥伦比亚",
+      "team_iso": "co",
+      "position": "边锋",
+      "goals": 2,
+      "assists": 1,
+      "matches": 1
+    },
+    {
       "name": "哈里斯·塔巴科维奇",
       "team": "瑞士",
       "team_iso": "ch",
@@ -3394,6 +3475,24 @@
       "name": "朱利安·阿尔瓦雷斯",
       "team": "阿根廷",
       "team_iso": "ar",
+      "position": "前锋",
+      "goals": 2,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "达尔文·努涅斯",
+      "team": "乌拉圭",
+      "team_iso": "uy",
+      "position": "前锋",
+      "goals": 2,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "阿尔瓦罗·莫拉塔",
+      "team": "西班牙",
+      "team_iso": "es",
       "position": "前锋",
       "goals": 2,
       "assists": 0,
@@ -3427,10 +3526,91 @@
       "matches": 1
     },
     {
+      "name": "克里斯蒂安·普利西奇",
+      "team": "美国",
+      "team_iso": "us",
+      "position": "边锋",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "内森·阿克",
+      "team": "荷兰",
+      "team_iso": "nl",
+      "position": "后卫",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "加维",
+      "team": "西班牙",
+      "team_iso": "es",
+      "position": "中场",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "卡勒姆·麦格雷戈",
+      "team": "苏格兰",
+      "team_iso": "gb-sct",
+      "position": "中场",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "坦吉·恩东贝莱",
+      "team": "土耳其",
+      "team_iso": "tr",
+      "position": "中场",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "布卡约·萨卡",
+      "team": "英格兰",
+      "team_iso": "gb-eng",
+      "position": "边锋",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "穆西亚拉",
+      "team": "德国",
+      "team_iso": "de",
+      "position": "前锋",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
       "name": "罗德里戈",
       "team": "巴西",
       "team_iso": "br",
       "position": "前锋",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "菲尔·福登",
+      "team": "英格兰",
+      "team_iso": "gb-eng",
+      "position": "中场",
+      "goals": 1,
+      "assists": 1,
+      "matches": 1
+    },
+    {
+      "name": "金斯利·科曼",
+      "team": "法国",
+      "team_iso": "fr",
+      "position": "边锋",
       "goals": 1,
       "assists": 1,
       "matches": 1
@@ -3445,9 +3625,27 @@
       "matches": 1
     },
     {
+      "name": "乔瓦尼·雷纳",
+      "team": "美国",
+      "team_iso": "us",
+      "position": "中场",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
       "name": "伊万·拉基蒂奇",
       "team": "克罗地亚",
       "team_iso": "hr",
+      "position": "中场",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "伊尔卡伊·京多安",
+      "team": "德国",
+      "team_iso": "de",
       "position": "中场",
       "goals": 1,
       "assists": 0,
@@ -3463,6 +3661,60 @@
       "matches": 1
     },
     {
+      "name": "优素福·亚齐吉",
+      "team": "土耳其",
+      "team_iso": "tr",
+      "position": "前锋",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "优素福·波科",
+      "team": "加纳",
+      "team_iso": "gh",
+      "position": "前锋",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "卢卡·莫德里奇",
+      "team": "克罗地亚",
+      "team_iso": "hr",
+      "position": "中场",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "哈梅斯·罗德里格斯",
+      "team": "哥伦比亚",
+      "team_iso": "co",
+      "position": "中场",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "塔雷米",
+      "team": "伊朗",
+      "team_iso": "ir",
+      "position": "前锋",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "奥利塞",
+      "team": "德国",
+      "team_iso": "de",
+      "position": "中场",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
       "name": "孙兴慜",
       "team": "韩国",
       "team_iso": "kr",
@@ -3472,9 +3724,63 @@
       "matches": 1
     },
     {
+      "name": "富安健洋",
+      "team": "日本",
+      "team_iso": "jp",
+      "position": "后卫",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "尼科·威廉斯",
+      "team": "西班牙",
+      "team_iso": "es",
+      "position": "前锋",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
       "name": "帕特里克·希克",
       "team": "捷克",
       "team_iso": "cz",
+      "position": "前锋",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "穆萨·迪亚比",
+      "team": "法国",
+      "team_iso": "fr",
+      "position": "边锋",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "维廷霍夫",
+      "team": "荷兰",
+      "team_iso": "nl",
+      "position": "中场",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "萨迪奥·马内",
+      "team": "塞内加尔",
+      "team_iso": "sn",
+      "position": "前锋",
+      "goals": 1,
+      "assists": 0,
+      "matches": 1
+    },
+    {
+      "name": "阿德莫拉·卢克曼",
+      "team": "尼日利亚",
+      "team_iso": "ng",
       "position": "前锋",
       "goals": 1,
       "assists": 0,
