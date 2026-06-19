@@ -8,9 +8,9 @@
   "startDate": "2026-06-11",
   "endDate": "2026-07-19",
   "totalMatches": 104,
-  "finishedMatches": 2,
+  "finishedMatches": 28,
   "flagCdn": "https://flagcdn.com/w40",
-  "lastUpdated": "2026-06-12 03:28:52",
+  "lastUpdated": "2026-06-19 13:05:01",
   "source": "wheniskickoff.com + manual updates",
   "teams": {
     "ARG": {
@@ -819,8 +819,12 @@
       "venue": "Mercedes-Benz Stadium",
       "city": "Atlanta, GA",
       "venue_code": "mercedes",
-      "status": "upcoming",
-      "slug": "qatar-vs-switzerland-2026-06-13"
+      "status": "finished",
+      "slug": "qatar-vs-switzerland-2026-06-13",
+      "homeScore": 1,
+      "awayScore": 2,
+      "home_score": 1,
+      "away_score": 2
     },
     {
       "id": 6,
@@ -1221,8 +1225,12 @@
       "venue": "AT&T Stadium",
       "city": "Arlington, TX",
       "venue_code": "att",
-      "status": "upcoming",
-      "slug": "argentina-vs-algeria-2026-06-17"
+      "status": "finished",
+      "slug": "argentina-vs-algeria-2026-06-17",
+      "homeScore": 3,
+      "awayScore": 0,
+      "home_score": 3,
+      "away_score": 0
     },
     {
       "id": 20,
@@ -1420,8 +1428,12 @@
       "venue": "Arrowhead Stadium",
       "city": "Kansas City, MO",
       "venue_code": "arrowhead",
-      "status": "upcoming",
-      "slug": "switzerland-vs-bosnia-herzegovina-2026-06-18"
+      "status": "finished",
+      "slug": "switzerland-vs-bosnia-herzegovina-2026-06-18",
+      "homeScore": 2,
+      "awayScore": 1,
+      "home_score": 2,
+      "away_score": 1
     },
     {
       "id": 27,
@@ -1503,7 +1515,7 @@
       "venue": "Estadio Akron",
       "city": "Guadalajara",
       "venue_code": "akron",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "united-states-vs-australia-2026-06-19"
     },
     {
@@ -1528,7 +1540,7 @@
       "venue": "Estadio BBVA",
       "city": "Monterrey",
       "venue_code": "bbva",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "scotland-vs-morocco-2026-06-19"
     },
     {
@@ -1553,7 +1565,7 @@
       "venue": "BMO Field",
       "city": "Toronto",
       "venue_code": "bmo",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "brazil-vs-haiti-2026-06-20"
     },
     {
@@ -1578,7 +1590,7 @@
       "venue": "BC Place",
       "city": "Vancouver",
       "venue_code": "bcplace",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "turkey-vs-paraguay-2026-06-20"
     },
     {
@@ -1603,7 +1615,7 @@
       "venue": "MetLife Stadium",
       "city": "East Rutherford, NJ",
       "venue_code": "metlife",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "netherlands-vs-sweden-2026-06-20"
     },
     {
@@ -1628,7 +1640,7 @@
       "venue": "SoFi Stadium",
       "city": "Los Angeles, CA",
       "venue_code": "sofi",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "germany-vs-ivory-coast-2026-06-20"
     },
     {
@@ -1653,7 +1665,7 @@
       "venue": "AT&T Stadium",
       "city": "Arlington, TX",
       "venue_code": "att",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "ecuador-vs-curaçao-2026-06-21"
     },
     {
@@ -1678,7 +1690,7 @@
       "venue": "Hard Rock Stadium",
       "city": "Miami Gardens, FL",
       "venue_code": "hardrock",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "tunisia-vs-japan-2026-06-21"
     },
     {
@@ -1703,7 +1715,7 @@
       "venue": "Mercedes-Benz Stadium",
       "city": "Atlanta, GA",
       "venue_code": "mercedes",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "spain-vs-saudi-arabia-2026-06-21"
     },
     {
@@ -1728,7 +1740,7 @@
       "venue": "NRG Stadium",
       "city": "Houston, TX",
       "venue_code": "nrg",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "belgium-vs-iran-2026-06-21"
     },
     {
@@ -1753,7 +1765,7 @@
       "venue": "Lincoln Financial Field",
       "city": "Philadelphia, PA",
       "venue_code": "lincoln",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "uruguay-vs-cape-verde-islands-2026-06-21"
     },
     {
@@ -1778,7 +1790,7 @@
       "venue": "Lumen Field",
       "city": "Seattle, WA",
       "venue_code": "lumen",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "new-zealand-vs-egypt-2026-06-22"
     },
     {
@@ -1803,7 +1815,7 @@
       "venue": "Levi's Stadium",
       "city": "Santa Clara, CA",
       "venue_code": "levis",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "argentina-vs-austria-2026-06-22"
     },
     {
@@ -1828,7 +1840,7 @@
       "venue": "Arrowhead Stadium",
       "city": "Kansas City, MO",
       "venue_code": "arrowhead",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "france-vs-iraq-2026-06-22"
     },
     {
@@ -1853,7 +1865,7 @@
       "venue": "Gillette Stadium",
       "city": "Foxborough, MA",
       "venue_code": "gillette",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "norway-vs-senegal-2026-06-23"
     },
     {
@@ -1878,7 +1890,7 @@
       "venue": "Estadio Azteca",
       "city": "Mexico City",
       "venue_code": "azteca",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "jordan-vs-algeria-2026-06-23"
     },
     {
@@ -1903,7 +1915,7 @@
       "venue": "Estadio Akron",
       "city": "Guadalajara",
       "venue_code": "akron",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "portugal-vs-uzbekistan-2026-06-23"
     },
     {
@@ -1928,7 +1940,7 @@
       "venue": "Estadio BBVA",
       "city": "Monterrey",
       "venue_code": "bbva",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "england-vs-ghana-2026-06-23"
     },
     {
@@ -1953,7 +1965,7 @@
       "venue": "BMO Field",
       "city": "Toronto",
       "venue_code": "bmo",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "panama-vs-croatia-2026-06-23"
     },
     {
@@ -1978,7 +1990,7 @@
       "venue": "BC Place",
       "city": "Vancouver",
       "venue_code": "bcplace",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "colombia-vs-congo-dr-2026-06-24"
     },
     {
@@ -2003,7 +2015,7 @@
       "venue": "MetLife Stadium",
       "city": "East Rutherford, NJ",
       "venue_code": "metlife",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "switzerland-vs-canada-2026-06-24"
     },
     {
@@ -2028,7 +2040,7 @@
       "venue": "SoFi Stadium",
       "city": "Los Angeles, CA",
       "venue_code": "sofi",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "bosnia-herzegovina-vs-qatar-2026-06-24"
     },
     {
@@ -2053,12 +2065,8 @@
       "venue": "AT&T Stadium",
       "city": "Arlington, TX",
       "venue_code": "att",
-      "status": "finished",
-      "slug": "morocco-vs-haiti-2026-06-24",
-      "homeScore": 2,
-      "awayScore": 0,
-      "home_score": 2,
-      "away_score": 0
+      "status": "scheduled",
+      "slug": "morocco-vs-haiti-2026-06-24"
     },
     {
       "id": 52,
@@ -2082,7 +2090,7 @@
       "venue": "Hard Rock Stadium",
       "city": "Miami Gardens, FL",
       "venue_code": "hardrock",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "scotland-vs-brazil-2026-06-24"
     },
     {
@@ -2107,7 +2115,7 @@
       "venue": "Mercedes-Benz Stadium",
       "city": "Atlanta, GA",
       "venue_code": "mercedes",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "czechia-vs-mexico-2026-06-25"
     },
     {
@@ -2132,7 +2140,7 @@
       "venue": "NRG Stadium",
       "city": "Houston, TX",
       "venue_code": "nrg",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "south-africa-vs-south-korea-2026-06-25"
     },
     {
@@ -2157,7 +2165,7 @@
       "venue": "Lincoln Financial Field",
       "city": "Philadelphia, PA",
       "venue_code": "lincoln",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "ecuador-vs-germany-2026-06-25"
     },
     {
@@ -2182,7 +2190,7 @@
       "venue": "Lumen Field",
       "city": "Seattle, WA",
       "venue_code": "lumen",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "curaçao-vs-ivory-coast-2026-06-25"
     },
     {
@@ -2207,7 +2215,7 @@
       "venue": "Levi's Stadium",
       "city": "Santa Clara, CA",
       "venue_code": "levis",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "tunisia-vs-netherlands-2026-06-25"
     },
     {
@@ -2232,12 +2240,8 @@
       "venue": "Arrowhead Stadium",
       "city": "Kansas City, MO",
       "venue_code": "arrowhead",
-      "status": "finished",
-      "slug": "japan-vs-sweden-2026-06-25",
-      "homeScore": 2,
-      "awayScore": 2,
-      "home_score": 2,
-      "away_score": 2
+      "status": "scheduled",
+      "slug": "japan-vs-sweden-2026-06-25"
     },
     {
       "id": 59,
@@ -2261,7 +2265,7 @@
       "venue": "Gillette Stadium",
       "city": "Foxborough, MA",
       "venue_code": "gillette",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "turkey-vs-united-states-2026-06-26"
     },
     {
@@ -2286,7 +2290,7 @@
       "venue": "Estadio Azteca",
       "city": "Mexico City",
       "venue_code": "azteca",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "paraguay-vs-australia-2026-06-26"
     },
     {
@@ -2311,7 +2315,7 @@
       "venue": "Estadio Akron",
       "city": "Guadalajara",
       "venue_code": "akron",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "norway-vs-france-2026-06-26"
     },
     {
@@ -2336,12 +2340,8 @@
       "venue": "Estadio BBVA",
       "city": "Monterrey",
       "venue_code": "bbva",
-      "status": "finished",
-      "slug": "senegal-vs-iraq-2026-06-26",
-      "homeScore": 2,
-      "awayScore": 1,
-      "home_score": 2,
-      "away_score": 1
+      "status": "scheduled",
+      "slug": "senegal-vs-iraq-2026-06-26"
     },
     {
       "id": 63,
@@ -2365,7 +2365,7 @@
       "venue": "BMO Field",
       "city": "Toronto",
       "venue_code": "bmo",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "uruguay-vs-spain-2026-06-27"
     },
     {
@@ -2390,7 +2390,7 @@
       "venue": "BC Place",
       "city": "Vancouver",
       "venue_code": "bcplace",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "cape-verde-islands-vs-saudi-arabia-2026-06-27"
     },
     {
@@ -2415,7 +2415,7 @@
       "venue": "MetLife Stadium",
       "city": "East Rutherford, NJ",
       "venue_code": "metlife",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "new-zealand-vs-belgium-2026-06-27"
     },
     {
@@ -2440,7 +2440,7 @@
       "venue": "SoFi Stadium",
       "city": "Los Angeles, CA",
       "venue_code": "sofi",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "egypt-vs-iran-2026-06-27"
     },
     {
@@ -2465,7 +2465,7 @@
       "venue": "AT&T Stadium",
       "city": "Arlington, TX",
       "venue_code": "att",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "panama-vs-england-2026-06-27"
     },
     {
@@ -2490,12 +2490,8 @@
       "venue": "Hard Rock Stadium",
       "city": "Miami Gardens, FL",
       "venue_code": "hardrock",
-      "status": "finished",
-      "slug": "croatia-vs-ghana-2026-06-27",
-      "homeScore": 1,
-      "awayScore": 0,
-      "home_score": 1,
-      "away_score": 0
+      "status": "scheduled",
+      "slug": "croatia-vs-ghana-2026-06-27"
     },
     {
       "id": 69,
@@ -2519,7 +2515,7 @@
       "venue": "Mercedes-Benz Stadium",
       "city": "Atlanta, GA",
       "venue_code": "mercedes",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "colombia-vs-portugal-2026-06-27"
     },
     {
@@ -2544,7 +2540,7 @@
       "venue": "NRG Stadium",
       "city": "Houston, TX",
       "venue_code": "nrg",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "congo-dr-vs-uzbekistan-2026-06-27"
     },
     {
@@ -2569,7 +2565,7 @@
       "venue": "Lincoln Financial Field",
       "city": "Philadelphia, PA",
       "venue_code": "lincoln",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "jordan-vs-argentina-2026-06-28"
     },
     {
@@ -2594,7 +2590,7 @@
       "venue": "Lumen Field",
       "city": "Seattle, WA",
       "venue_code": "lumen",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "algeria-vs-austria-2026-06-28"
     },
     {
@@ -2619,7 +2615,7 @@
       "venue": "Levi's Stadium",
       "city": "Santa Clara, CA",
       "venue_code": "levis",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-73-2026-06-28"
     },
     {
@@ -2644,7 +2640,7 @@
       "venue": "Arrowhead Stadium",
       "city": "Kansas City, MO",
       "venue_code": "arrowhead",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-74-2026-06-29"
     },
     {
@@ -2669,7 +2665,7 @@
       "venue": "Gillette Stadium",
       "city": "Foxborough, MA",
       "venue_code": "gillette",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-75-2026-06-29"
     },
     {
@@ -2694,7 +2690,7 @@
       "venue": "Estadio Azteca",
       "city": "Mexico City",
       "venue_code": "azteca",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-76-2026-06-30"
     },
     {
@@ -2719,7 +2715,7 @@
       "venue": "Estadio Akron",
       "city": "Guadalajara",
       "venue_code": "akron",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-77-2026-06-30"
     },
     {
@@ -2744,7 +2740,7 @@
       "venue": "Estadio BBVA",
       "city": "Monterrey",
       "venue_code": "bbva",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-78-2026-06-30"
     },
     {
@@ -2769,7 +2765,7 @@
       "venue": "BMO Field",
       "city": "Toronto",
       "venue_code": "bmo",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-79-2026-07-01"
     },
     {
@@ -2794,7 +2790,7 @@
       "venue": "BC Place",
       "city": "Vancouver",
       "venue_code": "bcplace",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-80-2026-07-01"
     },
     {
@@ -2819,7 +2815,7 @@
       "venue": "MetLife Stadium",
       "city": "East Rutherford, NJ",
       "venue_code": "metlife",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-81-2026-07-01"
     },
     {
@@ -2844,7 +2840,7 @@
       "venue": "SoFi Stadium",
       "city": "Los Angeles, CA",
       "venue_code": "sofi",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-82-2026-07-02"
     },
     {
@@ -2869,7 +2865,7 @@
       "venue": "AT&T Stadium",
       "city": "Arlington, TX",
       "venue_code": "att",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-83-2026-07-02"
     },
     {
@@ -2894,7 +2890,7 @@
       "venue": "Hard Rock Stadium",
       "city": "Miami Gardens, FL",
       "venue_code": "hardrock",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-84-2026-07-02"
     },
     {
@@ -2919,7 +2915,7 @@
       "venue": "Mercedes-Benz Stadium",
       "city": "Atlanta, GA",
       "venue_code": "mercedes",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-85-2026-07-03"
     },
     {
@@ -2944,7 +2940,7 @@
       "venue": "NRG Stadium",
       "city": "Houston, TX",
       "venue_code": "nrg",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-86-2026-07-03"
     },
     {
@@ -2969,7 +2965,7 @@
       "venue": "Lincoln Financial Field",
       "city": "Philadelphia, PA",
       "venue_code": "lincoln",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-87-2026-07-03"
     },
     {
@@ -2994,7 +2990,7 @@
       "venue": "Lumen Field",
       "city": "Seattle, WA",
       "venue_code": "lumen",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "last-32-match-88-2026-07-04"
     },
     {
@@ -3019,7 +3015,7 @@
       "venue": "Levi's Stadium",
       "city": "Santa Clara, CA",
       "venue_code": "levis",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-89-2026-07-04"
     },
     {
@@ -3044,7 +3040,7 @@
       "venue": "Arrowhead Stadium",
       "city": "Kansas City, MO",
       "venue_code": "arrowhead",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-90-2026-07-04"
     },
     {
@@ -3069,7 +3065,7 @@
       "venue": "Gillette Stadium",
       "city": "Foxborough, MA",
       "venue_code": "gillette",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-91-2026-07-05"
     },
     {
@@ -3094,7 +3090,7 @@
       "venue": "Estadio Azteca",
       "city": "Mexico City",
       "venue_code": "azteca",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-92-2026-07-06"
     },
     {
@@ -3119,7 +3115,7 @@
       "venue": "Estadio Akron",
       "city": "Guadalajara",
       "venue_code": "akron",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-93-2026-07-06"
     },
     {
@@ -3144,7 +3140,7 @@
       "venue": "Estadio BBVA",
       "city": "Monterrey",
       "venue_code": "bbva",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-94-2026-07-07"
     },
     {
@@ -3169,7 +3165,7 @@
       "venue": "BMO Field",
       "city": "Toronto",
       "venue_code": "bmo",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-95-2026-07-07"
     },
     {
@@ -3194,7 +3190,7 @@
       "venue": "BC Place",
       "city": "Vancouver",
       "venue_code": "bcplace",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "round-of-16-match-96-2026-07-07"
     },
     {
@@ -3219,7 +3215,7 @@
       "venue": "MetLife Stadium",
       "city": "East Rutherford, NJ",
       "venue_code": "metlife",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "quarter-finals-match-97-2026-07-09"
     },
     {
@@ -3244,7 +3240,7 @@
       "venue": "SoFi Stadium",
       "city": "Los Angeles, CA",
       "venue_code": "sofi",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "quarter-finals-match-98-2026-07-10"
     },
     {
@@ -3269,7 +3265,7 @@
       "venue": "AT&T Stadium",
       "city": "Arlington, TX",
       "venue_code": "att",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "quarter-finals-match-99-2026-07-11"
     },
     {
@@ -3294,7 +3290,7 @@
       "venue": "Hard Rock Stadium",
       "city": "Miami Gardens, FL",
       "venue_code": "hardrock",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "quarter-finals-match-100-2026-07-12"
     },
     {
@@ -3319,7 +3315,7 @@
       "venue": "Mercedes-Benz Stadium",
       "city": "Atlanta, GA",
       "venue_code": "mercedes",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "semi-finals-match-101-2026-07-14"
     },
     {
@@ -3344,7 +3340,7 @@
       "venue": "NRG Stadium",
       "city": "Houston, TX",
       "venue_code": "nrg",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "semi-finals-match-102-2026-07-15"
     },
     {
@@ -3369,7 +3365,7 @@
       "venue": "Lincoln Financial Field",
       "city": "Philadelphia, PA",
       "venue_code": "lincoln",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "third-place-play-off-match-103-2026-07-18"
     },
     {
@@ -3394,7 +3390,7 @@
       "venue": "Lumen Field",
       "city": "Seattle, WA",
       "venue_code": "lumen",
-      "status": "upcoming",
+      "status": "scheduled",
       "slug": "final-match-104-2026-07-19"
     }
   ],
